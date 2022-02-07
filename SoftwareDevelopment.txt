@@ -258,12 +258,272 @@ Agile brought an idea called
 4.LEAN
 5.Devops
 ..............................................................................................
+					Testing
+
+
+What is testing?
+  Software testing is a method to check whether the actual software product matches expected requirements and to ensure that software prdouct is defect free.
+
+
+Why Testing? 
+  Without testing we cant release product with confidence that software works very well.
+
+What are the benefits of testing?
+
+=>cost effective 
+     if we find bugs and errors in the early stage, before delivering to the customer, we can save lot of money.
+
+=>Secuirty
+    It is the most vulnerable and senstive informations whether is leaking or not, we can find out via testing.
+
+=>Product quality
+   It is an essential requirement , to meet the highest quality.
+
+
+Types of testing:
+
+=>Functional Testing
+=>Non functional Testing
+=>Regression and maintance testing
+ 
+Based on tools
+
+1.Manual
+     White box
+     black box
+     Gray box
+
+Black box:
+  =>Functional 
+	Unit Testing
+        Integration Testing
+        System Testing
+        User Acceptance Testing
+
+  =>Non function
+       Compability Testing
+       Performance Testing
+       Usability Testing
+2.Automatated
+     Using tools, programs,scripts we can enable testing.
+..............................................................................................
+
+Testing Startegies in Software engineering.
+
+
+Unit Testing:
+   It is done by the deveoper during development, to ensure unit of code meets client requirement or not.
+
+Integration Testing:
+   Combining many units togther to verify whether code is working or not.
+
+System Testing: 
+   In this method, the whole software is packed as a package, then we test.
+   In this we can test functionality,security, portablity and others.
+.........................................................................................
+				1.Manual
+ White box
+   =>done by developer, where they check every line of code before giving it to the Test      Enginer.
+  =>Since code is visible during development time, so we call white box
+
+ black box
+   =>done by test enginer, where they can check the functionality of an application or the 
+     software according to the customer/ clients need.
+  => Since code is invisble , it is called black box.
+ Gray box
+   =>Gray box testing done by the person who knows the code and testing.
+   =>It is coimbination of black box and white box.
+
+How to implement manual Testing?
+
+=>First the tester reads all Req docs(domain documents)
+=>Tester anyalyses requirement docs to cover all requirments stated by the customer
+=>Tester develops the cases according to the requirement document
+
+Test Case:
+.........
+What is a Test Case?
+A Test Case is a set of actions executed to verify a particular feature or functionality of your software application. 
+
+A Test Case contains test steps, test data, precondition, postcondition developed for specific test scenario to verify any requirement.
+
+The test case includes specific variables or conditions, using which a testing engineer can compare expected and actual results to determine whether a software product is functioning as per the requirements of the customer.
+
+
+What is a Test Scenario?
+  A Test Scenario is defined as any functionality that can be tested. It is also called Test Condition or Test Possibility. As a tester, you should put yourself in the end user’s shoes and figure out the real-world scenarios and use cases of the Application Under Test.
+
+For a Test Scenario: Check Login Functionality there many possible test cases are:
+
+Test Case 1: Check results on entering valid User Id & Password
+Test Case 2: Check results on entering Invalid User ID & Password
+Test Case 3: Check response when a User ID is Empty & Login Button is pressed, and many more
+Test Case 4: Check response when a User ID is with special characters
+Test Case 5: Check response when a User ID length  is min 4 character and max 7
+Test Case 6: Check response when a password length is min 4 character and max 5 chars
+etc...
+
+Step 1) A simple test case to explain the scenario would be
+
+Test Case #	Test Case Description
+1	      Check response when valid email and password is entered
+
+
+Step 2) Test the Data.
+In order to execute the test case, you would need Test Data. Adding it below
+
+Test Case #	Test Case Description	                        Test Data
+1	Check response when valid email
+ and password is entered	               Email: foo99@email.com Password: lNf9^Oti7^2h
+
+
+Step 3) Perform actions.
+In order to execute a test case, a tester needs to perform a specific set of actions on the AUT. This is documented as below:
+
+Test Case #	Test Case Description	Test Steps	Test Data
+1	Check response when valid email and password is entered	1) Enter Email Address
+2) Enter Password
+
+3) Click Sign in
+
+Email: foo@foo.com
+Password: lNf9^Oti7^2h
+
+Step 4) Check behavior of the AUT.
+The goal of test cases in software testing is to check behavior of the AUT for an expected result.
+
+The description of what requirement is being tested
+The explanation of how the system will be tested
+The test setup like a version of an application under test, software, data files, operating system, hardware, security access, physical or logical date, time of day, prerequisites such as other tests and any other setup information pertinent to the requirements being tested
+Inputs and outputs or actions and expected results
+Any proofs or attachments
+Use active case language
+Test Case should not be more than 15 steps
+An automated test script is commented with inputs, purpose and expected results
+The setup offers an alternative to pre-requisite tests
+With other tests, it should be an incorrect business scenario order
+..............................................................................................
+
+What is limitation of test scenerio and test case?
+
+ By default you can  write many test cases but which is limited in the scope requirements.
+
+
+As of now we have written, test cases in the excel sheet, but which is not good for big projects and very difficult to share the data.
+
+Manual Testing tools:
+
+1.JIRA :
+   It mostly used for tracking bugs(errors)
+
+Why JIRA
+
+=>To track the defects and issues any where in the world via web interfaces.
+
+2.Sonar Qube
+
+3.Bugzilla
+..............................................................................................
+                       STLC (Software Testing Life Cycle) Phases, Entry, Exit Criteria
 
 
 
 
+What is Software Testing Life Cycle (STLC)?
+
+  Software Testing Life Cycle (STLC) is a sequence of specific activities conducted during the testing process to ensure software quality goals are met. 
 
 
+STLC involves both verification and validation activities. Contrary to popular belief, Software Testing is not just a single/isolate activity, i.e. testing. It consists of a series of activities carried out methodologically to help certify your software product.
+
+
+STLC Phases :
+
+Requirement Analysis
+Test Planning
+Test case development
+Test Environment setup
+Test Execution
+Test Cycle closure
+
+Each of these stages has a definite Entry and Exit criteria, Activities & Deliverables associated with it.
+
+What is Entry and Exit Criteria in STLC?
+ Entry Criteria: Entry Criteria gives the prerequisite items that must be completed before  testing can begin.
+ Exit Criteria: Exit Criteria defines the items that must be completed before testing can be concluded
+You have Entry and Exit Criteria for all levels in the Software Testing Life Cycle (STLC)
+
+Requirement Phase Testing:
+
+  Requirement Phase Testing also known as Requirement Analysis in which test team studies the requirements from a "testing point of view" to identify testable requirements and the QA team may interact with various stakeholders to understand requirements in detail. Requirements could be either functional or non-functional. Automation feasibility for the testing project is also done in this stage.
+
+Activities in Requirement Phase Testing
+
+Identify types of tests to be performed.
+Gather details about testing priorities and focus.
+Prepare Requirement Traceability Matrix (RTM).
+Identify test environment details where testing is supposed to be carried out.
+Automation feasibility analysis (if required).
+
+
+Test Planning in STLC
+  Test Planning in STLC is a phase in which a Senior QA manager determines the test plan strategy along with efforts and cost estimates for the project. Moreover, the resources, test environment, test limitations and the testing schedule are also determined. The Test Plan gets prepared and finalized in the same phase.
+
+Test Planning Activities
+
+Preparation of test plan/strategy document for various types of testing
+Test tool selection
+Test effort estimation
+Resource planning and determining roles and responsibilities.
+Training requirement
+
+
+Test Case Development Phase
+
+The Test Case Development Phase involves the creation, verification and rework of test cases & test scripts after the test plan is ready. Initially, the Test data is identified then created and reviewed and then reworked based on the preconditions. Then the QA team starts the development process of test cases for individual units.
+
+Test Case Development Activities
+
+Create test cases, automation scripts (if applicable)
+Review and baseline test cases and scripts
+Create test data (If Test Environment is available)
+
+
+Test Environment Setup :
+
+   Test Environment Setup decides the software and hardware conditions under which a work product is tested. It is one of the critical aspects of the testing process and can be done in parallel with the Test Case Development Phase. Test team may not be involved in this activity if the development team provides the test environment. The test team is required to do a readiness check (smoke testing) of the given environment.
+
+Test Environment Setup Activities
+
+Understand the required architecture, environment set-up and prepare hardware and software requirement list for the Test Environment.
+Setup test Environment and test data
+Perform smoke test on the build
+
+
+Test Execution Phase
+Test Execution Phase is carried out by the testers in which testing of the software build is done based on test plans and test cases prepared. The process consists of test script execution, test script maintenance and bug reporting. If bugs are reported then it is reverted back to development team for correction and retesting will be performed.
+
+Test Execution Activities
+
+Execute tests as per plan
+Document test results, and log defects for failed cases
+Map defects to test cases in RTM
+Retest the Defect fixes
+Track the defects to closure
+
+
+Test Cycle Closure
+
+Test Cycle Closure phase is completion of test execution which involves several activities like test completion reporting, collection of test completion matrices and test results. Testing team members meet, discuss and analyze testing artifacts to identify strategies that have to be implemented in future, taking lessons from current test cycle. The idea is to remove process bottlenecks for future test cycles.
+
+Test Cycle Closure Activities
+
+Evaluate cycle completion criteria based on Time, Test coverage, Cost,Software, Critical Business Objectives, Quality
+Prepare test metrics based on the above parameters.
+Document the learning out of the project
+Prepare Test closure report
+Qualitative and quantitative reporting of quality of the work product to the customer.
+Test result analysis to find out the defect distribution by type and severity.
 
 
 
