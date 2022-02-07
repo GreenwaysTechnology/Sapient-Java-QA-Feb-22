@@ -21,5 +21,30 @@ Test Scenario: 1. XXX
 Test Scenario: 2. XXX
  -Test case....
 
+Test Scenarios for a Banking Site
+
+Test Scenario 1: Check the Login and Authentication Functionality
+
+Test Scenario 2: Check Money Transfer can be done
+
+Test Scenario 3: Check Account Statement can be viewed
+
+Test Scenario 4: Check Fixed Deposit/Recurring Deposit can be created
+
+Test Scenarios in any ecommerce site
+
+Check the Order History 
+  
+Check Home Page behavior for returning customers
+Check Category/Product Pages
+Check Customer Service/Contact Pages
+Check Daily Deals pages
+...........................................................................................
+
+
+
+
+
+
 
 
