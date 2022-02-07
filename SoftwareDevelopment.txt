@@ -1,0 +1,351 @@
+					Software Development
+..............................................................................................
+
+What is software?
+ Software is collection of programs written using programming languages.
+
+What is program?
+  Program is nothing collection of instructions.
+
+What is instruction?
+  instruction is nothing but task/work done by machine.
+
+Types of software:
+
+1.System software
+    Built for hardware devices, software which closly works with hardware.
+Eg:
+  Operating system,Device drivers
+
+2.Application software
+  
+   Software built to solve real world problems(to solve day to day) tasks.
+
+ What ever biz you have today, for all biz transactions are carried by machines.
+ eg:
+ Banking,Retail,Transportation,space,HealthCare,insurance.........
+
+In Software industry, the Biz who calls "DOMAIN".
+
+Software engineering stages:
+.Understanding domain-Planning and Requirement analysis
+.............................................................................................
+			Understanding DOMAIN - Planning and Requirement analysis
+..............................................................................................
+
+Stack Holder / Client / domain Expert:
+  
+  Will explan what he requires.
+
+SRS :Software Requirement Specification : 
+   Documenting the domain requirments and get them approved from the customer or stack holder.
+
+Every domain is very complex.
+
+eg:Human body
+
+Complexity is one of the key aspect in software development.
+
+How to break complexity?
+
+Abstraction :
+  in order to master complexity in the domain, we need to apply the first theroy called abstraction.
+
+  Abstraction means collect only necessary details what you want. 
+  Abstraction is concept already applied in human brain.
+
+eg:
+  Human - Mr.X
+
+Mr.x has been associated with tons of informations like complete health info, family info,education,work....
+
+if Mr.x is going to hospital,What are the necessary information required by hosiptial.
+baisc information
+ -firstName,lastName,middleName
+ -Contact information
+   mobileNo,your address
+ -How do you know about us?
+   friends,relatives,news papers,internet........
+ -..........
+
+Asking information like 
+ ->how many kids you have?
+ ->How many cars you have?
+ ->How many houses you have?
+ ->Where you are working / what is your profession/who is reporting manager...
+
+Converting abstractions into software(programs)
+
+Designing the Product Architecture:
+
+Technology stack selection:
+
+Based on how the software to be used.
+
+
+1.The software should be used by staffs and managment by providing unquie indentification
+   - authentication - login details
+2.The software can be used by paitents as well.
+
+Software can be distributed to the staffs , management,paitents via internet and web and mobile apps
+
+Back end how the software is disigned.
+
+What type of models we prefer to build applications.
+
+1.monolothic
+2.microservices
+3.serverless
+4.cloud native 
+ 
+
+Microservices:
+  A new architural style of building applications.
+
+1.Database design
+
+ Client requests that we need opensource database for storing vistor information.
+ Client requests that we need paid database for storing senstive information like payments,patient health records.
+ Client may ask to store some unstructured data -  nosql
+
+
+Database types:
+
+SQL Databases  -  Oracle,MSSQL Server,MySql,DB2,Mariadb,Postgre.....
+NoSQL Database  - Mongodb,Redis,casendra,neodb.......
+.............................................................................................
+
+Technology stack:
+
+Back end architecture is microservices,db is opensource and paid of sql and nosql.
+
+Frond end architecture is browser and mobile apps,other devices.
+
+
+Tech stack for back end: - Java -Microservices using java.
+
+Frameworks:
+ ->Spring cloud
+ ->Ecplise Vertx
+ ->Quarkus
+ ->MicroNut
+
+Databases
+mysql,redis,mongodb,neodb
+
+Testing apps
+
+Deployment Stack
+ - cloud
+   -containers/vms
+
+Tech stack for front end: Android and IOS / Hybrid /, React.js 
+............................................................................................
+.............................................................................................
+			Building or Developing The Product
+..............................................................................................
+
+Development :
+
+The developer gets user story from the team.
+
+User story:
+A user story is an informal, general explanation of a software feature written from the perspective of the end user. Its purpose is to articulate how a software feature will provide value to the customer.
+
+Converting userstory into code.
+
+Once the development is over, It is ready for next Stage.
+..............................................................................................
+				Quality Vertification - Testing
+..............................................................................................
+
+Once sotware is written, the software is moved to the team who must  understand the requirement(domain), is ready to test the applications. Once the test passes, it moves to the next stage 
+.............................................................................................
+				Live- Deployment / Production
+.............................................................................................
+
+Once the quality testing over, the software ready for use. It is used in production.
+............................................................................................
+				Maintaince -  Already started using
+.............................................................................................
+
+The application is already started in use , application is under moniotoring
+..............................................................................................
+				SDLC Models
+..............................................................................................
+
+Before 1960, Softwares were built without any standard practices,after that people stared giving patterns which are called SDLC models
+
+1.Waterfall - Monolithic
+2.Iterative 
+3.Spiral 
+4.V-Model
+5.Big bang
+6.Agile - This is model used now days-  Microservices
+			
+Waterfall model:
+ Process of building applications move stage by stage only.
+
+ Requirements
+ Design
+ Development/Implementation
+ Testing
+ Production
+ Maintaince
+
+Drawbacks of waterfall model.
+
+1.increasing cost
+2.Takes lot of timeline
+3.tech changellanges
+
+many softwares started failing due to watermodel.
+................................................................................................                              Agile Software Development
+
+
+Objective:
+ Reduce cost, reduce timeline.
+
+Agile Principles:
+
+1.Our highest priority is to satisfy the customer through "early and continuous delivery"
+of valuable software.
+
+2.Welcome changing requirements, even late in development. Agile processes harness change for
+the customer's competitive advantage.
+
+3.Deliver working software frequently, from a couple of weeks to a couple of months, with a
+preference to the shorter timescale.
+
+
+4.Business people and developers must work together daily throughout the project.
+   
+  Stack holders,developers,testers,dev ops team must coordinate togther to deliver apps.
+
+5.Build projects around motivated individuals.Give them the environment and support they need,
+and trust them to get the job done.
+
+6.The most efficient and effective method of conveying information to and within a development
+team is face-to-face conversation.
+
+7.Working software is the primary measure of progress.
+
+8.Agile processes promote sustainable development.The sponsors, developers, and users should be able to maintain a constant pace indefinitely.
+
+9.Continuous attention to technical excellence and good design enhances agility.
+ 
+10.Simplicity--the art of maximizing the amountof work not done--is essential.
+
+11.The best architectures, requirements, and designsemerge from self-organizing teams.
+
+12.At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
+
+Agile brought an idea called 
+
+  continuous requrement
+  continuous development
+  continuous testing
+  continous  deployment
+  continous maintains
+
+ CI/CD process
+..............................................................................................
+				Agile Implementations(frameworks)
+
+1.scrum
+2.Kanban -jira
+3.XP
+4.LEAN
+5.Devops
+..............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
