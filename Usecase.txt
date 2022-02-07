@@ -1,0 +1,25 @@
+Work flow of User Registration  Process:
+
+=>User clicks registration link
+=>User registration page is displyed
+=>User registration page contains
+  first Name, lastName , Middle Name
+  email id
+  password
+    actual
+    conformation
+  country
+  state
+  city
+  zipcode
+  submit
+=>User registration succefull or not.
+
+YOu have to write 
+Test Scenario: 1. XXX
+ -Test case....
+Test Scenario: 2. XXX
+ -Test case....
+
+
+
