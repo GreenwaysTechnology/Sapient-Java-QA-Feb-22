@@ -300,7 +300,7 @@ Black box:
         System Testing
         User Acceptance Testing
 
-  =>Non function
+  =>Non functional
        Compability Testing
        Performance Testing
        Usability Testing
@@ -428,7 +428,6 @@ Why JIRA
 
 
 
-
 What is Software Testing Life Cycle (STLC)?
 
   Software Testing Life Cycle (STLC) is a sequence of specific activities conducted during the testing process to ensure software quality goals are met. 
@@ -524,41 +523,189 @@ Document the learning out of the project
 Prepare Test closure report
 Qualitative and quantitative reporting of quality of the work product to the customer.
 Test result analysis to find out the defect distribution by type and severity.
+..............................................................................................
+
+Functional Testing:
+
+What is Functional Testing?
+  FUNCTIONAL TESTING is a type of software testing that validates the software system against  the functional "requirements/specifications" (Domain Problems) 
+
+ The purpose of Functional tests is to test each function of the software application, by providing appropriate input, verifying the output against the Functional requirements.
+
+This testing checks User Interface, APIs, Database, Security, Client/Server communication and other functionality of the Application Under Test. The testing can be done either manually or using automation.
+
+Functional Testing:
+
+1.Unit Testing (White Box)
+   It is type of testing done by the developer.
+   The purpose is to validate unit of program , whether it works in all envs.
+   Testing methods/functions
+
+eg:
+  int add(int a,int b) {
+      //return a+b
+     return a - b
+  }
+ 
+  it('add must take int input',function(){
+       expect(4).equals(add(2,2))
+  })
+
+Why Unit Testing?
+
+ Unit Testing helps to fix bugs in the code early during development cycles and saves cost.
+
+Test Coverage:
+   if you have biz logic, you want to test the biz logic of app in all Scenario
+
+What is Test Coverage?
+  Test coverage is defined as a metric in Software Testing that measures the amount of testing performed by a set of test. It will include gathering information about which parts of a program are executed when running the test suite to determine which branches of conditional statements have been taken.
+
+What Test Coverage does?
+Finding the area of a requirement not implemented by a set of test cases
+Helps to create additional test cases to increase coverage
+Identifying a quantitative measure of test coverage, which is an indirect method for quality check
+Identifying meaningless test cases that do not increase covera
+
+Unit Testing and Programming languages and frameworks
+.....................................................
+Every programming language has unit testing libs or frameworks
+
+Java:
+ JUnit
+ Mockito
+Javascript
+ -chai.js
+ -jasmine
+ -Jest
+..............................................................................................
+Integreation Testing:(etoe End to testing)
+
+What is Integration Testing?
+    INTEGRATION TESTING is defined as a type of testing where software modules are integrated logically and tested as a group. A typical software project consists of multiple software modules, coded by different programmers. The purpose of this level of testing is to expose defects in the interaction between these software modules when they are integrated
 
 
+Integration Testing tools:
+DBUnit.
+Greenmail.
+H2 Database
+JMockit1
+JUnit 5
+Embedded-redis
+Mockito
+REST-Assured
+
+Javascript Integration Testing tool:
+
+Protractor
 
 
+Automated Integration Testing tool:
+
+Selenium:
+   Powerfull end to end (integration) automated testing tool for web apps.
+   Selenium is going to fake the browser ,on which apps are tested
+
+Web Services/ API Testing tools
+
+1.Post man
+2.SOAP UI
+
+..............................................................................................
+3.SMOKE Testing
+
+Smoke Testing
+    Smoke Testing is a software testing process that determines whether the deployed software build is stable or not. Smoke testing is a confirmation for QA team to proceed with further software testing. It consists of a minimal set of tests run on each build to test software functionalities. Smoke testing is also known as “Build Verification Testing” or “Confidence Testing.”
+In simple terms, we are verifying whether the important features are working and there are no showstoppers in the build that is under testing.
 
 
+What is Regression Testing?
+  Regression Testing is defined as a type of software testing to confirm that a recent program or code change has not adversely affected existing features. Regression Testing is nothing but a full or partial selection of already executed test cases which are re-executed to ensure existing functionalities work fine.
+
+This testing is done to make sure that new code changes should not have side effects on the existing functionalities. It ensures that the old code still works once the latest code changes are done.
+.............................................................................................
+
+Non Functional Testing:
+
+1.Performance Testing
+
+Performance Testing is a software testing process used for testing the speed, response time, stability, reliability, scalability and resource usage of a software application under particular workload. The main purpose of performance testing is to identify and eliminate the performance bottlenecks in the software application. It is a subset of performance engineering and also known as “Perf Testing”.
+
+The focus of Performance Testing is checking a software program’s
+
+Speed – Determines whether the application responds quickly
+Scalability – Determines maximum user load the software application can handle.
+Stability – Determines if the application is stable under varying loads
+
+Performance Testing tools
+
+1.Apache benchmark
+2.JMeter
+3.LoadRunner
+etc...
+.............................................................................................
+What is Security Testing?
+   Security Testing is a type of Software Testing that uncovers vulnerabilities, threats, risks in a software application and prevents malicious attacks from intruders. The purpose of Security Tests is to identify all possible loopholes and weaknesses of the software system which might result in a loss of information, revenue, repute at the hands of the employees or outsiders of the Organization.
+
+Why Security Testing is Important?
+The main goal of Security Testing is to identify the threats in the system and measure its potential vulnerabilities, so the threats can be encountered and the system does not stop functioning or can not be exploited. It also helps in detecting all possible security risks in the system and helps developers to fix the problems through coding.
+..............................................................................................
+					Defect Management
+
+1.Importance
+2.Defect Lifecycle
+3,Create defects
+4.RACI
+5.Key Responsibilities
+6.Best Practices
+
+What is Bug?
+A bug is the consequence/outcome of a coding fault.
+
+Defect in Software Testing
+A Defect in Software Testing is a variation or deviation of the software application from end user’s requirements or original business requirements. A software defect is an error in coding which causes incorrect or unexpected results from a software program which does not meet actual requirements. Testers might come across such defects while executing the test cases.
+
+Bug Report
+ 
+Bug Report in Software Testing:
+
+     A Bug Report in Software Testing is a detailed document about bugs found in the software application. Bug report contains each detail about bugs like description, date when bug was found, name of tester who found it, name of developer who fixed it, etc. Bug report helps to identify similar bugs in future so it can be avoided.
+
+While reporting the bug to developer, your Bug Report should contain the following information
+
+Defect_ID – Unique identification number for the defect.
+Defect Description – Detailed description of the Defect including information about the module in which Defect was found.
+Version – Version of the application in which defect was found.
+Steps – Detailed steps along with screenshots with which the developer can reproduce the defects.
+Date Raised – Date when the defect is raised
+Reference– where in you Provide reference to the documents like . requirements, design, architecture or maybe even screenshots of the error to help understand the defect
+Detected By – Name/ID of the tester who raised the defect
+Status – Status of the defect , more on this later
+Fixed by – Name/ID of the developer who fixed it
+Date Closed – Date when the defect is closed
+Severity which describes the impact of the defect on the application
+Priority which is related to defect fixing urgency. Severity Priority could be High/Medium/Low based on the impact urgency at which the defect should be fixed respectively
 
 
+Defect Life cylce
 
+Defect Management is a systematic process to identify and fix bugs. 
 
+A defect management cycle contains the following stages 
 
+1) Discovery of Defect,
+2) Defect Categorization
+3) Fixing of Defect by developers
+4) Verification by Testers,
+5) Defect Closure 
+6) Defect Reports at the end of project
 
+RACI -A Responsible, Accountable, Consulted, and Informed (RACI):
 
+A Responsible, Accountable, Consulted, and Informed (RACI) diagram (or RACI matrix) is used to describe the roles and responsibilities of the various teams or people that are responsible for delivering a project or operating a process.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The matrix is especially useful for clarifying roles and responsibilities in cross-functional/departmental projects and processes.
+......................................&&&&&&&&&&&&&&&&&&&&&..................................
 
 
 
