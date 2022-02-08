@@ -706,27 +706,156 @@ A Responsible, Accountable, Consulted, and Informed (RACI) diagram (or RACI matr
 
 The matrix is especially useful for clarifying roles and responsibilities in cross-functional/departmental projects and processes.
 ......................................&&&&&&&&&&&&&&&&&&&&&..................................
+					Test Reports
+
+Test case management is an elaborate process that involves team, expertise, and extensive tracking, as well as addressing of issues. It includes preparation of categorical and detailed test reports in software testing, that go on during the cycle. The prime goal is to ensure communication between the team members. 
 
 
+1. Test Incident Report 
+This report communicates the defects or issues as they occur during the life cycle. Defect and issue management involve multiple people from various teams
+
+2. Test Cycle Report 
+Test Cycle Report refers to running various tests in the testing life cycle. It includes the planning and execution of certain tests, the priority of those tests, and the severity of issues to be addressed. 
+
+3. Test Summary Report 
+The test summary report is the crux of the test cycle that recommends that the product is mature and ready for release. It can be considered as the final word regarding the entire cycle,
+
+4.Requirements coverage reports:
+The Requirements Coverage report in RTM allows us to verify if all the Requirements are covered by related Test Cases, Test Plans, Test Executions, Test Case Executions, and Defects. It gives a possibility to filter the results 
+
+5.Traceability report
+The Traceability Matrix displays all types of relations between two baselined issue types on a transparent view, using the many-to-many relationship comparison
 
 
+6.Test Execution progress report
+Requirements and Test Management for Jira Requirement Traceability Matrix (RTM) gives us the possibility to track the progress of Test Case Executions with the dedicated Test Case Execution
+
+Test Reports formats
+
+1.excel
+2.pdf
+3.on line web formats
+4.emails
+
+.............................................................................................
+				  Test Plan
+............................................................................................
+
+A test plan is a detailed document which describes software testing areas and activities. It outlines the test strategy, objectives, test schedule, required resources (human resources, software, and hardware), test estimation and test deliverables.
+
+The test plan is a base of every software's testing. It is the most crucial activity which ensures availability of all the lists of planned activities in an appropriate sequence.
+
+The test plan is a template for conducting software testing activities as a defined process that is fully monitored and controlled by the testing manager. The test plan is prepared by the Test Lead (60%), Test Manager(20%), and by the test engineer(20%).
 
 
+Types of Test plan:
+
+Master Test Plan
+  Master Test Plan is a type of test plan that has multiple levels of testing. It includes a complete test strategy.
+
+Phase Test Plan
+A phase test plan is a type of test plan that addresses any one phase of the testing strategy. For example, a list of tools, a list of test cases, etc.
+
+Specific Test Plans
+Specific test plan designed for major types of testing like security testing, load testing, performance testing, etc. In other words, a specific test plan designed for non-functional testing.
+
+How to write a Test Plan
+   Making a test plan is the most crucial task of the test management process. According to IEEE 829, follow the following seven steps to prepare a test plan.
+
+First, analyze product structure and architecture.
+Now design the test strategy.
+Define all the test objectives.
+Define the testing area.
+Define all the useable resources.
+Schedule all activities in an appropriate manner.
+Determine all the Test Deliverables.
+
+RACI : Roles and Responsiblity:
+
+Role: Test Manager
+
+Name: Ryan
+
+Responsibility:
+
+Prepare( write and review) the test plan
+Conduct the meeting with the development team
+Conduct the meeting with the testing team
+Conduct the meeting with the customer
+Conduct one monthly stand up meeting
+Sign off release note
+Handling Escalations and issues
 
 
+Role: Test Lead
+
+Name: Harvey
+
+Responsibility:
+
+Prepare( write and review) the test plan
+Conduct daily stand up meeting
+Review and approve the test case
+Prepare the RTM and Reports
+Assign modules
+Handling schedule
 
 
+Role: Test Engineer 1, Test Engineer 2 and Test Engineer 3
 
+Name: Louis, Jessica, Donna
 
+Assign modules: M1, M2, and M3
 
+Responsibility:
 
+Write, Review, and Execute the test documents which consists of test case and test scenarios
+Read, review, understand and analysis the requirement
+Write the flow of the application
+Execute the test case
+RTM for respective modules
+Defect tracking
+Prepare the test execution report and communicate it to the Test Lead.
+..............................................................................................
+				   Test Estimation
+..............................................................................................
 
+What is Software Test Estimation?
+Test Estimation is a management activity which approximates how long a Task would take to complete. Estimating effort for the test is one of the major and important tasks in Test Management.
 
+Why Test Estimation?
+Two questions you can expect from your clients when discussing potential test engagements are
 
+How long will this testing take?
+How much it will cost?
 
+What to Estimate?
 
+Resources: Resources are required to carry out any project tasks. They can be people, equipment, facilities, funding, or anything else capable of definition required for the completion of a project activity.
+Times : Time is the most valuable resource in a project. Every project has a deadline to delivery.
+Human Skills : Human skills mean the knowledge and the experience of the Team members. They affect to your estimation. For example, a team, whose members have low testing skills, will take more time to finish the project than the one which has high testing skills.
+Cost: Cost is the project budget. Generally speaking, it means how much money it takes to finish the project.
+..............................................................................................
+				   Software Envs
 
+Environments
 
+1.Dev
+     Where  The application is being built.
+  In dev env could be local desktops running on windows,mac,linux
+2.Testing
+    Where the application is tested using various tools
+   Platform could be local desktop, vms,cloud  
+3.Staging
+    Where the application is prepared for production , build stage
+   plaform could be remote vms, linux machines
+4.Production
+   Data centers where app is deployed
+   Platform could be linux,cloud,vms
+..............................................................................................
+    
+
+					
 
 
 
