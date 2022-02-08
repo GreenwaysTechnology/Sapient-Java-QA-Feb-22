@@ -1,0 +1,426 @@
+					Java Script
+.............................................................................................
+
+Software Setup:
+
+1.Node.js
+2.vscode
+3.browsers
+
+What is javaScript?
+
+ java script is a programming language like c++,c,java...
+
+Every programming language follows some style -  Object Oriented,Procedural,Functional Programmming.
+
+C++ -  C++ is object oriented Programming language
+Java-  object oriented Programming language.
+
+some langugages follows 2 or 3 styles -  hybrid style programming
+
+Javascript is object based,functional style ,event driven programming lanugage.
+
+Java 8 on wards java is also called "object oriented , functional style" programming language.
+
+         Programming languages can be classifed based on "Data Types-Type System"
+
+1.Strongly Typed / Static Typed Programming language
+
+ The type of variable is verified during compile time 
+
+ int a =10;
+  a="hello" // compiler will give an error
+
+c,c++,java,C#,scala	
+
+
+2.Dynamic Typed/Weak Typed Programming language
+
+ The type of variable is verified during  run time
+
+ var a =10;
+ a="hello"
+
+Javascript is object based,functional style ,event driven,dynamic typed programming lanugage.
+
+Why Javascript was created? History of Javascript:
+
+ Javascript was created at Netscap Communications by Brendan Eich.
+
+Birth of Web:
+ The World Wide Web was invented by British scientist Tim Berners-Lee in 1989 while working at CERN to distribute documents(web documents written in HTML) via internets through out world.
+
+1989 -Birth of Web
+
+First Web Browser : line mode web browser
+First WEB URL :http://info.cern.ch/hypertext/WWW/TheProject.html
+First Web Server :NeXT machine
+
+1992 - Web Was used outside CERN
+
+
+1995 - Till this date Web was static 
+   Hand coded html pages.
+
+In 1995 ,many people started thinking about web , regarding how to convert existing biz system into web system.
+
+1996 Dynamic content Technology was created:
+ 
+   HTML pages were created onfly with database records
+
+CGI -  COMMON Gateway Interface-C,Perl
+J2ee - Servlets and JSP
+ASP  -  Microsoft
+PHP  -  Open source 
+
+Nets cap communications also wanted to create server side technology but who failed. 
+
+NetsCap decided to create client side technology -  how to manipulate rendered html on fly.
+
+
+Netscap wanted to put the lanugage inside browser looks like java but java ,who selected the programmer  Brendan Eich asked him to create new programming language to change the behaviour of web pages.
+
+Brendan Eich created the first language looks like java but very light wieght.
+
+1995-1996 - The name of the language called "Mocha".
+1996 - Who changed name called "Live Script".
+1996 - Who changed name called "Java Script".
+
+Once the langugage was ready which was submitted to "ECMA Committee -European Computer Manufacturers Association (ECMA)"
+
+
+1997 -  ECMA Committee released language 
+Versions:
+js 1.0  -  ECMA 1.0  /es 1.0
+
+1998 -  New version was not available.
+
+1999 - ECMA 3 /ES 3 Came out
+
+2005 - AJAX was introduced
+
+2007  - ES 4
+2008  - ES 5
+2012 to 2017 -  ES 6
+2018.....
+2018 -  javascript was introduced inside server side computing via "node.js"
+
+Now Javascript is every where  - browsers,servers,mobile,devices................
+..............................................................................................
+				ES 5 AND 6
+..............................................................................................
+
+Javascript language learning path:
+.................................
+
+1.language fundementals
+2.javascript functions
+3.javascript object based 
+4.DOM programming
+5.Server side programming
+
+
+
+1.language fundementals:
+
+
+src/index.js
+//hello world
+console.log("Hello Javascript");
+
+
+variables,typesystem,values(literals)
+
+javascript is untyped/dyamic typed language.
+
+keyword variableName=value(literals)
+
+var | let | const | this | variablename=literals(value)
+
+
+literals - values: based on literal only the type of variable is decided during runtime.
+; optional
+
+types of literals
+
+1.string
+2.number
+3.boolean
+4.undefined
+5.NaN
+6.infinity
+7.null
+8.function
+9.object
+
+
+Strings:
+=>basic literal , its size 16 bit unicode character
+=> "" , '' ,``(back tick - es 6)
+
+
+//variable declaration
+var firstName = "Subramanian"
+var lastName = 'Murugan'
+//+ string concatnation
+console.log(" Name " + firstName + lastName)
+// ,
+console.log(" Name ", firstName, lastName)
+//String interpolation : es 6 feature
+console.log(`Name ${firstName} ${lastName}`)
+//back tick `` usage
+//multi line string
+var title = 'Sapient'
+var doc = "<html>" +
+    "<head>" +
+    "<title>" + title + "</title>" +
+    "</head>" +
+    "<body>" +
+    "<h1>Hello</h1>" +
+    "</body>";
+console.log(doc)
+
+var docOne = `<html>
+           <head>
+            <title>${title}</title>
+            </head>
+          <body>
+            <h1>Hello</h1>
+          </body>
+        `;
+console.log(docOne)
+..............................................................................................
+
+Number:
+
+=>It is 64 bit  by default aka double.
+//Numbers
+
+var i = 100;
+var j = 200;
+var r = i * j
+console.log(`I ${i} j${j} r ${r}`);
+
+
+Booleans:
+
+=>it is 1 bit value
+
+var isFound = true;
+var isEnabled = false;
+console.log(`isFound ${isFound} isEnabled ${isEnabled}`)
+
+
+undefined:
+
+=>it is built in value(literal)
+=>it is initalized to a variable when the variable has no valid literals(numbers,strings,booleans,objects,functions)
+
+//undefined
+
+var a;
+var b;
+console.log(`a ${a}  b ${b}`)
+..............................................................................................
+
+NaN -  Not a Number
+
+=>It is number inside javascript
+=>The number which indicates Runtime error code.
+=>NaN represents numerical computation error
+
+when you will get NaN.
+1.if you do compuation against undefined variables.
+//NaN
+//NaN due to computatio against undefined
+
+var a; // undefined
+var b = 100;
+var c = a * b;
+
+console.log(`a ${a} b ${b} result ${c}`)
+
+2. when you do type conversion ; string to number.
+
+type conversion; 
+ implict and explict.  String to Number
+
+implicit : 
+  javascript automatically converts string representation of numbers into number type
+
+eg:
+//Type conversion : implicit
+
+var a = 100; // a is number
+var b = "10" // b value is number but type is string
+var c = a * b; //here before computation js converts "10" into 10
+console.log(`a ${a} b${b} result ${c}`)
+
+Explicit Conversion:
+1.via builit in js apis
+  parseInt,parseFloat,Number()
+
+parseInt() -  converts any string into number based on 32 bit(int)
+parseFloat() -converts any string into number based on 64 bit(double)
+
+//Type conversion : explicit
+
+var a = 100; // a is number
+var b = "10" // b value is number but type is string
+var c = a * parseFloat(b); //here before computation js converts "10" into 10
+console.log(`a ${a} b${b} result ${c}`)
+
+Number():
+  it is constructor function/api used to convert string to number
+
+//Type conversion : explicit
+
+var a = 100; // a is number
+var b = "10" // b value is number but type is string
+var c = a * Number(b); //here before computation js converts "10" into 10
+console.log(`a ${a} b${b} result ${c}`)
+
+2.Using "+" operator
+
++ operator can be used
+
+1. to add two numbers
+2. for string concatation
+3. for string to number conversion -unary +
+//Type conversion : explicit
+
+var a = 100; // a is number
+var b = "10" // b value is number but type is string
+var c = a * +b; //here before computation js converts "10" into 10
+console.log(`a ${a} b${b} result ${c}`)
+
+
+NaN and Type conversion:
+.........................
+ NaN may come when u apply implicit and explicit pattern
+//Type conversion : explicit
+
+var a = 100; // a is number
+var b = "$10" // b value is number but type is string
+var c = a * b
+console.log(`a ${a} b${b} result ${c}`)
+
+Note:
+ if you get NaN, you have to fix it , because it is bug.
+
+.............................................................................................
+
+infinity :
+
+=>it is value , you get this value when you divide any number by 0.
+var a =100;
+var b =0;
+var c = a /b;
+console.log(`a ${a} b ${b} result ${c}`)
+
+............................................................................................
+				  Operators
+
+1.Assignment operators
+2.Comparison operators
+3.Arithmetic operators
+4.Bitwise operators
+5.Logical operators
+6.String operators
+7.Conditional (ternary) operator
+8.Comma operator
+9.Unary operators
+10.Relational operators
+11.other operators
+   (typeof,new , instanceof,in, dot(.) ,[](subscript ,*)
+
+
+
+1.Assignment Operators:
+
+expanded version
+x = x + 10
+
+shortcut
+x += 10	
+   
+//operators
+
+var a = 10;
+var b = 20
+var c = a + b
+c = c + 10
+console.log(`c ${c}`)
+c += 10
+console.log(`c ${c}`)
+..............................................................................................
+					Comparsional Operators
+
+
+1.equal and not equal
+
+A.==
+B.===
+
+//equal operator
+
+var a = 10;
+var b = 10;
+//compare two values
+var c = a == b; // == equal operator
+console.log(`c ${c}`)
+
+
+//here we compare x and y , but values are equal, but types are not equal, but result is true : Bug in the language itself.
+var x = 10;
+var y = "10";
+var z = x == y;
+console.log(`z ${z}`)
+
+//=== - This is right comparsion
+var z1 = x === y;
+console.log(`z1 ${z1}`)
+
+
+== vs ===
+
+=> double equal only validates value equality
+=> triple equal validates value + type equality - This is recommended operator.
+
+!= and !== => it is recommended for negative equality validation
+
+Other comparsional operators
+>,<,>=,<=
+.............................................................................................
+				 Logical Operators
+
+
+1.And - &&
+2.Or   -||
+3.Not  -! - which converts true to false and false to true
+4.inverter - !! -  which keeps true to true only.
+
+var isValid = true;
+var res = !!isValid;
+console.log(`Res ${res}`)				
+.............................................................................................
+
+
+
+  
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
