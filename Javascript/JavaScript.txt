@@ -404,11 +404,827 @@ var isValid = true;
 var res = !!isValid;
 console.log(`Res ${res}`)				
 .............................................................................................
+                                Runtime Data types
+
+1.typeof operator is used to know the runtime data type of a variable.
+
+typeof operator gives results in "string" representation.
+
+Types
+
+1.number
+   ->regular number
+   ->NaN
+   ->infinity
+2.string
+3.boolean
+4.undefined
+5.function
+6.object
+   ->regular objects
+   ->null
+
+//typeof operator
+
+var i =10;
+var name = "subramanian"
+var isValid = true
+var j;
+var k = j * 10
+var x = 10/0
+console.log(`The type of i is ${typeof i}`)
+console.log(`The type of name is ${typeof name}`)
+console.log(`The type of isValid is ${typeof isValid}`)
+console.log(`The type of j is ${typeof j}`)
+console.log(`The type of k is ${typeof k}`)
+console.log(`The type of x is ${typeof x}`)
+...............................................................................................				 control statements
+..............................................................................................
+if..else, if...else if, switch case.
+
+//if condition
+var i = 10;
+var j = 20;
+
+//logical and comparsional operators always gives boolean result. -  either true or false.
+
+if (i === j) {
+    console.log('i and j are equal')
+} else {
+    console.log('i and j are not equal')
+}
+//if ..else if
+var time = 3
+if (time < 10) {
+    greeting = "Good morning";
+} else if (time < 20) {
+    greeting = "Good day";
+} else {
+    greeting = "Good evening";
+}
+console.log(greeting)
+
+var today = 3
+var day="";
+switch (today) {
+    case 0:
+        day = "Sunday";
+        break;
+    case 1:
+        day = "Monday";
+        break;
+    case 2:
+        day = "Tuesday";
+        break;
+    case 3:
+        day = "Wednesday";
+        break;
+    case 4:
+        day = "Thursday";
+        break;
+    case 5:
+        day = "Friday";
+        break;
+    case 6:
+        day = "Saturday";
+}
+console.log(`Today is ${day}`)
+.............................................................................................
+			tenary operator : can be used to replace if...else
+
+//if condition
+var i = 10;
+var j = 20;
+
+//logical and comparsional operators always gives boolean result. -  either true or false.
+
+if (i === j) {
+    console.log('i and j are equal')
+} else {
+    console.log('i and j are not equal')
+}
+
+//tenary operator
+i === j ? console.log('i and j are equal') : console.log('i and j are not equal')
+
+var result = i === j ? "i and j are equal" : "i and j are not equal"
+console.log(result);
+.............................................................................................
+				Advanced boolean
+
+What can be true and false?
+
+In c:
+.......
+
+int a =10;
+
+if(a>10){
+
+}
+here "if" evaulates condition and gives result either true or false
+
+#include <stdio.h>
+
+int main()
+{
+    int a =10;
+
+if(a){
+     printf("true");
+}else{
+  printf("false");
+}
+}
+
+
+In c language 0 consider false, everthing is true
+
+
+in java
+.......
+
+int a =0
+
+if(a){
+
+}else{
+
+}
+
+
+int a =10
+
+if(a){
+
+}else{
+
+}
+In java we can pass only boolean values to if statement.
+..............................................................................................
+
+In javascript every thing is true, except the following values
+
+Falsy values
+
+1.boolean false
+2.0
+3."",''
+4.undefined
+5.NaN
+6.null
+
+
+var a = 10;
+if (a) {
+    console.log('a is true')
+} else {
+    console.log('a is false')
+}
+a = 0
+if (a) {
+    console.log('a is true')
+} else {
+    console.log('a is false')
+}
+var firstName=""
+if (firstName) {
+    console.log('firstName is true')
+} else {
+    console.log('firstName is false')
+}
+var city;
+if (city) {
+    console.log('city is true')
+} else {
+    console.log('city is false')
+}
+var res = 10 * undefined
+if (res) {
+    console.log('res is true')
+} else {
+    console.log('res is false')
+}
+//tenary and booleans
+
+var message;
+var greet = message ? "Hello" : "Hai";
+console.log(greet)
+..............................................................................................
+				 || , && ,! Operators and boolean expressions
+..............................................................................................
+
+|| Operator:
+
+ city || "Chennai";
+
+ here city is operand
+
+  "if first operand is true(truthy),the result would be the first Operand itself else second operand"
+
+// ||
+
+// ||
+
+var a = 10;
+var b = 100;
+var x = 10;
+var y = 90;
+
+var result = (a < b) || (x > y) // true || false
+console.log(`Result is ${result}`)
+
+//|| can be used with other values
+
+var city = "Coimbatore";
+var myCity = city || "Chennai";
+console.log(`My city ${myCity}`) // true
+city=""
+console.log(`My city ${city || "newyork"}`)
+
+
+&& : Opposit of "||" operator
+
+"if first operand is true(truthy),the result would be the second Operand  else first operand"
+
+// &&
+
+var a = 10;
+var b = 100;
+var x = 10;
+var y = 90;
+
+var result = (a < b) && (x > y) // true && false
+console.log(`Result is ${result}`)
+
+//&& can be used with other values
+
+var city = "Coimbatore";
+var myCity = city && "Chennai";
+console.log(`My city ${myCity}`) // true
+city=""
+console.log(`My city ${city && "newyork"}`)
+
+
+! Operator
+
+//! operator
+
+var isValid = true;
+var result = !isValid;
+
+console.log(`Boolean not result ${result}`)
+
+var city = "Coimbatore"
+
+var myres = !city ? "yourcity" : "mycity"
+console.log(myres)
+.............................................................................................
+				  Loops
+
+for - loops through a block of code a number of times
+for/in - loops through the properties of an object
+for/of - loops through the values of an iterable object
+while - loops through a block of code while a specified condition is true
+do/while - also loops through a block of code while a specified condition is true
+//loops
+
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+console.log("while")
+var j = 0;
+while (j < 10) {
+    console.log(j)
+    j++;
+}
+..............................................................................................
+				 Functions
+.............................................................................................
+
+function is core/basic building block for encapsulating code.
+function is unit of computation.
+function represents the execution of some logic.
+
+How to declare function? how to run/execute/invoke the function?
+
+function FunctionName() {
+  //function body
+}
+//invoke the function
+FunctionName();
+
+//function declaration
+
+function sayHello() {
+    console.log('hello')
+}
+sayHello();
+..............................................................................................
+
+Function with Biz logic:
+//function with logic
+
+function add() {
+    var a = 10;
+    var b = 20;
+    var c = a + b
+    console.log(`The result is ${c}`)
+}
+
+function substract() {
+    var a = 10;
+    var b = 20;
+    var c = a - b
+    console.log(`The result is ${c}`)
+}
+
+function multiply() {
+    var a = 10;
+    var b = 20;
+    var c = a * b
+    console.log(`The result is ${c}`)
+}
+
+function div() {
+    var a = 10;
+    var b = 20;
+    var c = a / b
+    console.log(`The result is ${c}`)
+}
+
+add();
+substract()
+multiply()
+div()
+.............................................................................................
+				 Function args and Parameters
+
+What is args?
+ receiving
+
+What is parameter?
+ passing
+
+//function with args
+//name is arg
+function sayHello(name) {
+    console.log(`Hello ${name}`);
+}
+//'Subramanian' - Parameter
+sayHello('Subramanian')
+
+//multiple parameters
+
+function add(a, b) {
+    var c = a + b;
+    console.log(`Add Result is ${c}`)
+}
+add(10,10)
+
+//parameters can be any type of value - numbers,strings,undefined,NaN,object,function...
+
+function sayHello(name) {
+    console.log(`Hello ${name}`)
+}
+//pass value
+sayHello('Subramanian')
+sayHello(10);
+//no value
+sayHello() //undefined
+/////////////////////////////////////////////////////////////////////////////////////
+//Runtime errors and parameters
+
+function multiply(a, b) {
+    var c = a * b;
+    console.log(`The result is ${c}`);
+}
+multiply(10, 10)
+multiply() //would cause NaN.
+
+//default args : if args are undefined, we can supply default values
+console.log('....default args....')
+function multi(a, b) {
+    a = a !== undefined ? a : 0;
+    b = b !== undefined ? b : 0;
+    var c = a * b;
+    console.log(`The result is ${c}`);
+}
+
+multi(10, 10)
+multi()
+//es 6 default args
+function calculate(a = 0, b = 0) {
+    var c = a * b;
+    console.log(`The result is ${c}`);
+}
+calculate(10, 10)
+calculate()
+//args are positional : positional paramerters, parameters can be passed in order only
+calculate(undefined, 90) //here i want to pass only b value
+/////////////////////////////////////////////////////////////////////////////////////
+//more parameters
+//i dont know in advance how may parameters i am going to pass.
+
+//var args : variable arguments
+function log() {
+    //special variable through which you can collect all parameters
+    console.log(arguments)
+}
+log('Hello', 'myapp', '1.0.0', 'Sapient')
+log('Sapient')
+log('hello', 'Sapient')
+
+//es 6 var args: operator: Rest operator(...)
+function logDetails(message,...myargs) {
+    console.log(myargs,message)
+}
+logDetails('Greet','Hello', 'myapp', '1.0.0', 'Sapient')
+logDetails('Sapient','1.0.0')
+logDetails('welcome','hello', 'Sapient')
+..............................................................................................
+			    function Return values
+
+//functions can return values(can be any value)
+
+function sayHello() {
+    return 'Hello';
+}
+let hello = sayHello();
+console.log(hello)
+
+function add(a = 0, b = 0) {
+    return a + b; //expression
+}
+console.log(add(10, 10))
+
+function sayHai() {
+    return // undefined
+}
+console.log(sayHai())
 
 
 
+
+
+.............................................................................................
+				 Scope
+..............................................................................................
+
+Scope determines the accessibility (visibility) of variables.
+
+JavaScript has 3 types of scope:
+
+Function scope
+Block scope
+Global scope
+
+
+Function scope:
+  if any variable is declared within function or function args variable is conderised "function scope".
+ function scoped variables not accessible outside the function.
+ This is some time called "local scope".
+
+
+//function scope
+
+function add() {
+    var a = 10;
+    var b = 20;
+    var c = a + b;
+    console.log(`a ${a} b ${b} c${c}`)
+}
+add();
+//trying to access the function scoped variable
+console.log(`a ${a} b ${b} c${c}`) //error Uncaught ReferenceError: a is not defined
+//at index.js:11:18
+//////////////////////////////////////////////////////////////////////////////////////////
+				 Block scope
+..........................................................................................
+
+block means group, if any variable is declared with in block like if,for is called "block scope".
+
+//block scope
+
+function login(name, password) {
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+          var status = "login success"
+    }
+    //access the status variable outside the block
+    console.log(status);
+
+}
+login("admin", "admin")
+
+In the above we get output is "login success".
+
+Why and How?
+
+ if any variable is delclared inside block(if), that variable cant be accessed outside that block in c,c++,java languages
+ but
+ javascript does not support "block scope" by default.
+
+How js is exposing the block scoped variables outside the block?
+
+Before that you need to understand one concept "Hoisting"
+
+Hositing:
+........
+
+If you want to understand hositing , we need to understand that js parsers and compilers
+
+Javascript compilation model:
+.............................
+
+Step:-1
+source code - index.js
+
+function login(name, password) {
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+          var status = "login success"
+    }
+    //access the status variable outside the block
+    console.log(status);
+
+}
+login("admin", "admin")
+
+Step 2:load the source into javascript engine
+ <script src="src/index.js"></script>
+
+Step 3: javascript starts parsing the code using parser
+
+Parser changes the code, which to be compiled later
+
+function login(name, password) {
+
+    var status;
+
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+       status= "login success"
+    }
+    //access the status variable outside the block
+    console.log(status);
+
+}
+login("admin", "admin")
+
+=>Parser moves all the declarations inside function(with in block) to function level(with in function) , this process is called as "Hositing"
+
+Step 4: parsed code gets compiled and generates binary image
+
+
+Step 5: loads the binary image into Memory and CPU.
+.............................................................................................
+				What if i want  block scope in Code
+.............................................................................................
+
+1.ES 5 style 
+   We can implement block scope in old javascript(es5) via "IEFE" Functions.
+
+2.ES 6 style
+   We can implement block scope via keyword called "let and const".
+
+   
+     //block scope
+function login(name, password) {
+    //var status
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+          var status = "login success"
+    }
+    //access the status variable outside the block
+    console.log(status);
+
+}
+login("admin", "admin")
+login()
+
+//block scope with let keyword
+function auth(name, password) {
+    //var status
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+          let isValid = "login success"
+    }
+    //access the status variable outside the block
+    console.log('status',isValid); //Uncaught ReferenceError: isValid is not defined
+    //at auth (index.js:23:26)
+    //at index.js:26:1
+
+}
+auth("admin", "admin")
+auth()
+  
+Best pratices:
+
+1.In es 6 apps , you must use only let or const keyword only dont use "var".
+
+.............................................................................................
+				Advanced Hositing
+............................................................................................
+
+your source code
+
+console.log(`i is ${i}`)
+var i = 10;
+console.log(`i is ${i}`)
+
+output
+undefined
+10
+How?
+
+parserd code:
+var i;
+console.log(`i is ${i}`) //undefined
+i=10
+console.log(`i is ${i}`) // 10 
+
+Now variables are hoisted at top levels.
+
+
+console.log(`i is ${i}`)
+console.log(`j is ${j}`)
+var i = 10;
+let j = 10;
+console.log(` is ${i}`)
+console.log(`j is ${j}`)
+
+index.js:4 Uncaught ReferenceError: Cannot access 'j' before initialization
+    at index.js:4:21
+..............................................................................................
+				 function literals
+
+
+literal means value, value means can be assigned to a variable,can be passed as parameter and return from functions.
+
+Since function itself is value(literal), can be assinged to a variable, can be pass as parameter , can returned from another function.
+
+let a=10;
+
+let b = fun
+
+//function literal
+
+//syntax -1
+function sayHello() {
+    console.log('Hello')
+}
+//assign the function to a variable
+let hello = sayHello;
+hello();
+
+//syntax 2
+//here the function is assinged directly to the variable
+// function has no name - anonmous function
+let hai = function () {
+    console.log('hai')
+};
+hai();
+...........................................................................................
+			   Anonmous functions parameters and args,returns
+...........................................................................................
+//anonmous function with args and parameters
+
+// var add = function (a = 0, b = 0) {
+//    return a + b;
+// };
+let add = function (a = 0, b = 0) {
+    return a + b;
+};
+console.log(add(10, 10))
+////////////////////////////////////////////////////////////////////////////////////////////
+                                   IIFE
+
+An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined.
+
+(function () {
+  statements
+})();
+
+(functiondeclaration)()function invocation
+
+(function () {
+    console.log('init')
+})()
+
+//block scope implementation using iife functions:not recommended now a days,use let statement.
+
+//block scope
+function login(name, password) {
+    //var status
+    if (name === 'admin' && password === 'admin') {
+        //variable status is declared within if statement : block scope
+        (function () {
+            var isValid = "login success"
+        })();
+    }
+    //access the status variable outside the block
+    console.log(isValid)
+
+}
+login("admin", "admin")
+login()
+.............................................................................................
+			Function literals - Anonmous functions in ES 6
+				Arrow functions
+
+
+What is arrow function?
+  It is syntax sugar of old es5 anonmous functions.
+Arrow functions helps to remove lot of code -  simple syntaxs
   
 
+//arrow 
+//es 5
+let hai = function () {
+    console.log('hai');
+}
+hai()
+//arrow version
+let hello = () => {
+    console.log('hello');
+}
+hello();
+
+//if function has only one line of body we can remove {}
+let greet = () => console.log('greet')
+greet();
+
+//args and parameters
+let add = (a = 0, b = 0) => {
+    let c = a + b;
+    return c;
+}
+console.log(add(10, 10))
+
+add = (a = 0, b = 0) => {
+    return a + b;
+}
+console.log(add(10, 10))
+//if the function has only return statementwe can remove {} and return statement
+add = (a = 0, b = 0) => a + b
+console.log(add(10, 10))
+
+//if function takes single arg, no default value, return the same: we can remove ()
+let doStuff = message => message;
+console.log(doStuff('foo'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 
 
  
