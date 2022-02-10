@@ -1,0 +1,20 @@
+//inner functions : functions are declared with in function
+
+//syntax 1
+// function outer() {
+//     console.log('outter')
+//     return function inner() {
+//         console.log('inner')
+//     }
+// }
+//syntax 2 :anonmous functions
+function outer() {
+    console.log('outter')
+    return function () {
+        console.log('inner')
+    }
+}
+let myinner=outer();
+myinner();
+//calling inner function short cut
+outer()();

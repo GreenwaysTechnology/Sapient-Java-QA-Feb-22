@@ -1309,6 +1309,598 @@ login('admin','admin',status => console.log(status), err => console.log(err));
 
 login('foo','bar',status => console.log(status), err => console.log(err));
 
+.............................................................................................
+		Higher order Function: Return a function from another function
+
+1.inner functions
+2.closures
+
+
+Inner functions:
+
+functions can be declared with in function, called inner functions
+inner function scope is within that function only.
+//inner functions : functions are declared with in function
+
+function outer() {
+    console.log('outter')
+    function inner() {
+        console.log('inner')
+    }
+    inner();
+}
+outer();
+//inner();
+
+What if i want to access inner function outside outter function?
+
+YOu have to return the function, so that we can call outside
+
+//inner functions : functions are declared with in function
+
+//syntax 1
+// function outer() {
+//     console.log('outter')
+//     return function inner() {
+//         console.log('inner')
+//     }
+// }
+//syntax 2 :anonmous functions
+function outer() {
+    console.log('outter')
+    return function () {
+        console.log('inner')
+    }
+}
+let myinner=outer();
+myinner();
+//calling inner function short cut
+outer()();
+.............................................................................................
+
+Parameters and args,returns inner and outter function:
+..............................................
+
+function outer(x) {
+    console.log('outter', x)
+    return function (y) {
+        // console.log('inner',y)
+        return `inner ${y}`
+    }
+}
+let value = outer(10)(34);
+console.log(value);
+
+arrow function of inner and outer function:
+..........................................
+// function outer(x) {
+//     console.log('outter', x)
+//     return function (y) {
+//         // console.log('inner',y)
+//         return `inner ${y}`
+//     }
+// }
+
+// let outer = (x) => {
+//     console.log('outter', x)
+//     return (y) => {
+//         // console.log('inner',y)
+//         return `inner ${y}`
+//     }
+// }
+let outer = x => {
+    console.log('outter', x)
+    return y =>`inner ${y}`
+}
+let value = outer(10)(34);
+console.log(value);
+..............................................................................................
+				Curry Function
+.............................................................................................
+
+Curry function  which return function in turn which return function , last function can read all args outter function.
+
+
+
+function outer(a) {
+    //  console.log('outter')
+    return function (b) {
+        //    console.log('inner-1')
+        return function (c) {
+            //      console.log('inner-2')
+            return function (d) {
+                //        console.log('inner-3')
+                //can access all its outer function variables
+                return `${a} ${b} ${c} ${d}`
+            }
+        }
+    }
+}
+let res = outer('a')('b')('c')('d')
+console.log(res);
+//////////////////////////////////////////////////////////////////////////////////////
+
+// let outerArrow = a => {
+//     return b => {
+//         return c => {
+//             return d => {
+//                 return `${a} ${b} ${c} ${d}`
+//             }
+//         }
+//     }
+// }
+
+let outerArrow = a => b => c => d => `${a} ${b} ${c} ${d}`
+
+let res1 = outerArrow('a')('b')('c')('d')
+console.log(res1);
+.............................................................................................
+				Closures
+.............................................................................................
+
+What is closure?
+
+ closure is inner function can access outter function local variables and arg variables.
+
+As soon as the inner function access outter function variables it becomes closure.
+
+//closure
+
+// function counter() {
+//     let count = 0;
+//     //closure
+//     return function () {
+//         return ++count;
+//     }
+// }
+let counter = () => {
+    let count = 0;
+    //closure
+    return () => ++count
+}
+
+let inc = counter(); //here which returns function pointer
+console.log(inc())
+console.log(inc())
+console.log(inc())
+
+in order to understand this,you need to understand "stack".
+
+stack is the place where functions are pushed.
+
+When ever the function is called , it is pushed into stack, then ,from the stack "stack frames are created"
+
+Stack frames are runtime representation of any functions.
+
+Once the frame is removed, all memory(local variables) also removed.
+
+In case, if the variable is refered inside inner function, that variable will not be stored inside stack frame rather in "shared" memory location, so that inner function can access those variables in n-number of times - this is called as "closure"
+..............................................................................................
+				Objects
+.............................................................................................
+
+Object oriented and Object based:
+.................................
+
+1.Abstraction
+2.Encapsulation
+3.Hierarchy
+    inheritance
+    has-a -composition
+4.Typing
+   polymorphism
+5.Modularity
+   
+----------------------
+6.Concurrency
+7.Persistency
+
+if any language follows the first 5 prinicples 100% , those languages are called object
+oriented programming.
+
+All object oriented programming languages must have classes
+
+java script does not follow the first 5 principles , so it is called as object based languge.
+javascript until es 5, no classes
+..............................................................................................
+                       Java script and Object based implemenation
+..............................................................................................
+
+Object has three things
+1.identity
+2.state
+3.behaviour
+
+Object creations in javascript?
+
+1.constructor pattern
+   -function
+   -es 6 class
+2.literal pattern
+   without function and without pattern.
+
+1.constructor pattern
+   -function
+
+functions in javascript is used to represent
+
+=>unit of computation - logic
+=>container for creating objects.
+
+logic
+function add(){
+ 
+}
+add();  ===> stack
+
+class template;object
+function Employee(){
+
+}
+
+new Employee(); ==> heap
+
+since syntax for logic and object creations are same, in order to avoid coding confussion.
+js recommends to keep function name like below.
+
+
+logic:
+ name 
+  verb ----eg add()
+  verb+Noun --- addNumbers()
+
+object name
+  name
+  Noun - Employee,Order,OrderDetails,Payment
+  
+  
+//logic
+function add() {
+    return 10 + 10;
+}
+add();
+
+//object template
+function Employee() {
+
+}
+//emp is variable,pointer to the object,reference variable
+let emp=new Employee();
+console.log(emp)
+
+//object state,behaviour
+
+state - variables,instance variables
+behaviour - methods, instance methods.
+
+how to declare state,behaviour?
+
+using "this" keyword
+
+
+//logic
+function add() {
+    return 10 + 10;
+}
+add();
+
+//object template
+function Employee() {
+    //state and behaviour
+    this.id = 1;
+    this.name = 'Subramanian'
+    //methods
+    // this.calculateSalary = function () {
+    //     return 100 *10;
+    // }
+    this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+}
+//emp is variable,pointer to the object,reference variable
+let emp = new Employee(); //constructor call
+console.log(emp)
+//how to access object properties
+console.log(emp.id, emp.name, emp.calculateSalary(2000, 20));
+
+
+Note:
+                 "Arrow functions cant be used to create objects"
+............................................................................................
+			How to initalize the state?
+
+
+1.hardcoded inside class(function)
+2.after object creation
+3.during object creation - constructor args && parameters
+
+
+
+1.hardcoded inside class(function)
+
+
+function Employee() {
+    //state inside function
+    this.id = 1;
+    this.name = 'Subramanian'
+    this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+}
+let emp = new Employee(); //constructor call
+console.log(emp.id, emp.name, emp.calculateSalary(2000, 20));
+
+
+2.after object creation
+
+function Employee() {
+    //state
+    this.id = 1;
+    this.name = 'Subramanian'
+    this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+}
+let emp = new Employee(); //constructor call
+
+//access object properties and reinitalize the value
+emp.id =100;
+emp.name = 'Ram'
+console.log(emp.id, emp.name, emp.calculateSalary(2000, 20));
+
+3.during object creation - constructor args && parameters
+
+function Employee(id = 1, name = 'Subramanian') {
+    //state
+    this.id = id;
+    this.name = name;
+    this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+}
+let emp = new Employee(2,'ram'); //constructor call
+console.log(emp.id, emp.name, emp.calculateSalary(2000, 20));
+
+..............................................................................................
+			  How many objects can i create out of single function
+
+
+You can create many.
+
+
+function Employee(id = 1, name = 'Subramanian') {
+    //state
+    this.id = id;
+    this.name = name;
+    this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+}
+let emp = new Employee(2,'ram'); //constructor call
+console.log(emp.id, emp.name, emp.calculateSalary(2000, 20));
+
+let emp1= new Employee(5,'arun');
+console.log(emp1.id, emp1.name, emp1.calculateSalary(2000, 20));
+
+let emp2=new Employee(4,'karthik')
+console.log(emp2.id, emp2.name, emp2.calculateSalary(2000, 20));
+............................................................................................
+			ES 6 Class 
+...........................................................................................
+
+//es 6 class
+// function Employee(id = 1, name = 'Subramanian') {
+//     //state
+//     this.id = id;
+//     this.name = name;
+//     this.calculateSalary = (basicSalary = 100, noOfdays = 0) => basicSalary * noOfdays
+// }
+
+class Employee {
+    //special function ; constructor function
+    salary = 100;
+    constructor(id = 1, name = 'Subramanian') {
+        this.id = id;
+        this.name = name;
+    }
+    //methods
+    calculateSalary(value) {
+        return this.salary * value
+    }
+
+}
+
+let emp = new Employee(2, 'ram'); //constructor call
+console.log(emp.id, emp.name, emp.calculateSalary(800));
+..............................................................................................
+				 Literal pattern
+..............................................................................................
+
+
+// let employee = {
+//     id: 1,
+//     name: 'Subramanian',
+//     calculateSalary: function () {
+//         return 100
+//     }
+// }
+
+
+// let employee = {
+//     id: 1,
+//     name: 'Subramanian',
+//     calculateSalary: ()=> {
+//         return 100
+//     }
+// }
+
+
+let employee = {
+    id: 1,
+    name: 'Subramanian',
+    calculateSalary() {
+        return 100
+    }
+}
+console.log(employee.id, employee.name, employee.calculateSalary())
+employee.id =90;
+employee.name='Ram'
+console.log(employee.id, employee.name, employee.calculateSalary())
+.............................................................................................
+				hierachy - has-a
+.............................................................................................
+
+Object has a another object.
+
+//has-a
+
+class OrderService {
+    constructor() {
+
+    }
+    findAllOrders() {
+        return 'orders'
+    }
+}
+class OrderController {
+    constructor(orderService = new OrderService()) {
+        //has-a
+        this.orderService = orderService
+    }
+    fetchOrders() {
+        return this.orderService.findAllOrders();
+    }
+}
+let orderCtrl = new OrderController();
+console.log(orderCtrl.fetchOrders())
+
+Has-a and literal object:
+//literal objects and has-a
+
+let employee = {
+    id: 1,
+    name: 'subramanian',
+    //has-a - nested object
+    address: {
+        city: 'Coimbatore'
+    }
+}
+console.log(employee.name,employee.address.city)
+..............................................................................................
+				Javascript Builtin Objects
+..............................................................................................
+
+Javascript built in objects can be classified into two category
+
+1.POJOS -  Plain old javascript objects
+
+2.DOM -  Document Object Model -  User interfaces(HTML Related)
+		
+
+1.POJOS -  Plain old javascript objects
+ JS offers lot of utility objects.
+
+1.Array
+   Every pl has datastructure, js has datastructure -  Array
+
+Array is object , which holds collection of any type of values.
+Array is dynamic like List in java.
+Since array is object , which has lot of methods for array processing.
+
+Recommend Link for mastering arrays:
+https://www.w3schools.com/js/js_arrays.asp
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+iterators:
+
+1.forEach
+2.filter
+3.map
+etc...
+
+//
+let list = [1, 2, 3, 4, 5, 6] //numbers
+
+list.forEach((value, index) => {
+    console.log(`index ${index} value ${value}`)
+});
+
+//list of employees
+let empList = [
+    { id: 1, name: 'a', salary: 1000 },
+    { id: 2, name: 'b', salary: 4000 },
+    { id: 1, name: 'c', salary: 6000 }
+];
+empList.forEach((emp, index) => {
+    console.log(`index ${index} value ${emp.name} ${emp.salary}`)
+});
+..............................................................................................
+				Wrapper Objects
+.............................................................................................
+
+int -Integer
+
+Every values in js object finally
+
+1.Number -
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+2.String
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+
+3.Boolean
+
+
+10 ---> Number()
+Number is a primitive wrapper object used to represent and manipulate numbers like 37 or -9.25.
+//wrapper objects
+
+let a = 10.7865897;
+console.log(a.toFixed(2))
+
+let str = "subramanian".trim();
+console.log(str.toUpperCase())
+.............................................................................................
+				 Math
+.............................................................................................
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
+
+console.log(Math.random().toFixed(2))
+..............................................................................................
+
+Advanced Objects
+.................				
+1.JSON  - JSON parser
+2.Promise
+etc......
+..............................................................................................
+				DOM
+
+HTML objects,events
+..............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
