@@ -676,7 +676,6 @@ var result = !isValid;
 console.log(`Boolean not result ${result}`)
 
 var city = "Coimbatore"
-
 var myres = !city ? "yourcity" : "mycity"
 console.log(myres)
 .............................................................................................
@@ -865,9 +864,6 @@ function sayHai() {
 console.log(sayHai())
 
 
-
-
-
 .............................................................................................
 				 Scope
 ..............................................................................................
@@ -903,7 +899,7 @@ console.log(`a ${a} b ${b} c${c}`) //error Uncaught ReferenceError: a is not def
 				 Block scope
 ..........................................................................................
 
-block means group, if any variable is declared with in block like if,for is called "block scope".
+block means group, if any variable is declared with in block like "if",for loop is called "block scope".
 
 //block scope
 
@@ -960,9 +956,7 @@ Step 3: javascript starts parsing the code using parser
 Parser changes the code, which to be compiled later
 
 function login(name, password) {
-
     var status;
-
     if (name === 'admin' && password === 'admin') {
         //variable status is declared within if statement : block scope
        status= "login success"
@@ -984,7 +978,7 @@ Step 5: loads the binary image into Memory and CPU.
 .............................................................................................
 
 1.ES 5 style 
-   We can implement block scope in old javascript(es5) via "IEFE" Functions.
+   We can implement block scope in old javascript(es5) via "IIFE" Functions.
 
 2.ES 6 style
    We can implement block scope via keyword called "let and const".
@@ -1063,7 +1057,7 @@ index.js:4 Uncaught ReferenceError: Cannot access 'j' before initialization
 
 literal means value, value means can be assigned to a variable,can be passed as parameter and return from functions.
 
-Since function itself is value(literal), can be assinged to a variable, can be pass as parameter , can returned from another function.
+Since function itself is value(literal), can be assinged to a variable, can be passed as parameter , can be returned from another function.
 
 let a=10;
 
@@ -1174,6 +1168,151 @@ console.log(add(10, 10))
 //if function takes single arg, no default value, return the same: we can remove ()
 let doStuff = message => message;
 console.log(doStuff('foo'))
+
+..............................................................................................
+				Function as Parameter -Higher order function
+
+
+What is higher order function?
+
+ javascript is functional style programming language.
+
+According to functional programming,"functions are first class citzens"
+
+functions are literals ,so that we can
+
+=>store into a variable
+=>we can pass as parameter to another function
+
+let myfun = function(){
+
+};
+
+function hello(foo){
+ foo()
+
+}
+hello('hello')
+
+var message='hello'
+hello(message)
+
+//
+hello(function(){})
+hello(myfun)
+
+
+//Higher order function: function can be passed as parameter to another function
+
+//a=10;b=10
+//a=x;b=y
+let add = function (a, b) {
+    console.log(`a${a} b${b}`)
+};
+add(10, 10)//pass values directly
+let x = 10;
+let y = 70;
+add(x, y)
+//function as parameter
+//hello=function () {
+//console.log('hello');
+//}
+
+//sayGreet is called higher order function
+let sayGreet = function (greet) {
+    //greet()
+    greet();
+};
+sayGreet(function () {
+    console.log('hello');
+});
+let hai = function () {
+    console.log('hai')
+};
+sayGreet(hai);
+
+function sayWelcome(welcome) {
+    welcome();
+}
+sayWelcome(function () {
+    console.log('welcome')
+});
+/////////////////////////////////////////////////////////////////////////////////////
+//arrow version
+// let delay = (callback) => {
+//    callback();
+// }
+let delay = callback => callback();
+// delay(function () {
+//     console.log('delay')
+// });
+delay(() => console.log('delay'));
+let timeout = () => console.log('timeout');
+delay(timeout)
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+//higher order function and args parameter
+
+let sayGreet = greet => {
+    greet('Subramanian', 'Hello');
+    greet();
+}
+
+sayGreet((name = 'foo', message = 'bar') => {
+    console.log(`${message} ${name}`)
+});
+........................................................................................
+
+//Higer order function and how to return values?
+let sayGreet = greet => {
+    let res = greet('Subramanian', 'Hello');
+    console.log(res);
+}
+
+sayGreet((name = 'foo', message = 'bar') => {
+    return `${message} ${name}`;
+});
+
+sayGreet((name = 'foo', message = 'bar') => `${message} ${name}`);
+............................................................................................
+		Advanced Higher order function : passing more functions are parameter
+............................................................................................
+
+//Passing multiple functions as parameter
+
+// let login = (success, failure) => {
+//     let userName = 'admin';
+//     let password = 'admin';
+//     if (userName === 'admin' && password === 'admin') {
+//         success('Login success')
+//     } else {
+//         failure('Login failed');
+//     }
+// };
+
+let login = (userName = '', password = '', success, failure) => {
+    if (userName === 'admin' && password === 'admin') {
+        success('Login success')
+    } else {
+        failure('Login failed');
+    }
+};
+
+login('admin', 'admin', (status) => {
+    console.log(status)
+}, (err) => {
+    console.log(err)
+});
+login('admin','admin',status => console.log(status), err => console.log(err));
+
+
+login('foo','bar',status => console.log(status), err => console.log(err));
+
+
+
+
+
 
 
 

@@ -1,34 +1,29 @@
-//arrow 
-//es 5
-let hai = function () {
-    console.log('hai');
-}
-hai()
-//arrow version
-let hello = () => {
-    console.log('hello');
-}
-hello();
+//Passing multiple functions as parameter
 
-//if function has only one line of body we can remove {}
-let greet = () => console.log('greet')
-greet();
+// let login = (success, failure) => {
+//     let userName = 'admin';
+//     let password = 'admin';
+//     if (userName === 'admin' && password === 'admin') {
+//         success('Login success')
+//     } else {
+//         failure('Login failed');
+//     }
+// };
 
-//args and parameters
-let add = (a = 0, b = 0) => {
-    let c = a + b;
-    return c;
-}
-console.log(add(10, 10))
+let login = (userName = '', password = '', success, failure) => {
+    if (userName === 'admin' && password === 'admin') {
+        success('Login success')
+    } else {
+        failure('Login failed');
+    }
+};
 
-add = (a = 0, b = 0) => {
-    return a + b;
-}
-console.log(add(10, 10))
-//if the function has only return statementwe can remove {} and return statement
-add = (a = 0, b = 0) => a + b
-console.log(add(10, 10))
+login('admin', 'admin', (status) => {
+    console.log(status)
+}, (err) => {
+    console.log(err)
+});
+login('admin','admin',status => console.log(status), err => console.log(err));
 
-//if function takes single arg, no default value, return the same: we can remove ()
-let doStuff = message => message;
-console.log(doStuff('foo'))
+
+login('foo','bar',status => console.log(status), err => console.log(err));
