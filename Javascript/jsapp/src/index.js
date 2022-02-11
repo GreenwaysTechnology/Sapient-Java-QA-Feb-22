@@ -1,3 +1,7 @@
-//Math
 
-console.log(Math.random().toFixed(2))
+function createAndReadCookie(){
+    document.cookie = "username=John Doe";
+    console.log(document.cookie)
+
+}
+createAndReadCookie();

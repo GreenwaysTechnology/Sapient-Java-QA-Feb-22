@@ -1398,7 +1398,7 @@ console.log(value);
 				Curry Function
 .............................................................................................
 
-Curry function  which return function in turn which return function , last function can read all args outter function.
+Curry function  which return function in turn which return function , last function can read all args of outter function.
 
 
 
@@ -1864,10 +1864,640 @@ Advanced Objects
 2.Promise
 etc......
 ..............................................................................................
-				DOM
-
-HTML objects,events
+				DOM - How to build browser application- UI Technologies
 ..............................................................................................
+
+HTML:
+
+What is HTML?
+  HTML is programming language.
+
+Programming can be classified based on applications.
+
+1.GPL - General Purpose Language
+   Programming language used to build many category apps.
+  c,c++,java....
+2.DSL - Domain Specific language
+   Language built for specific domain. The language cant be used for other purpose.
+HTML is one the DSL language.
+ HTML was created to "design documents"
+
+Document Design programming language:
+In 1960, IBM and Xerox joined together who built a language to create computer based document systems- GML(Generalized Markup lanauge).
+Based on GML many document design languages were created.
+
+				 GML
+				  |
+ ----------------------------------------------------------------------------------------
+ |          |                      |           |  
+MathML   HTML(1989)             XML(1996)    (WML)  etc.....
+
+
+HTML language created to design document that can be linked together based on hyper links
+and distributed over "internet" via special software called "WebServer" via special transport called "HTTP protocal", and can be viewed special software called "Web Agents" -Web Browsers.
+
+..............................................................................................
+				HTML Compilation and Runtime Architecture
+.............................................................................................
+
+Any Programming  has three stage
+
+1.source code
+2.compiled code
+3.Runtime code
+
+Java:
+
+Hello.java
+ |
+compile
+ |
+Hello.class
+ |
+Hello
+
+Do you think that Html is compiled and executed?
+
+
+index.html -source code
+
+<html>
+<head></head>
+<title><title>
+<body>
+  <div>
+     <h1>Welcome</h1>
+  </div>
+</body>
+</html>
+  -------------------Browser
+loader---LOAD Code into browser
+ |
+   from file: or http:
+ |
+Parser : Parser is special compiler which converts source into lexcial tree(string tree)
+|
+body
+  div
+     h1
+        Welcome 
+     h1
+  div
+body
+|
+
+ Complier-Compilation : Convert this into assembly
+|
+body -load xxx
+  div
+     h1
+        Welcome 
+     h1
+  div
+body
+.........................Compile Time Phase finished--Runtime Begins.....
+ |
+
+-------------------------Execution cycle------------------------------------
+         HTML Execution engine : Request OS ,to allocate memory :Runtime
+-LinkedList
+body -Node
+  div -Node
+     h1 -Node
+        Welcome -Node
+     h1
+  div
+body
+Linking the Nodes: Tree
+body  -Node
+  |
+  div -Node
+    |
+     h1 -Node
+      |
+        Welcome -Node
+        |
+     h1
+  div
+body
+|
+ Layout/Paint Engine: will convert nodes into pxs : final output
+..............................................................................................
+
+In 1996 , The company called "Netscap Communication", Started a project, How to access the tree from the browser
+Why should we access the tree?
+ We have to manipulate the tree -  addding new node, update existing node content, remote node,get a single node, apply some styles.
+
+Netscap introduced a c api to access the tree, but who failed, so that they decided to put java language to access the tree , again who could not use java language.
+
+So netscap decided to create light weight programming language, to access the tree "Birth of Javascript".
+
+How to access the c tree inside javascript engine?
+
+ Who proposed a model , that model we call "Object oriented Model" , To represent every html element as "Object"
+
+eg:
+  div element----->div node------div Object
+
+objects forms tree, called "Object tree".
+
+Those objects are called DOM -  Document Object Model(object oriented html).
+
+ "According to DOM , every html element is Object, which forms Hierachy(tree)"
+  Every object is created by Javascript only, we cant create using new operator"
+  We can access the created objects, we can create objects using factory apis"
+..............................................................................................
+				DOM programming
+.............................................................................................	
+
+What is inheirtance?
+   Way of code sharing , from base class to dervied.
+
+Since javascript object based, there is no class based inheritance.
+
+class based inheritance means "compile inheritance"  -C++,Java,C#
+
+javascript follows object based inheritance, object inherits other objects this special type of inheritance called "Prototypical inheritance".
+
+In javascript , every object has Super object(parent object).
+
+In javascript we have superium object called "object"
+..............................................................................................
+				   Object
+				     |
+ ----------------------------------------------------------------------------------------->
+ |               |
+Your Object  BuiltIn Objects
+
+Object:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+	
+
+function Employee (){
+    this.id=1;
+}
+let emp =new Employee();//User defined
+console.log(emp.id,emp.toString())
+
+Object utitily methods:
+Object.assign
+Object.freeze
+etc...
+..............................................................................................
+
+					Objects
+			---------------------------------------------
+			|                                         DOM
+                      POJO
+
+
+DOM:
+  In DOM every html element is object
+  DOM forms a heriachy
+
+				
+				 Object
+				   |
+				 Window
+				   |
+		-------------------------------------------------
+               Document   Location    History 
+                  |
+              HTML Elements
+
+Window:
+  Represents a Browser
+
+Document:
+  Represents a current document
+Location :
+  Reprents URL in the browser
+
+History :
+  Represents collection of visited Pages
+
+<html>
+<head>
+  <title>My Document</title>
+</head>
+<body>
+  <h1>Header</h1>
+  <p>Paragraph</p>
+</body>
+</html>
+
+				   Window
+				     |
+                                  Document
+				     |
+				    HTML
+				-------------------------
+                               head		       body	
+                                 |                      |
+                                 title                  h1
+							 |
+                                    |                     Header
+                                     MyDocument         |
+                                                        p 
+                                                         |
+                                                          Paragraph
+
+
+..............................................................................................
+
+How to access the html elements using javascript?
+
+document - reference variable represent "Document" Object
+  using this you can access the elements inside body.
+
+<body>
+  <h1>Header</h1>
+  <p>Paragraph</p>
+</body>
+
+apis:
+Finding HTML Elements
+
+document.getElementById(id)	        Find an element by element id
+document.getElementsByTagName(name)	Find elements by tag name
+document.getElementsByClassName(name)	Find elements by class name
+document.querySelector(className)       Find elements by class name
+
+
+<h1>Header</h1> - Element
+
+Header---innerHTML
+
+function getElements() {
+    //get h1 element
+    let heading = document.getElementsByTagName('h1')
+    console.log(heading)
+    for (let i = 0; i < heading.length; i++) {
+            console.dir(heading[i].innerHTML); //return 
+    }
+}
+getElements();
+
+//get single Element
+function getSingleElement(){
+  let value= document.getElementById('hello')
+  console.dir(value.innerHTML);
+}
+getSingleElement();
+//var emp = new Employee()
+//var document = new Document();
+//var window =new Window();
+//var history = new History()
+
+..............................................................................................
+				create new DOM element
+..............................................................................................
+
+Adding and Deleting Elements
+
+Method	Description
+
+document.createElement(element)	Create an HTML element
+document.removeChild(element)	Remove an HTML element
+document.appendChild(element)	Add an HTML element
+document.replaceChild(new, old)	Replace an HTML element
+
+document.write(text)	Write into the HTML output stream -Dont use this api.
+
+
+How to create a dom element?
+
+Steps:
+
+1.create new element
+    var newElement = document.createElement('h2')
+
+2.add new content to the element
+  newElement.innerHTML = 'Hey i am new Element';
+
+3.add created element on existing tree.
+get the body
+    document.body.appendChild(newElement)
+
+function createElement() {
+    //create h2 element
+    var newElement = document.createElement('h2')
+    //add innerHtml
+    newElement.innerHTML = 'Hey i am new Element';
+    //attach this element on existing tree.
+    //where you are going to append - inside body
+    //get the body
+    document.body.appendChild(newElement)
+    
+}
+createElement();
+...........................................................................................
+				User interactions
+..........................................................................................
+
+What is user interaction?
+
+User can 
+   click on the page, buttons,hyperlinkes
+   move mouse on the page,on image,elements
+   press /give inputs through keyboard
+
+How to implement user interaction? how we can change the web page according to user interactions?
+
+via Event handling
+
+What is events?
+  events are some actions/signals, the javascripts reacts for those actions, perform some activities accordingly
+
+eg;
+  if user moves mouse on image, then i have to zoom it.
+  if user clicks button, then it moves to the next page.
+  if user moves mouse on text, change the background color.
+
+Types of events:
+
+ 1.Hardware events : mouse,keyboard,touch events
+ 2.application events : onload,onupdate,offline,online........
+
+Adding interactions via Events -  DOM Events:
+.............................................
+ Every html element, has event attchment feature.
+
+Event Listener:
+..............
+   Function which is called when ever an event is occured on dom elemement
+ eg: if you move mouse on text, then listener is called. the logic of that event will be fired.
+
+Use case:
+ Change the background of a text, when i move mouse on it, when mouse left, keep the old color.
+ 
+Syntax:
+
+ domelement.addEventListener('nameoftheevent',function(){})
+
+name ofthe events
+1.click
+2.dbclick
+3.mousemove
+4.mouseover
+5.onpress
+6.oninput
+etc....
+
+CSS and java script:
+....................
+ Via javascript can add CSS styles dynamically(via code).
+ https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+domelement.style.backgroundColor = 'yellow'
+
+function changeColor() {
+    //get Element
+    let heading = document.getElementById('hello')
+    //add event listner
+    heading.addEventListener('mouseenter', function () {
+        //apply the background color
+        heading.style.backgroundColor = 'yellow'
+        heading.style.fontSize = '50px'
+    });
+    heading.addEventListener('mouseleave', function () {
+        //apply the background color
+        heading.style.backgroundColor = null;
+        heading.style.fontSize = null
+    });
+}
+changeColor()
+...........................................................................................
+				 Application Events
+
+Application events are fired not because of hardware devices -mouse,keyboard.
+
+Where can i script tag?
+
+->head
+->body
+
+
+Adding script inside head tag:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript apps</title>
+    <script src="src/index.js"></script>
+
+</head>
+<body>
+    <h1>Javascript Apps</h1>
+    <h1>DOM</h1>
+    <h1>HTML</h1>
+    <h1>XML</h1>
+    <h1>WML</h1>
+    <p id="hello">hello , How are you?</p>
+    
+</body>
+</html>
+
+index.js
+
+function changeColor() {
+    //get Element
+    let heading = document.getElementById('hello')
+    //add event listner
+    heading.addEventListener('mouseenter', function () {
+        //apply the background color
+        heading.style.backgroundColor = 'yellow'
+        heading.style.fontSize = '50px'
+    });
+    heading.addEventListener('mouseleave', function () {
+        //apply the background color
+        heading.style.backgroundColor = null;
+        heading.style.fontSize = null
+    });
+}
+changeColor()
+
+output:
+
+Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')
+    at changeColor (index.js:5:13)
+    at index.js:16:1
+
+Why we get this error?
+
+HTML code execution is sequential
+
+like 
+ first it will  load html,head,title, 
+
+when it tries to encounter script tag, it starts execute the javascript , then only it will load other elements.
+
+During execution, it tries to find out elements which not yet created, then it will throw error.
+
+How to solve this problem?
+
+There are two ways?
+
+1.Add script tag inside body, at end of the body.
+
+<body>
+    <h1>Javascript Apps</h1>
+    <h1>DOM</h1>
+    <h1>HTML</h1>
+    <h1>XML</h1>
+    <h1>WML</h1>
+    <p id="hello">hello , How are you?</p>
+    <script src="src/index.js"></script> 
+</body>
+
+This is recommended solution.
+
+2.Via application events- window events
+
+Window has an event called "load", ensures that all dom tree is ready, then fire your javascript.
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript apps</title>
+    <script src="src/index.js"></script>
+
+</head>
+
+<body>
+    <h1>Javascript Apps</h1>
+    <h1>DOM</h1>
+    <h1>HTML</h1>
+    <h1>XML</h1>
+    <h1>WML</h1>
+    <p id="hello">hello , How are you?</p>
+    <!-- <script src="src/index.js"></script> -->
+
+</body>
+
+</html>
+
+function changeColor() {
+    
+    //get Element
+    let heading = document.getElementById('hello')
+    //add event listner
+    heading.addEventListener('mouseenter', function () {
+        //apply the background color
+        heading.style.backgroundColor = 'yellow'
+        heading.style.fontSize = '50px'
+    });
+    heading.addEventListener('mouseleave', function () {
+        //apply the background color
+        heading.style.backgroundColor = null;
+        heading.style.fontSize = null
+    });
+}
+
+//add window.onload method
+
+window.addEventListener('load', function () {
+   changeColor()
+})
+..............................................................................................
+				Event Object
+..............................................................................................
+
+How to get input from the user?
+
+Ways
+
+1.via html form fields- input,checkbox,radio,select,....
+2.via windows methods - window.prompt,window.alert - dont use these methods
+
+
+ document.getElementById('userName').addEventListener('input', function () {
+        //read value of text
+    })
+
+here i want to read the text box value?
+ 
+Solution is Event object.
+
+Event object is bridge object between listener and dom element.
+
+Event object is bound with every dom element.
+
+Event object reference we can get via listener
+
+ document.getElementById('userName').addEventListener('input', function (event) {
+        //read value of text
+ })
+
+function getValue() {
+
+    let value = ''
+    //get
+    document.getElementById('userName').addEventListener('input', function (e) {
+        //Get the text via event object , target property returns the reference of text
+        let textBox = e.target
+        // console.dir(textBox.value)
+        value = textBox.value
+    })
+    document.getElementById('btn').addEventListener('click', function (e) {
+        alert(value)
+        document.getElementById('showText').innerHTML = value;
+    })
+}
+getValue();
+..............................................................................................
+
+Other Objects:
+
+What are Cookies?
+Cookies are data, stored in small text files, on your computer.
+
+When a web server has sent a web page to a browser, the connection is shut down, and the server forgets everything about the user.
+
+Cookies were invented to solve the problem "how to remember information about the user":
+
+When a user visits a web page, his/her name can be stored in a cookie.
+Next time the user visits the page, the cookie "remembers" his/her name.
+
+create cookie
+
+function createAndReadCookie(){
+    document.cookie = "username=John Doe";
+    console.log(document.cookie)
+
+}
+createAndReadCookie();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
