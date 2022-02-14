@@ -348,6 +348,506 @@ frameworks and libs are examples of third party
 etc...  
 
 How to use the packages? to be discussed latter.
+..............................................................................................
+
+Language fundamentals:
+
+1.data types,variables and literals
+
+Data types:
+
+ Java is strongly typed/static typed programming language.
+ The type of variable is decided during compile time.
+
+Data types classification:
+
+1.primitive data types
+2.reference data types/Object types
+
+1.primitive data types
+
+numbers
+ byte,short,int,long -  whole number
+Each data type has its own size.
+
+byte:
+ The byte data type is an 8-bit signed two's complement integer. It has a minimum value of -128 and a maximum value of 127 (inclusive) 
+
+short: The short data type is a 16-bit signed two's complement integer. It has a minimum value of -32,768 and a maximum value of 32,767 (inclusive)
+
+int: By default, the int data type is a 32-bit signed two's complement integer, which has a minimum value of -231 and a maximum value of 231-1.
+
+long: The long data type is a 64-bit two's complement integer. The signed long has a minimum value of -263 and a maximum value of 263-1
+
+float,double -  precision values
+
+float: The float data type is a single-precision 32-bit IEEE 754 floating point.
+double: The double data type is a double-precision 64-bit IEEE 754 floating point
+
+chars 
+ char 
+The char data type is a single 16-bit Unicode character.
+
+boolean
+  The boolean data type has only two possible values: true and false. This data type represents one bit of information, but its "size" isn't something that's precisely defined.
+
+
+2.Rerference types
+  Size of reference types cant be fixed, collection of other types, which is calculated dynamically.
+
+Object types
+String - collection of character
+
+..............................................................................................
+
+Literals:
+  values are stored inside variable
+
+Integer literals:
+ ->decimal -  26;
+ ->hexa decimal -0x1a;
+ ->binary - 0b11010;
+
+Floating point literals
+ ->10.4f/F  - floating points
+ ->10.4 -double literal
+
+String literals:
+  Collection of strings
+  "hello"
+Character literals
+  Single character
+  'A'
+boolean literals 
+  true 
+  false
+.............................................................................................
+
+Variables:
+  Place holder which holds/refers the literals
+variables can store prmiitive values or reference values(objects).
+
+Variables are classified into various category:
+
+1.local variables and args variables
+  Variables are declared with any type(primitive/reference), with in method
+2.instance variables
+   variables are declared inside class
+   instance variables can be any type (primitive/reference)
+3.static variables 
+    Variables are declared inside class with static keyword
+   instance variables can be any type (primitive/reference
+..............................................................................................
+
+package com.sapient.core;
+
+public class PrimitiveDataTypes {
+    public static void main(String[] args) {
+        //variables
+        //whole numbers
+        byte byteVariable = 10;
+        short shortVariable = 199;
+        int intVariable = 9000;
+        long longVariable = 900;
+        System.out.println("Whole Numbers : Integer");
+        System.out.println("Byte " + byteVariable);
+        System.out.println("Short " + shortVariable);
+        System.out.println("Int  " + intVariable);
+        System.out.println("Long " + longVariable);
+        //literals
+        //decimal number
+        //hexa decimal
+        //octal numbers
+        // The number 26, in decimal
+        int decVal = 26;
+//  The number 26, in hexadecimal
+        int hexVal = 0x1a;
+// The number 26, in binary
+        int binVal = 0b11010;
+        System.out.println("Decimal Literal " + decVal);
+        System.out.println("Hexa Decimal " + hexVal);
+        System.out.println("binValue " + binVal);
+
+        System.out.println("Precision Numbers : Floating points");
+        float floatVariable = 10.5f;
+        double doubleVariable = 90.78;
+        System.out.println("Float  " + floatVariable);
+        System.out.println("Double " + doubleVariable);
+        //chars
+        System.out.println("Characters : Single Char");
+        char c = 'a';
+        System.out.println("Char  " + c);
+        //collection of Characters
+        System.out.println("Characters : multi Char");
+        String stringVariable = "hello";
+        System.out.println("Strings  " + stringVariable);
+        //boolean
+        System.out.println("Boolean : true/false");
+        boolean booleanVariable = true;
+        System.out.println("Boolean  " + booleanVariable);
+
+
+    }
+}
+...........................................................................................
+				Underscores literals
+
+Using Underscore Characters(_) in Numeric Literals
+
+package com.sapient.core;
+
+public class UnderscoreLiterals {
+    public static void main(String[] args) {
+        long creditCardNumber = 1234_5678_9012_3456L;
+        long socialSecurityNumber = 999_99_9999L;
+        float pi =  3.14_15F;
+        long hexBytes = 0xFF_EC_DE_5E;
+        long hexWords = 0xCAFE_BABE;
+        long maxLong = 0x7fff_ffff_ffff_ffffL;
+        byte nybbles = 0b0010_0101;
+        long bytes = 0b11010010_01101001_10010100_10010010;
+        System.out.println(socialSecurityNumber);
+        System.out.println(creditCardNumber);
+
+    }
+}
+
+You can place underscores only between digits; you cannot place underscores in the following places:
+
+At the beginning or end of a number
+Adjacent to a decimal point in a floating point literal
+Prior to an F or L suffix
+In positions where a string of digits is expected
+..............................................................................................
+				 Operators
+..............................................................................................
+
+Most of the Operators are dervied from c / c++ :
+.................................................
+
+The Arithmetic Operators
++	Additive operator (also used for String concatenation)
+-	Subtraction operator
+*	Multiplication operator
+/	Division operator
+%	Remainder operator
+
+package com.sapient.core;
+
+public class OperatorsDemo {
+    public static void main(String[] args) {
+        int result = 1 + 2;
+        // result is now 3
+        System.out.println("1 + 2 = " + result);
+        int original_result = result;
+
+        result = result - 1;
+        // result is now 2
+        System.out.println(original_result + " - 1 = " + result);
+        original_result = result;
+
+        result = result * 2;
+        // result is now 4
+        System.out.println(original_result + " * 2 = " + result);
+        original_result = result;
+
+        result = result / 2;
+        // result is now 2
+        System.out.println(original_result + " / 2 = " + result);
+        original_result = result;
+
+        result = result + 8;
+        // result is now 10
+        System.out.println(original_result + " + 8 = " + result);
+        original_result = result;
+
+        result = result % 7;
+        // result is now 3
+        System.out.println(original_result + " % 7 = " + result);
+    }
+}
+.............................................................................................
+The Unary Operators
+   single operand.
+ ++
+The binary operators
+   two operand
+  a + b
+
++	Unary plus operator; indicates positive value (numbers are positive without this, however)
+-	Unary minus operator; negates an expression
+++	Increment operator; increments a value by 1
+--	Decrement operator; decrements a value by 1
+!	Logical complement operator; inverts the value of a boolean
+
+package com.sapient.core;
+
+public class UnaryOperators {
+    public static void main(String[] args) {
+        int result = +1;
+        // result is now 1
+        System.out.println(result);
+
+        result--;
+        // result is now 0
+        System.out.println(result);
+
+        result++;
+        // result is now 1
+        System.out.println(result);
+
+        result = -result;
+        // result is now -1
+        System.out.println(result);
+
+        boolean success = false;
+        // false
+        System.out.println(success);
+        // true
+        System.out.println(!success);
+    }
+}
+..............................................................................................
+
+The Equality and Relational Operators
+
+==      equal to
+!=      not equal to
+>       greater than
+>=      greater than or equal to
+<       less than
+<=      less than or equal to
+
+All operators here , gives boolean result, like true or false.
+package com.sapient.core;
+
+public class RealtionalOperator {
+    public static void main(String[] args) {
+        int value1 = 1;
+        int value2 = 2;
+        if(value1 == value2)
+            System.out.println("value1 == value2");
+        if(value1 != value2)
+            System.out.println("value1 != value2");
+        if(value1 > value2)
+            System.out.println("value1 > value2");
+        if(value1 < value2)
+            System.out.println("value1 < value2");
+        if(value1 <= value2)
+            System.out.println("value1 <= value2");
+    }
+}
+.............................................................................................
+Conditional  Operator:
+
+&& Conditional-AND
+|| Conditional-OR
+?: Tenary operator
+
+package com.sapient.core;
+
+public class ConditionalOperator {
+    public static void main(String[] args) {
+        int value1 = 1;
+        int value2 = 2;
+        if((value1 == 1) && (value2 == 2))
+            System.out.println("value1 is 1 AND value2 is 2");
+        if((value1 == 1) || (value2 == 1))
+            System.out.println("value1 is 1 OR value2 is 1");
+        //tenary opertor
+        boolean someCondition = true;
+        String result = someCondition ? "Hello" : "How are you?";
+
+        System.out.println(result);
+
+    }
+}
+.............................................................................................
+				 Other operators
+
+1.new Operator -  memory allocation operator
+2.instanceof operator - type verification operator
+..............................................................................................
+Expressions, Statements, and Blocks,Control Statements:
+.......................................................
+
+Expression:
+ An expression is a construct made up of variables, operators, and method invocations, which are constructed according to the syntax of the language, that evaluates to a single value
+
+eg:
+   int result = 10 *10(expression)
+   int result  = calculate();
+
+Statements:
+ Statements are roughly equivalent to sentences in natural languages. A statement forms a complete unit of execution. 
+
+1.Assignment expressions
+2.Any use of ++ or --
+3.Method invocations
+4.Object creation expressions
+
+// assignment statement
+aValue = 8933.234;
+// increment statement
+aValue++;
+// method invocation statement
+System.out.println("Hello World!");
+// object creation statement
+Bicycle myBike = new Bicycle();
+
+Blocks:
+A block is a group of zero or more statements between balanced braces and can be used anywhere a single statement is allowed.
+
+if(condition) {
+  //block
+}
+//instance block
+
+class A {
+   
+   {}
+  
+}
+//static block
+class A {
+   static {}
+  
+}
+..............................................................................................
+The if-then and if-then-else ,if--elseif---else Statements
+
+The if-then Statement without else statement:
+..............................................
+package com.sapient.core;
+
+public class IFControlFlowStatement {
+    public static void main(String[] args) {
+        boolean isMoving = true;
+//        if (isMoving){
+//            System.out.println("Moving...");
+//        }
+        if (isMoving) System.out.println("Moving...");
+        
+    }
+}
+
+if...else
+package com.sapient.core;
+
+public class IFControlFlowStatement {
+    public static void main(String[] args) {
+        boolean isMoving = true;
+       //if...else
+        if (isMoving) {
+            System.out.println("Moving...");
+        } else {
+            System.err.println("The bicycle has already stopped!");
+        }
+
+    }
+}
+
+if...else if ..else
+ int testscore = 76;
+        char grade;
+
+        if (testscore >= 90) {
+            grade = 'A';
+        } else if (testscore >= 80) {
+            grade = 'B';
+        } else if (testscore >= 70) {
+            grade = 'C';
+        } else if (testscore >= 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+        System.out.println("Grade = " + grade);
+
+..............................................................................................
+
+Switch ...case:
+  Unlike if-then and if-then-else statements, the switch statement can have a number of possible execution paths. 
+A switch works with the byte, short, char, and int primitive data types,even enums also
+
+
+package com.sapient.core;
+
+public class SwitchCaseDemo {
+    public static void main(String[] args) {
+        //switch replaces if with multiple equal condtions
+        int month = 8;
+        String monthString;
+        switch (month) {
+            case 1:  monthString = "January";
+                break;
+            case 2:  monthString = "February";
+                break;
+            case 3:  monthString = "March";
+                break;
+            case 4:  monthString = "April";
+                break;
+            case 5:  monthString = "May";
+                break;
+            case 6:  monthString = "June";
+                break;
+            case 7:  monthString = "July";
+                break;
+            case 8:  monthString = "August";
+                break;
+            case 9:  monthString = "September";
+                break;
+            case 10: monthString = "October";
+                break;
+            case 11: monthString = "November";
+                break;
+            case 12: monthString = "December";
+                break;
+            default: monthString = "Invalid month";
+                break;
+        }
+        System.out.println(monthString);
+    }
+}
+...........................................................................................
+					Loops
+...........................................................................................
+
+1.for 
+  regular for.
+  for..in loop
+2.while
+3.do..while
+
+package com.sapient.core;
+
+public class LoopsMain {
+    public static void main(String[] args) {
+        for (int i = 1; i < 11; i++) {
+            System.out.println("Count is: " + i);
+        }
+
+        int count = 1;
+        while (count < 11) {
+            System.out.println("Count is: " + count);
+            count++;
+        }
+        //do...while
+        int counter = 1;
+        do {
+            System.out.println("Count is: " + counter);
+            counter++;
+        } while (counter < 11);
+    }
+}
+..............................................................................................
+
+
+
+
+
+
+
   
 
 
