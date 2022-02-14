@@ -841,6 +841,237 @@ public class LoopsMain {
     }
 }
 ..............................................................................................
+                  Object oriented Programming and Implementation
+..............................................................................................
+
+What is Object orientation?
+  It is way of building applications.
+  It is style of writing code.
+  It was introduced in 1960, became popular in 1970 ,C++.
+  The language which follows the object orientation called "Object oriented programming   language"
+Object oriented Programming langugages
+
+1.C++
+2.Java
+3.C#
+etc....
+
+What is Object?
+   "Every thing in this universe Object but which should be relvant to the Problem Domain/Space".
+
+Eg:
+   I am doctor, according to the doctor brian cell is object, but as a normal person 
+ we dont understand about brain cell, we have not seen that.
+ 
+As object oriented developer, we represent objects in the software domain as it is.
+
+Object contains three things
+
+1.state - information associated with object
+2.behaviour -  methods which change the information
+3.identity - to identify the object uniquly
+
+..............................................................................................
+			Objects and software systems
+
+Software intention is to store information(data),process them,produce them.
+
+Software design is all about how we capture the information/data, how to represent them.
+
+Programming lanugages capture data, organize them, process them.
+
+Programming language follows object models , which captures the data as it is in the real world.
+
+When we capture and represent the data, we need classification. "class" -  class is core concept which capture data,how to process them.
+..............................................................................................
+Object oriented Concepts/principles:
+....................................
+
+1.Abstraction
+2.Encapsulation
+3.Hierarchy
+    inheritance
+    has-a -composition
+4.Typing
+   polymorphism
+5.Modularity
+6.Concurrency
+7.Persistency
+
+The language which implements these 7 principles called object oriented programming langugage.
+
+Java has implemented all these principles.
+............................................................................................
+				 Object Modeling Process
+............................................................................................
+
+Object oriented Any and design
+
+Steps :
+
+1.Identify objects in the realtime/problem Domain. 
+ eg:Banking
+          Customer,Account,Loan,Employee.....
+
+
+2.Appling Abstraction
+   Abstraction is nothing but take necessary details from the problem domain,give up unncessary details.
+ eg:
+ if you go to hospital, you are now patient, now hostipal need collect only health related information not your educational details,not your personal information.
+
+How to apply abstraction in code(java)?
+ class
+
+java syntax;
+
+ public | package class ObjectName {
+    //data - via variables with types
+    //behaviour - how to change the data
+    //identity  - special variable to identitfy the object
+ }
+
+What is object?
+
+ There are two views
+
+1.In the Problem domain
+     Customer,Account,Employee
+2.In the Program domain
+     Object is other wise called as "instance".
+   Object represent memory.
+   Object means collection of variabl's memory.
+
+  Type(className) variableName(pointer to memory address-reference)= new ClassName(); //instance /object creation
+.............................................................................................
+					Data types
+
+Computer can understand only one type - number (0/1)
+
+How to represent other information in computer?
+
+1.Numbers
+ whole - 10
+ precision -10.5
+2.NonNumbers
+  text
+  images
+  videos
+  sounds
+
+In CS, data types can be two things
+
+1.prmitives -  core types
+  number,characters
+  byte,int,short,long,double,float,char  
+
+2.Custom Types
+   using core types we can create custom types
+ classes are used to create custom types
+
+ class Customer {
+      //state-data
+    int id; //identity
+    String name;
+    double invoiceValue;
+    String city;
+ }
+
+ Here Customer is a type, which contains other types -  {int,String,double,String]
+
+  Customer =  {int,String,double,String}
+
+ new Operator - used to allocate memory for custom type.
+ Constructor - it is special method/function provided by language to initiate memory allocation.
+
+ Customer customer = new Customer();
+  |        |         |       |
+ Type    variable   operator constructor call
+
+Using reference variable, we can access object properties (state,behaviour,identity).
+
+Java gives "." (dot) operator to access object properties.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
