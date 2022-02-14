@@ -1,0 +1,523 @@
+                                         Java
+..............................................................................................
+
+JDK 11 - https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html
+Download IntelliJ IDEA - https://www.jetbrains.com/idea/download/#section=windows
+Maven - https://maven.apache.org/download.cgi
+.............................................................................................
+				Java
+.............................................................................................
+
+What is java ? Term Java ?
+ 
+ Java is technology.
+
+What is Technology?
+ Solving practical Problems in the real world.
+
+What type of problem java was trying to solve? Why Java?
+
+ SUN Micro System is the leading hardware and electronics manfacturing company in USA.
+
+1988 - SUN setup an RND division to develop new technology for their hardwares, before that SUN was using c and c++ was the primary language for building apps. SUN decided to move out from c and c++.
+
+C working model:
+
+hello.c
+
+#include<stdio.h>
+
+void main(){
+  printf("Hello");
+}
+ |
+hello.out - Unix - Compiled code- assembly language.
+
+Role of compiler:
+1.To generate os specific code
+2.Finding Syntax error
+ 
+#include<stdio.h>
+
+void main(){
+  printf("Hello"); // api /lib/ built in function
+}
+void printf(char* text,int offset...){
+   //which os system call
+   unix_printf(text,01,10...);
+}
+
+|
+Executed on OS.
+|
+Runtime - Program which runs the other program, Every program must have runtime.
+|
+loads the assemble(compiled code) into RAM(Main Memory)
+|
+Code is now running
+
+.............................................................................................
+Problems of c and C++.
+
+1.if you build application using c++ on unix operating system, the same application we cant reuse on windows.
+  =>many apis were built os specific.
+
+eg:
+  on windows i have an api called
+ 
+   clearScreen() 
+
+ The same api may not be available in Unix.
+
+2.compiled code cant be resued across multiple operating system.
+
+
+3. lot of complexity in the code.
+   =>Pointers- which leaks security
+   =>Threads creation was very complex.
+   =>Datastructure
+
+SUN MicroSystem who wanted to create a new Programming langugage to solve c++ issues
+
+ =>Portablity -  Platform independant Programming lanugage
+
+Under James Golsing, who was chief scientist, asked to create new Programming lanugage.
+
+James and his team started working on new Programming lanugage.
+
+=>The language was initially called Oak after an oak tree that stood outside Gosling's office. Later the project went by the name Green and was finally renamed Java, from Java coffee, a type of coffee from Indonesia.
+
+1988 -1989 -  OAK.
+
+OAK failed with respect to 100 portablity.
+
+1989 - James conviced a concept called "Virtual Computing", by looking the white paper published in 1974.
+ A "virtual machine" was originally defined by Popek and Goldberg as "an efficient, isolated duplicate of a real computer machine.
+
+James got an idea , why we should create programs for real computer,rather we create virutal computer, on which we can run program.
+
+As result of that James invented /created a virtual Operating(simulating real Operating System).
+
+Real Operating like windows,linux.
+
+James created an operating system called "Virtual Machine", after creating Virtual machine 
+who renamed the language and also added some modification on OAK- 
+  Java Programming language
+  Java Virtual Machine
+
+                         "Write once run any where"
+
+He developed the complete technolgy which contains tools
+
+called:
+
+ 1.JVM
+ 2.language apis - JDK
+ 3.compiler - javac 
+ 4.other tools
+ 5.java is for running code.
+ 6.JRE - java Runtime Environment - Which contains jvm,libs
+
+How JVM has been built?
+
+  JVM is simple c program only.
+.............................................................................................
+
+Java Application development:
+Requirements
+
+1.JDK 
+2.IDE
+
+JDK contains all tools for development and testing apps
+
+1.javac compiler for compiling source code into assembly
+
+2.java command for running code.
+
+.............................................................................................
+Once the application has been built , it moves to production or testing env.
+
+We need only JRE - Java Runtime env.
+
+Which contains
+
+1.jvm
+2.runtime libs
+..............................................................................................
+				Java Programming language
+..............................................................................................
+
+What is Java Programming language?
+  Java Programming language is object oriented,functional style programming language.
+  
+Java Programming language features:
+...................................
+ 
+=>Simple and Familiar.
+=>Platform Independent/Portable
+=>Architectural Neutral
+=>Object-Oriented && Functional style
+=>Robust
+=>Secure - it does not allow pointers
+
+Java was released in 1996 for public as open source technology.
+.............................................................................................
+Java entered in the many parts of software development particullary who played vital role in web development.
+Java started growing vast, SUN decided to organize the java into three major editions
+
+=> JSE -  Java standard Edition
+   Covers core language features
+=> JEE -  Java Enterprise Edition
+   Web and distributed application Development
+=> JME -  Java Micro Edition
+   Card,Mobile
+
+Who is developing java technology? and who is controlling java?
+
+In the begining, SUN ,later java was acquired by Oracle, now java with Oracle.
+
+Even though Oracle is developing and managining java, who cant controll fully , who is controlling.
+
+Java Community Process:https://www.jcp.org/en/home/index
+............................................................................................
+
+All java technology is based on specification only. The first JCP writes a specifcation which document how technology looks like.
+
+Any people can write implementation for the specification, 
+
+Major Spec and its implementation.
+
+JVM Spec:
+ -Oracle JVM/Sun Hot Pot JVM
+ -Open JDK JVM
+
+Language spec and implemenation
+  -Oracle
+
+..............................................................................................
+
+Java Programming language Learning path:
+
+1.language fundamentals
+   -variables,datatypes,literals
+   -conditional statements 
+   -loops
+2.Object oriented programming and implementation
+
+3.Exception Handling
+
+4.How to work with IO
+
+5.How to work with databases
+
+6.DataStructure in java Collections
+
+7.Multi Threading
+
+1.language fundamentals:
+
+How to setup java project?
+
+-Plain java project
+-Java project using build systems
+  ->ant - very old, nobody is using now a days
+  ->Maven
+  ->Gradle
+..............................................................................................
+1.language fundamentals
+   -variables,datatypes,literals
+   -conditional statements 
+   -loops
+
+HelloWorld.java
+  javac HelloWorld.java
+
+java is class based object oriented programming language. so every program must start with 
+class.
+
+Poniters:
+
+=>We can create n-number of classes
+=>There must be only one main class, which starts your application
+=>The class Containing main method, called main class.
+=>Single java application must have only one main class.
+
+Program types:
+
+1.source code , FileName.java
+
+2.compiled code FileName.class
+  -class file
+  -byte code 
+ Assembly code , is portable across multiple os where ever jvm is present.
+..............................................................................................
+
+Modularity:
+
+  breaking the code into files and folders, and organized based on some standards
+  In java modularity is implemented via packages.
+
+What is Package?
+
+  logical and physical organization of java source and compiled code into folders and files.
+   
+  package is collection of classes and sub packages.
+
+Every java class must begin with package.
+
+package packagename
+
+if there is no package statement, then it uses default package, but it is not recommended.
+
+
+eg:
+public class HelloWorld {
+    //main method
+    public static void main(String args[]) {
+        //print some text on console
+        System.out.println("Hello World Java");
+    }
+}
+
+How to introduce package?
+
+package com.sapient.core
+
+as soon as if you introduce package, java compiler creates folder in the filesystem
+
+E:\session\sapient\Java-QA\javaapps\src\main\java\com\sapient\core
+
+
+package com.sapient.core;
+
+public class HelloWorld {
+    //main method
+    public static void main(String args[]) {
+        //print some text on console
+        System.out.println("Hello World Java");
+    }
+}
+ 
+Types of packages:
+
+1.java built in packages
+  java language offers lot of packages which provides api to write java application
+java language package starts with
+ java.lang
+ java.util
+ java.net
+ javax.xml
+
+Note: java and javax cant be used for our own packages -  Reserved packages
+
+2.custom packages
+  Packages created for project specific.
+
+custom packages starts with
+com.
+org.
+Why it starts with com and org?
+ =>It is standard way of defining packages. - Coding standards
+
+com - means company
+org - organization
+
+any commerical projects starts with "com", where as any open source projects starts "org"
+
+com                 .sapient      .core
+ |                     |            |
+commerical project  company Name  Project module
+
+com.sapient.hr.    admin;
+             |       |
+         main module submodule
+
+org.apache.tomcat.server
+
+
+3.Third party packages
+   
+ Packages distributed by thrid parties, so that we can use those packages in our applications
+
+frameworks and libs are examples of third party
+
+ spring framework
+ junit
+ mockito
+etc...  
+
+How to use the packages? to be discussed latter.
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
