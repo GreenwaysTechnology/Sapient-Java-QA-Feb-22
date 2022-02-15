@@ -52,7 +52,7 @@ Executed on OS.
 |
 Runtime - Program which runs the other program, Every program must have runtime.
 |
-loads the assemble(compiled code) into RAM(Main Memory)
+loads the assembly(compiled code) into RAM(Main Memory)
 |
 Code is now running
 
@@ -962,7 +962,7 @@ In CS, data types can be two things
 
 1.prmitives -  core types
   number,characters
-  byte,int,short,long,double,float,char  
+  byte,int,short,long,double,float,char ,boolean
 
 2.Custom Types
    using core types we can create custom types
@@ -976,7 +976,7 @@ In CS, data types can be two things
     String city;
  }
 
- Here Customer is a type, which contains other types -  {int,String,double,String]
+ Here Customer is a type, which contains other types -  {int,String,double,String}
 
   Customer =  {int,String,double,String}
 
@@ -990,6 +990,530 @@ In CS, data types can be two things
 Using reference variable, we can access object properties (state,behaviour,identity).
 
 Java gives "." (dot) operator to access object properties.
+
+
+package com.sapient.oo.abstraction;
+
+public class Customer {
+    //state-data
+    int id=1; //identity
+    String name="Subramanian";
+    double invoiceValue=100.89;
+    String city="Coimbatore";
+    //
+}
+
+package com.sapient.oo.abstraction;
+
+public class ObjectCreationMain {
+    public static void main(String[] args) {
+        Customer customer = new Customer();
+        System.out.println("Id :" + customer.id);
+        System.out.println("Name " + customer.name);
+        System.out.println("City " + customer.city);
+        System.out.println("Invoice Value " + customer.invoiceValue);
+    }
+}
+.............................................................................................
+				 Object Behaviour
+..............................................................................................
+
+What is method?
+
+method is nothing but unit of computation.
+Which performes computation.
+Which mutates(change) the state(updating the variable value).
+
+syntax:
+
+ AccessModifer | nonAccessModifer ReturnType methodName(arg){
+  //method body
+  //return statement
+}
+package com.sapient.oo.object.behaviour;
+
+public class Car {
+    //state
+    int speed = 0;
+    int gear = 0;
+
+    void start() {
+        //mutation changing
+        speed = 5;
+    }
+
+    void changeGear(int gear) {
+        this.gear = gear;
+        switch (this.gear) {
+            case 1:
+                System.out.println("Pressing exclator ");
+                speed = 10;
+                break;
+            case 2:
+                System.out.println("Pressing exclator ");
+                speed = 20;
+                break;
+            case 3:
+                System.out.println("Pressing exclator ");
+                speed = 30;
+                break;
+            case 4:
+                System.out.println("Pressing exclator ");
+                speed = 40;
+                break;
+            case 5:
+                System.out.println("Pressing exclator ");
+                speed = 60;
+                break;
+            default:
+                System.out.println("Reverse ");
+                speed = 10;
+                break;
+
+        }
+    }
+}
+package com.sapient.oo.object.behaviour;
+
+public class CarMain {
+    public static void main(String[] args) {
+        Car car = new Car();
+        //access car initial speed
+        System.out.println("Speed :" + car.speed);
+        //change the state
+        car.start();
+        System.out.println("Speed :" + car.speed);
+        car.changeGear(4);
+        System.out.println("Speed :" + car.speed);
+
+    }
+}
+..............................................................................................
+
+methods ,args,Parameters and returns
+
+=> can accept any type of args-  primtives,reference Type
+=> can return any type 
+=> may not return - void 
+
+package com.sapient.oo.object.behaviour;
+
+public class Calculator {
+    //with parameters and no return
+    void add(int a, int b) {
+        int result = a + b;
+        System.out.println("Add " + result);
+    }
+    //with return
+    int multiply(int a, int b) {
+        return a * b;
+    }
+}
+package com.sapient.oo.object.behaviour;
+
+public class ArgsMain {
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        //
+        calculator.add(10,10);
+        System.out.println(calculator.multiply(10,10));
+    }
+}
+..............................................................................................
+				Types of Methods
+.............................................................................................
+
+Based on How methods are accessed:
+
+1.instance methods
+2.static methods/class methods
+
+
+1.instance methods:
+   
+  The method declared inside class, instance methods
+  instance methods can be accessed only through "reference variable" with having objects.
+
+2.static methods
+ 
+   The method declared inside class with static keyword/modifier
+  Static methods are accessed with help of ClassName.
+............................................................................................
+				static keyword
+
+static keyword can be used with variable declaration and also method declarations.
+
+if variable declared with static , called as "class variables/static variables"
+if method is declared with static, called as "class methods/static methods"
+............................................................................................
+				Memory Allocation - JVM internals
+...........................................................................................
+
+What is JVM?
+ It is Process, written in c language.
+
+How the process looks like?
+ Every process has three segments
+
+->heap
+   - for allocating dynamic memory needed by an application
+->stack
+   - for allocating static memory for methods
+   - methods/functions are also require memory.
+   - where methods are pushed , for that memory is allocated
+   -> methods memory is called "stack frame work"
+->program data
+   Program code memory is allocated here like literals...
+
+Since JVM is process , it also has structure:
+
+JVM has three segments
+
+1.heap
+    Inside heap only all objects are created and living.
+2.stack
+    all methods are pushed into stack, becomes the stack frame.
+    main method is entry method which is pushed at the bottom of the stack
+   
+    when   method is called
+     -> it is pushed into stack
+     -> stack creates stack frame
+     -> stack framework executes
+     -> stack framework is closed
+    
+3.method area(program data)
+   It is global memory area
+   Which contains
+   ->methods definitions
+   ->stack variables
+   ->classes memory before object creation/loaded .class file information
+   ->literals - (string literals are living inside string constant pool).
+
+ 
+All instance variables and methods live inside heap(object).
+
+All static variables and methods live inside method Area.
+All static variables are initalized during class loading process before object creation.
+All static variables and methods are accessed by "className" only.
+
+package com.sapient.oo.staticinfo;
+
+public class Message {
+   static String WARNING_INFO ="Warning";
+   //static method
+    static String getInfo(){
+        return "INFO";
+    }
+}
+package com.sapient.oo.staticinfo;
+
+public class StaticMain {
+    public static void main(String[] args) {
+        System.out.println(Message.WARNING_INFO);
+        System.out.println(Message.getInfo());
+    }
+}
+.............................................................................................
+				instance methods classification
+
+
+There are two classification:
+
+1.biz methods
+
+2.accessor/mutator methods
+
+
+1.biz methods
+
+ represents biz process, which change the state.
+public class Car {
+    //state
+    int speed = 0;
+    int gear = 0;
+
+    void start() {
+        //mutation changing
+        speed = 5;
+    }
+
+    void changeGear(int gear) {
+        this.gear = gear;
+        switch (this.gear) {
+            case 1:
+                System.out.println("Pressing exclator ");
+                speed = 10;
+                break;
+            case 2:
+                System.out.println("Pressing exclator ");
+                speed = 20;
+                break;
+            case 3:
+                System.out.println("Pressing exclator ");
+                speed = 30;
+                break;
+            case 4:
+                System.out.println("Pressing exclator ");
+                speed = 40;
+                break;
+            case 5:
+                System.out.println("Pressing exclator ");
+                speed = 60;
+                break;
+            default:
+                System.out.println("Reverse ");
+                speed = 10;
+                break;
+
+        }
+    }
+}
+
+2.accessor and mutators:
+  setters and getters
+
+are used to set and get instance variables outside the class.
+
+How instance variables  are accessed?
+
+There are different ways
+
+Using reference variable directly
+ Employee emp=new Employee();
+ emp.id=1
+
+Using reference variable via setters and getters methods
+
+setters are methods used to initalize the data
+
+getters are methods used to read the data.
+
+setter Syntax:
+..............
+
+class Employee {
+ int id;
+ String name;
+ public void setId(int id){
+   this.id = id;
+ }
+
+}
+
+1.Every setter method must have void return type
+2.Every setter method must start with set+VaribleName
+   -Variable Name must be Camel Case setId()
+3.Ever setter method arg must match with instance variable declaration
+  int id;
+  public void setId(int id){
+   this.id = id;
+  }
+4.instance variables are referenced inside method using "this" keyword
+   this.id means you are refering instance variable
+   id means here local variable 
+   this.id =id means we assign localvariable value to instance variable
+
+
+setter vs direct Reference?
+
+Coding standards:
+
+  Enforcing code best pratices across the team, company, community.
+
+Java brought lot of common standard, as a java developer we should not viloate the coding standards.
+
+
+File Name Coding standard:
+...........................
+
+1.File Name must be meaning full to the problem.
+  a.java - invaild
+  xyz.java -invalid
+
+ Employee.java,Customer.java,WithdrawService.java - valid
+ 
+2.File name must be noun.
+
+3.File Name and class Name must match
+ 
+  Employee.java
+
+  public class Employee {}
+
+Class name coding standard:
+...........................
+1.class Name must be meaningfull to the problem
+  Employee -valid
+  emp -invalid
+2.Class Name must be always nouns only cant be verbs , should start with Capital Letter
+  if there is SecondNoun, it should be also capitalized
+  Employee,Customer -Nouns
+  CustomerService
+3.class can be marked public or without public.
+
+instance variable coding standard
+...................................
+
+1.instance variables must be meaninful
+  int a; -  invalid
+  int id;
+  String name;
+  double salary;
+
+2.instance variables must be nouns
+   int id;
+   String name;
+3. instance variables must be camel cased
+   String firstName;
+
+4. instance variables must be marked "private"
+   private int id;
+   private String name;
+
+5. instance variables must be initalized via
+   setters or constructors / setters and constructors but directly
+	
+   customer.id =10; //invalid
+   
+public class Employee {
+    private String name;
+    //instance variables
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+}
+
+5. instance variables must be read via
+   getters.
+
+   public returnType getVariableName(){
+        return instancevariableName
+   }
+
+instance method coding standard:
+................................
+
+1.methods must be meaningfull
+  calculate()
+2.methods must start with smallar case
+  calculate()
+2.methods must be "verbs" , not nouns
+  add() -valid
+  Addition() - invalid
+3.methods may mix verb + noun, noun should start with upper case
+   addNumber()
+   calculateSalary()
+   depositMoney()
+  
+static variables coding standards:
+
+1.should be capitalized
+   WARNING
+2.INCASE LONG names,_ should be used
+  WARNING_INFO
+3.all static variables must be marked public
+   public static String WARNING_INFO ="Warning";
+4.all static variables can be marked final
+   public static final String WARNING_INFO ="Warning";
+
+static methods coding standards
+
+=>similar to instance methods
+..............................................................................................
+				Java Bean Coding standards
+
+In 1996, SUN introduced coding standard called "java bean coding standards" , in order to declare class, instance variables, how it can be initalized and read.
+ setters and getters are part of that javabean standards.
+..............................................................................................
+					Encapsulation
+..............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
