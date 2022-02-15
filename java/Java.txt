@@ -1433,32 +1433,527 @@ In 1996, SUN introduced coding standard called "java bean coding standards" , in
 					Encapsulation
 ..............................................................................................
 
+The meaning of Encapasulation is "hidding".
 
+How to share code  and how much code we can share , at what extend we can share?
 
+Code sharing;
+ code means classes and its members.
 
+Encapsulation in java is implemented through keywords - access modifiers.
 
+-public
+-private
+-default(package level)
+-protected
+ 
+public means we can share code any where in the application.
 
+class can be public, meaning that it can be accessed any where in the application.
 
+                                 Modularity
 
+Java applications are classified into modules callead as packages.
 
+Each package defines a boundry for classes
 
-
-
-
-
-
-
-
-
-
+public: 
+  can be accessed with in package.
+  can be accessed outside the package.
+public classes:
   
+Use case 1 : within package.
+
+package com.sapient.enc.pub;
+
+public class Employee {
+}
+
+package com.sapient.enc.pub;
+public class EmployeeMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+    }
+}
+
+Use case 2: Outside package
+
+if classes are in the different packages, we have to import them.
+
+
+package com.mycom.example;
+
+import com.sapient.enc.pub.Employee;
+
+public class EmployeeMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+    }
+}
+
+syntax of import:
+
+import com.sapient.enc.pub.*; => import or link all the classes defined inside this package
+    
+import com.sapent.enc.pub.Employee => import only Employee class defined inside this package
+  -This is recommended
+
+Rule for import:
+
+if classes are defined inside the same package, you dont need to use "import" statement to link classes, java does automatically.
+
+com.sapient.core
+class Employee{}
+
+com.sapient.core
+class Main{
+  main{
+    Employeee employee=new Employee();
+  }
+}
+
+if classes are in the different package , only you have to import.
+..............................................................................................
+				public instance variables and methods
+..............................................................................................
+
+we can declare public instance variables, but it is not recommended as per java bean coding standard.
+
+package com.sapient.enc.pub;
+
+public class Customer {
+    public int id;
+}
+
+we can declare public instance methods.
+
+public class Customer {
+    public int id;
+    public void save(){
+        System.out.println("save");
+    }
+}
+we can declare public constructors : to be dicussed later
+...........................................................................................
+				 private
+
+private means not possible to share outside the class.
+
+class and private:
+
+ classes cant be marked private
+
+private class Employee {
+} //error
+
+private instance variables and methods
+
+-private variables cant be accessed outside the class
+
+public  class Employee {
+    private int id;
+    
+}
+Note: all instance variables must be marked private as per java coding standard.
+
+private instance methods:
+..........................
+
+-> methods can be marked private, can be accessed outside class.
+   Private methods are used to encapuslate internal logic of object.
+package com.sapient.enc.pri;
+
+public class Authentication {
+    private String username;
+    private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    //
+    public boolean login() {
+        //access the private method
+        return auth();
+    }
+    private boolean auth(){
+        if (this.username == "admin" && this.password == "admin") return true;
+        return false;
+    }
+}
+package com.sapient.enc.pri;
+
+public class Main {
+    public static void main(String[] args) {
+        Employee employee =new Employee();
+      //  employee.id
+        Authentication authentication = new Authentication();
+        authentication.setUsername("admin");
+        authentication.setPassword("admin");
+        String res = authentication.login() ? "Login success" : "Login failed";
+        System.out.println(res);
+    }
+}
+
+priavate constructors : to be discussed 
+..............................................................................................
+			static variables and methods, with private and public
+
+
+static variables can be marked public : this is always coding standard
+   public static final String WARNING_INFO ="Warning";
+
+static methods can also can be marked public
+   public  static String getInfo(){
+        return "INFO";
+   }
+
+static variables can be marked private in certain conditions only.
+..............................................................................................
+				default modifier
+
+if any to be restricted with in the package only, then it called package level modifer.
+
+in order to declare package level , there is no explicit keyword,no keyword is presented
+
+class and default modifier:
+
+class Employee{}
+ here no keyword in front of class.
+
+valid code
+package com.sapient.enc.def;
+
+//in default scope
+class Employee {
+    private  int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+package com.sapient.enc.def;
+
+public class Main {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.setId(10);
+        System.out.println(employee.getId());
+    }
+}
+
+Invalid access:
+
+package com.sapient.enc.def.subpack;
+//'com.sapient.enc.def.Employee' is not public in 'com.sapient.enc.def'. 
+// Cannot be accessed from outside package
+import com.sapient.enc.def.Employee;
+public class Main {
+    public static void main(String[] args) {
+
+    }
+}
+
+You can declare class package level based on your application use cases.
+
+instance variables and methods:
+
+We can declare instance variables and methods package level.
+
+if class is public but variables and methods are default, 
+   "You can access only class but not variables and methods.
+
+static variables and methods are also can be declared default scope.
+..............................................................................................
+				state initalization
+.............................................................................................
+
+state can be initized in three ways
+
+1.hardcoded inside class.
+
+2.after object creation
+  2.1.using reference variable- not recommened
+  2.2.using setters
+
+3.durating object creation
+  constructors
 
 
 
+1.hardcoded inside class.
+package com.sapient.oo.state.init;
+
+public class Employee {
+    private int id = 1;
+    private String name = "Subramanian";
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+package com.sapient.oo.state.init;
+
+public class Main {
+    public static void main(String[] args) {
+        Employee employee=new Employee();
+        System.out.println(employee.getId() + " => " + employee.getName());
+    }
+}
+
+Here the output would be 1 ,Subramaian
+............................................................................................
+
+What if i dont initalize the instance variables directly or setters /constructors?
+
+class Employee
+ private int id;
+ private String name;
+}
+
+Java provide default values based on data types.
+
+for integer data types(byte,short,int,long) => 0
+for floating point types (float,double) => 0.0
+for boolean => false
+for char -> `\u0000'
+
+For any reference types
+String
+Employee
+Address    -> null
+
+implicit default values provided by java, where as explicit default values provided by developer inside class or using setter or using constructors.
+..............................................................................................
+
+2. After object creating
+
+incase if the variable is not private then we can reinitalize the variable 
+using reference variable
+
+employee.city = "coimbatore";
+        System.out.println(employee.city);
+        employee.setCity("Coimbatore");
+        System.out.println(employee.getCity());
+..............................................................................................
+                3. During object creation : constructors
 
 
+What is constructors 
+
+  Constructors  are special method used to initialize the state during object creation.
 
 
+How to declare constructor?
+
+Employee.java
+
+class Employee {}
+
+
+Here no constructors? 
+  if you dont provide constructor, the java will provide constructor automatically which is called "default constructor"
+  After compilation, the compiler will add constructor automatically.
+
+Employee.class
+public class Employee {
+   
+    public Employee() {
+    }
+}
+
+Syntax: 
+=> constructor name and class name must match
+=> constructor can be private , public,default
+=> constructors can take args, where we can initalze the state.
+
+Explicit constructors:
+......................
+
+public class Customer {
+    private int id;
+    private String name;
+
+    //constructor - no arg constructor
+    public Customer() {
+        this.id = 10;
+        this.name = "foo";
+    }
+}
+
+Employee emp = new Employee();
+			|
+                    Constructor call
+
+parameterized constructor:
+  state can be initalized in different ways.
+
+Constructor overloading:
+   Having different constructors, and initalizing the state according to our neeed.
+
+eg:
+  i want to pass only id, then we can use one constructor
+  i want to pass id and name, then we can use another constructor
+
+Constructors are differentiated by type and order of the type, not by names, 
+
+valid;
+
+public class Customer {
+    private int id;
+    private String name;
+    private String city;
+
+  //two args
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    //only Name
+    public Customer(String name){
+        this.name = name;
+    }
+    public Customer(String city,int id){
+        this.city = city;
+    }
+}
+
+invalid
+public class Customer {
+    private int id;
+    private String name;
+    private String city;
+
+  //two args
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public Customer(int id,String city){
+        this.city = city;
+        this.id =id;
+  
+    }
+}
+.............................................................................................
+			constructors vs setter
+
+Both are valid and good.
+
+=>constructors are used to initalize during object creation - earger initalization
+=>setters are used to initalize the object after its creation -  lazy intialzation.
+.............................................................................................
+				this keyword
+.............................................................................................
+
+Reference variable:
+
+ It is variable which refers the location of Object.
+
+Employee emp = new Employee();
+
+emp-> reference variable
+
+Types of Reference variables:
+............................
+
+1.Emplicit reference variable
+ The reference variable declared and assinged in the code by the developer
+
+Employee emp = new Employee();
+
+ emp-> Explicit reference variable
+
+
+2.implicit reference variable
+ 
+ The reference variable assinged by compiler during compile time and used by jvm during runtime.
+
+ "this" and "super" are reference variables assinged by compiler.
+
+ "this"
+    =>just variable points to the current object. 
+
+Every object in java , has "this" reference variable.
+..............................................................................................
+			When we can use "this" variable
+............................................................................................
+
+There are contexts:
+
+1.inside setter method to differentiate local variable and instance variable, which avoids ambiquity.
+
+
+public class Employee {
+    private int id;
+
+    public void setId(int id) {
+        id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+}
+ Employee employee = new Employee();
+        employee.setId(100);
+        System.out.println(employee.getId());
+
+What will be output?
+
+ here - 0
+
+why because, instance variable id , not initalized with 100
+
+ public void setId(int id) {
+        id = id;
+    }
+here the compiler has confusion over left and right side. here leftside(id) and rightside(id)
+is treated as same.but we are accessing instance variable via getter.
+
+in order to avoid this ambiquity, we need to differentiate local variable and instance variable by using this keyword explicitly.
+
+
+2.inside constructors to differentiate local variable and instance variable, which avoids ambiquity.
+
+    public Employee(int id){
+        this.id = id;
+    }
+
+3.Calling constructors.
+
+ 
+
+ 
 
 
 
