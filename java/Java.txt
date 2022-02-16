@@ -2557,44 +2557,536 @@ public class StringToNumberConversion {
 				Typing and Inheritance
 ............................................................................................
 
+Program to Super Type:
+.....................
+
+The type of reference variable can be
+
+=>concrete type
+=>super type
+
+Animal.java
+
+public class Animal {
+    public void eat(){
+        System.out.println("Animal is eating");
+    }
+}
+
+Dog.java
+public class Dog extends Animal {
+  
+}
+
+:concrete type
+Dog dog = new Dog();
+dog.eat();
+
+Program to super type: the type of variable can be super/parent type
+//program to super type
+Animal dog1 = new Dog();
+dog1.eat();
+..............................................................................................
+			 How eat method is called?
+
+
+source code :
+
+Animal.java
+
+public class Animal {
+    public void eat(){
+        System.out.println("Animal is eating");
+    }
+}
+
+Dog.java
+public class Dog extends Animal { 
+
+}
+Here eat method is not available in the dervied class,  
+
+dog.eat(); how eat method  is available for accessing using reference variable
+
+
+Animal.class
+
+public class Animal {
+    public void eat(){
+        System.out.println("Animal is eating");
+    }
+}
+
+Dog.class
+public class Dog extends Animal { 
+   public void eat(){
+        super.eat()
+   }
+}
+dog.eat(); 
+
+super keyword:
+..............
+
+=>super is pointer (reference variable like this).
+=>this points the current object where as super points parent object
+=>super keyword can be used to access  parent class methods,variables
+..........................................................................................
+			 What if i provide my own eat method in the child class
+
+public class Animal {
+    public void eat(){
+        System.out.println("Animal is eating");
+    }
+}
+public class Dog extends Animal {
+    public void eat(){
+        System.out.println("Dog eats");
+    }
+}
+dog.eat();
+
+if you define the method from the base class to child class : "Overriding"
+
+After overriding what i want to call base class eat also?
+ you can use super keyword explicitly.
+
+public class Dog extends Animal {
+    public void eat(){
+        super.eat();
+        System.out.println("Dog eats");
+    }
+}
+.............................................................................................
+				Program to Super type advanced.
+
+
+public class Animal {
+    void eat(){
+        System.out.println("Animal is eating");
+    }
+}
+public class Dog extends Animal {
+    public void eat(){
+        super.eat();
+        System.out.println("Dog eats");
+    }
+}
+
+Animal dog = new Dog();
+dog.eat();
 
 
 
+public class Dog extends Animal {
+    @Override
+    public void eat() {
+        super.eat();
+        System.out.println("Dog eats");
+    }
+
+    //extra method
+    public void bark() {
+        System.out.println("dog is barking");
+    }
+}
+
+ Animal dog = new Dog();
+ dog.eat();
+  //call bark method
+  dog.bark();
+Cannot resolve method 'bark' in 'Animal'
+
+ Here "dog" reference variable, type is animal type, Object is Dog.
+
+Formula:
+        "Java always binds the method expression based on Type only during compile time"
+        "During compile time compiler always check left side(type) whether the method belongs           that type or not"
+         Animal dog = new Dog();
+         dog.eat();
+	 
+         "During runtime, jvm always looks Object , that means right Side"
+          dog.eat()
+..............................................................................................
+     dog.bark() - since the bark method is not available in the Animal type, we cant compile.
+
+How to call bark with help of Parent Type?
+   "Type Conversion".
+
+We have to convert Animal to Dog.
+
+According to inheritance, Parent Type is big one, child Type is small one.
+
+int a =900
+byte b =(byte)a; //Explicit cast is required when you cast big to small , 
+
+Converting reference types  called as "Down Cast".
+Animal dog = new Dog();
+dog.eat();
+//call bark method
+Dog tmpDog= (Dog)dog; // cast Animal to Dog
+tmpDog.bark();
+..............................................................................................
+				 What can be super type
+->super type can be class,interface,abstract class
+->super type of  a variable can be immediate parent Dog...to Animal
+->super type of a variable can be "java.lang.Object"
+
+   //Object as Super type
+        Object myDog = new Dog();
+        Animal animal = (Animal) myDog;
+        animal.eat();
+        Dog tmpDog2 = (Dog) myDog;
+        tmpDog2.bark();
 
 
+Polymorphism:
+
+   Polymorphism is the ability of an object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object. 
+ 
+Types of Polymorphism
+
+1.Compile time polymorphism/Early binding:
+
+  During compile time , the compiler binds/fixes the signature of methods with reference variable based on "Type".
+  Compile time polymorphism happens with object not in the inheritance tree.
+
+How to implment Compile time polymorphism?
+
+Overloading:
+  The reference variable binds the methods based on method signature.
+
+=>method name should be same
+=>method args should be different types or no of args
+=>method return type need not match.
+
+Types of overloading:
+
+1.method overloading
+2.constructor overloading
+3.operator overloading
+  java does not support operator overloading except + operator.
+
+    
+Method overloading:
+package com.sapient.oo.typing.poly.compile;
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+package com.sapient.oo.typing.poly.compile;
+
+public class OverloadingMain {
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        System.out.println(calculator.add(10, 10));
+        System.out.println(calculator.add(1, 3, 4));
+        System.out.println(calculator.add(10.4, 19.8));
+    }
+}
+
+constructor overloading:
+=>constructor name is same
+=>constructor args are different type or no parameters 
 
 
+package com.sapient.oo.typing.poly.compile;
+
+public class Employee {
+    private int id;
+    private String name;
+
+    public Employee() {
+
+    }
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Employee(int id) {
+        this.id = id;
+    }
+
+    public Employee(String name) {
+        this.name = name;
+    }
+}
+Employee emp = new Employee();
+Employee emp1 = new Employee(1);
+Employee emp2 = new Employee("ff");
+Employee emp3 = new Employee(1, "ddd");
+
+.............................................................................................
+
+Runtime Polymorphism: Overriding:
+   It is all about method invocation based on object.
+
+Rules:
+Methods of child and parent class must have the same name.
+Methods of child and parent class must have the same parameter.
+Access modifer in the parent class
+   public 
+   public
+   protected
+   public 
+private methods cant be overriden
+final methods cant be overriden
+Return type can be super or child type.
+..............................................................................................
+				 interfaces
+............................................................................................
+
+interface is looks like class, it defines only method signature.
+The method we declare inside interface is called abstract methods
+interface is used for
+  ->Act as parent class having common behaviour and to be implemented across the classes.
+  ->Can hide  multiple implemenation under single Type -  has-a relationship
+
+interface as base class:
+public interface Flyable {
+    //declare methods
+    public abstract void fly();
+}  
+
+Simple syntax :
+=>by default all methods inside  interface is public abstract, so we dont need to use public and abstract keywords
+ 
+public interface Flyable {
+    //declare methods
+    void fly();
+}
+ 
+public class Crow implements Flyable {
+    @Override
+    public void fly() {
+        System.out.println("Crow is flying");
+    }
+}
+Crow crow = new Crow();
+crow.fly();
+        //program to super type
+        Flyable crow1 = new Crow();
+        crow1.fly();
+        Crow tmpCrow = (Crow) crow1;
+        tmpCrow.buildNest();
+
+............................................................................................
+			     interface vs class
+
+Which one , when to use?
+
+                   "Classes are used for sharing code with in family of object tree"
+
+Human family:
+  class Human { 
+     method
+  }
+  class Male extends Human {}
+  class FeMale extends Human {}
+  
+	"interfaces are used for sharing code across the different family of object tree"
+		
+
+public interface Flyable {
+    //declare methods
+  //  public abstract void fly();
+    void fly();
+}
+package com.sapient.oo.typing.interfaces;
+
+public class Crow implements Flyable {
+    @Override
+    public void fly() {
+        System.out.println("Crow is flying");
+    }
+    public void buildNest(){
+        System.out.println("Nest");
+    }
+}
+package com.sapient.oo.typing.interfaces;
+
+public class AirPlan implements Flyable{
+    @Override
+    public void fly() {
+        System.out.println("Airplan is flying");
+    }
+}
+..............................................................................................
+
+Rules:
+
+1.interfaces can inherit other interfaces
+
+public interface Adder {
+    void add(int a, int b);
+}
+public interface Substractor {
+    void substract(int a, int b);
+}
+public interface Calculator extends Adder, Substractor {
+
+}
+public class Math implements Calculator{
+    @Override
+    public void add(int a, int b) {
+        System.out.println(a+b);
+    }
+
+    @Override
+    public void substract(int a, int b) {
+        System.out.println(a-b);
+
+    }
+}
+        
+Calculator calculator = new Math();
+calculator.add(100,100);
+calculator.substract(20,10);
 
 
+2.1.interfaces cant implement other  interfaces
+
+3.interface cant have private and final methods
+
+4.interface cant have instance variables, but can have static variables and must have initalized
+
+public interface Calculator extends Adder, Substractor {
+  static int a=0;
+}
+..............................................................................................
+				 Abstract classes
+..............................................................................................
+
+Class with abstract method and non method methods
+
+Abstract class = interface + class
+
+Abstract class is used to share code in the same family but some behaviours are decided later.
+
+Abstract class must have abstract methods, to be overriden by child class.
+
+Abstract class can extend interfaces
 
 
+public abstract class Animal {
+    abstract public void eat();
+
+    public String saveAnimals() {
+        return "Save Animals from the Hunter";
+    }
+}
+package com.sapient.oo.typing.abstractcls;
+
+public class Dog extends Animal{
+    @Override
+    public void eat() {
+        System.out.println("Dog eats");
+    }
+}
+
+package com.sapient.oo.typing.abstractcls;
+
+public class Tiger extends Animal {
+    @Override
+    public void eat() {
+        System.out.println("Tiger eats");
+    }
+}
 
 
+public class AbstractClassMain {
+    public static void main(String[] args) {
+        Animal animal = null;
+        animal = new Dog();
+        animal.eat();
+        System.out.println(animal.saveAnimals());
+
+        animal = new Tiger();
+        animal.eat();
+        System.out.println(animal.saveAnimals());
+
+    }
+}
+..............................................................................................
+                      null, non access modifers -(final,abstract)
+..............................................................................................
+
+final:
+
+Variables:
+
+final variables cant be changed once it is initalized- constant
+final variables must be intialized
+
+public class Container {
+    final int a;
+}
+//errror
+public class Container {
+    final int a=0;
+}
+Container container = new Container();
+System.out.println(container.a);
+container.a =100; //error
+
+instance variables should not be declared final - coding standard
+
+static variables are declared final
+
+public class Container {
+    public static final  double PI = 3.14;
+    final int a = 0;
+}
+.............................................................................................
+
+local variables and final keyword:
+..................................
+   public void getValue(){
+        final  int b =10;
+        //b=90;
+        System.out.println(b);
+    }
+...........................................................................................
+				final methods
+............................................................................................
 
 
+final methods cant be overriden but we can access outside class if it is public 
 
+   public final void setValue() {
+        System.out.println("value is set");
+    }
 
+............................................................................................
+			   final class
 
+we can declare class as final, if you do so you cant inherit class.
 
+All wrapper classes and string class are final classes.
 
+package com.sapient.oo.finalkeyword;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public final class MyString {
+    public void setValue(){
+        System.out.println("final class");
+    }
+}
+public class NewString extends MyString{
+}
+ //error.
+.............................................................................................
 
 
 
