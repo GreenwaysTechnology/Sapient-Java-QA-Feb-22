@@ -1869,7 +1869,7 @@ public class Customer {
 
 Both are valid and good.
 
-=>constructors are used to initalize during object creation - earger initalization
+=>constructors are used to initalize during object creation - eager initalization
 =>setters are used to initalize the object after its creation -  lazy intialzation.
 .............................................................................................
 				this keyword
@@ -1951,9 +1951,630 @@ in order to avoid this ambiquity, we need to differentiate local variable and in
 
 3.Calling constructors.
 
- 
+constructors can be called in two ways:
 
+1.using new Keyword
+   new Employee()
+
+2.using "this" keyword inside class only
+
+package com.sapient.oo.object.state.thiskeyword;
+
+public class Customer {
+    private int id;
+    private String name;
+
+    //default constructor
+    public Customer() {
+//        this.id =1;
+//        this.name ="foo";
+        //call two arg constructor : constructor chaining
+        this(1, "foo");
+    }
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+package com.sapient.oo.object.state.thiskeyword;
+
+public class ThisMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee(1);
+        employee.setId(100);
+        System.out.println(employee.getId());
+        //
+        Customer customer = new Customer();
+        System.out.println(customer.getId() + " " + customer.getName());
+    }
+}
+
+constructor chaining:
+  Calling constructors from the constructors  using this called "constructor chaining".
+.............................................................................................
+			     private constructors
+
+
+constructors can be marked private 
+
+public class Container {
+    private Container() {
+        System.out.println("Container is created");
+    }
+    public String getInfo() {
+        return "Container";
+    }
+}
+
+  Container container = new Container(); //calling constructor
+  System.out.println(container.getInfo());
+
+Compiler error:
+'Container()' has private access in 'com.sapient.oo.object.state.constructors.priv.Container'
+
+if you mark constructor private, you cant create object, then cant access any thing outside.
+
+but what if i want to create object and access methods and variables even though constructor is marked.
+
+There is some pattern:
+
+1.you have declare public static method.
+2.The method must return "Type of the same class"
+3.Inside that method we have to create object by calling constructor.
+4.we have to return the object reference.
+5. In the caller side, we have to call static method , get the reference of the object.
+
+"Factory Pattern is most popular pattern based static and private constructors"
+package com.sapient.oo.object.state.constructors.priv;
+
+public class Container {
+    private Container() {
+        System.out.println("Container is created");
+    }
+
+    //static
+    public static Container getInstance() {
+        Container container = new Container();
+        return container;
+    }
+
+    public String getInfo() {
+        return "Container";
+    }
+}
+
+package com.sapient.oo.object.state.constructors.priv;
+
+public class PrivateConstructorMain {
+    public static void main(String[] args) {
+        //Container container = new Container(); //calling constructor
+        Container container = Container.getInstance();
+        System.out.println(container.getInfo());
+    }
+}
+.............................................................................................
+				Hierachy
+............................................................................................
+
+Object relation ship.
+
+One Object is not Object, Objects need to collbrate or connect each other.
+
+There two types of object relationship
+
+1.has-a / composition
+2.is-a - inheritance
+
+has- a:
+ Object can have reference of the other objects.
+
+Objects are made of up spare parts(components), Connecting all components making one big Component is called Compostion.
+
+
+package com.sapient.oo.hasa;
+
+public class Employee {
+    private int id;
+    private String name;
+    private double salary;
+    //address -has a
+    private Address address;
+
+    public Employee() {
+
+    }
+
+    public Employee(int id, String name, double salary, Address address) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+}
+package com.sapient.oo.hasa;
+
+public class Address {
+    private String doorno;
+    private String city;
+    private String state;
+    private String zipcode;
+
+    public  Address(){
+
+    }
+
+    public Address(String doorno, String city, String state, String zipcode) {
+        this.doorno = doorno;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+    }
+
+    public String getDoorno() {
+        return doorno;
+    }
+
+    public void setDoorno(String doorno) {
+        this.doorno = doorno;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+}
+
+package com.sapient.oo.hasa;
+
+public class HasAMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.setId(1);
+        employee.setName("Subramanian");
+        employee.setSalary(1000.89);
+        Address address = new Address();
+        address.setDoorno("10");
+        address.setCity("Coimbatore");
+        address.setState("Tamil Nadu");
+        address.setZipcode("6000 001");
+        //object binding or dependency injection
+        employee.setAddress(address);
+
+        //Access
+        System.out.println("Id => " + employee.getId());
+        System.out.println("Name => " + employee.getName());
+        System.out.println("Salary => " + employee.getSalary());
+        //address
+        System.out.println("Address " + employee.getAddress());
+        System.out.println("Door No =>" + employee.getAddress().getDoorno());
+        System.out.println("City =>" + employee.getAddress().getCity());
+        System.out.println("State =>" + employee.getAddress().getState());
+        System.out.println("Zip code =>" + employee.getAddress().getZipcode());
+
+        //with constructors
+        Address address1 = new Address("11","Chennai","Tamil Nadu","6098823");
+        Employee employee1 = new Employee(2,"John",7897.00,address1);
+
+        System.out.println("Id => " + employee1.getId());
+        System.out.println("Name => " + employee1.getName());
+        System.out.println("Salary => " + employee1.getSalary());
+        //address
+        System.out.println("Address " + employee1.getAddress());
+        System.out.println("Door No =>" + employee1.getAddress().getDoorno());
+        System.out.println("City =>" + employee1.getAddress().getCity());
+        System.out.println("State =>" + employee1.getAddress().getState());
+        System.out.println("Zip code =>" + employee1.getAddress().getZipcode());
+
+    }
+}
+............................................................................................
+				 IS-A inheritance
+............................................................................................
+
+What is inheritance?
+  Inheritance is nothing the way we re use  the code  across the different classes.
+  Avoid code duplication.
+
+Java supports single inheritance, means One class inherits the other class.
+
+Terms:
+1.Base class /parent Class/Super class
+  The class is ready to share its code to other class
+2.child class /dervied
+   The class is ready to accept the code given other class.
+
+In java inheritance happens during compile time only.
+
+A.java
+class A {
+  //code
+}
+B.java
+class B extends A {
+
+}
+
+After compilation
+
+A.class
+class A {
+  //code
+}
+B.class
+class B extends A {
+ //code
+}
+
+
+=> inheritance means coping the base class code into dervied class during compile time.
+
+What code can be copied from base class to child class?
+
+all instance variables and methods having "public,default,protected" modifers
+
+...........................................................................................
+				inheritance implementation
+
+1.class  -Regular class/concrete class
+2.interfaces
+3.abstract class
+
+
+1.class  -Regular class/concrete class
+
+public class Account {
+    //instance variable
+    protected int accountId = 100;
+
+    //instance methods
+    protected int deposit() {
+        return 1000;
+    }
+}
+public class SavingsAccount extends Account {
+
+}
+public class InheritanceMain {
+    public static void main(String[] args) {
+        SavingsAccount savingsAccount = new SavingsAccount();
+        System.out.println(savingsAccount.accountId);
+        System.out.println(savingsAccount.deposit());
+    }
+}
+
+protected:
+  
+ protected  =  private + public
+
+ protected variables can be accessed any where in the application but that class should be part of inheritance - public 
+ protected variables can be accessed within class only, if the class is not part of inheritance.
+..............................................................................................
+ 				default inheritance
+
+=> Every class in java has default parent called Object which part of built in package called
+   "java.lang". compiler automatically inherits the class during compile time.
+
+Source code;
+
+MyClass.java
+ public class MyClass{
+
+ }
+
+public class YourClass extends MyClass{
+}
+After compilation
+
+MyClass.class
+ public class MyClass extends java.lang.Object{
+
+ }
+
+public class YourClass extends MyClass{
+}
+..............................................................................................
+					Typing
+.............................................................................................
+
+ "Type of one variable can be converted into another type based on certain condition" -   Type Conversion
+
+Types of type conversion:
+
+1.implicit type conversion
+
+ 1.1.primitive type conversion
+ 1.2.reference type conversion
+
+2.explicit type conversion
+ 2.1.primitive type conversion
+ 2.2.reference type conversion
+
+1.implicit type conversion
+ 1.1.primitive type conversion
+
+byte b=10;
+
+byte b=int;
+
+What is the type of b?
+ byte
+What is the type of 10?
+ int
+
+byte b=int;
+ how int can be assinged to byte -  not possible
+
+int size 4 byte
+byte size 1 byte
+
+1 = 4 => overflow
+
+
+ byte b = 10;
+ System.out.println(b);
  
+ here 10(int) is converted into byte automatically - Implicit type conversion.
+byte range - 1
+
+
+
+byte b2 = 128;
+System.out.println(b2);
+you will get compil time error, 128 is bigger size than byte, so compiler cant cast automatically
+Still i want it?
+    "Explicit type conversion" 
+
+Syntax
+
+  targetType variable =(targetType) value(sourceType)
+  
+byte b2 = (byte) 128; //int is converted into byte
+System.out.println(b2);
+..............................................................................................
+				 float and double
+..............................................................................................
+
+  float f =10.5; =>compile time error
+
+ f type is float
+ 10.5 type is double
+ double cant be assinged to float
+  
+Type conversion:
+
+
+1.Explicit conversion
+float f =(float)10.5;
+
+2.implicit conversion by adding suffix "f or F"
+float f1 = 10.5f;
+.............................................................................................
+				int,long
+
+long l =10;
+long =int
+
+long l = 10L;
+long =long
+............................................................................................
+				 char and int
+
+Every character is int.
+
+    char a = 'a';
+    char c = 100;
+    System.out.println(a + " " + c);
+...........................................................................................
+Implicit means : small to big 
+Explicit means : big to small
+.............................................................................................
+				Wrapper classes
+.............................................................................................
+
+In Java , all Primitives are represented as Objects called Wrapper objects
+
+int -------> java.lang.Integer
+short ----->java.lang.Short
+byte-------->java.lang.Byte
+long-------->java.lang.Long
+float ------>java.lang.Float
+double------->java.lang.Double
+char-------->java.lang.Char
+
+Object creation in Wrapperclasses and how to assign values.
+
+Pattern 1: very old pattern
+Integer ins = new Integer(100);
+System.out.println(ins.intValue());
+
+Pattern 2: recommended
+
+Integer ins1 = 100;
+System.out.println(ins1.intValue());
+
+Integer          ins1 =         100;
+ |                 |             |
+Object type   referencevariable primitive
+
+Here we assign primitve type into object type, it is not possible default.
+
+ "Here type conversion is happening"  -  Boxing
+
+What is Boxing?
+   Converting primitives into reference type called "Boxing"
+
+What is UnBoxing?
+    int b = ins1;
+    System.out.println(b);
+  Converting reference type into primitive type called "Unboxing"
+
+Auto boxing:
+  Boxing and unboxing happens automatically which we call "auto boxing".
+..............................................................................................
+			 Strings and type conversion
+.............................................................................................
+
+Strings are immutable object, collection of unicode characters
+
+What is immutable object?
+ immutablity means once the object is created can't be changed.
+
+mutability means if object state  is modified by using methods, the object memory location is updated again and again.
+
+immutablity means if object state is modified by using methods, for every change, new Object is created.
+
+String Object Creations
+
+String str = new String("hello") // this is not recommended
+
+String str = "Hello";
+System.out.println(str);
+.............................................................................................
+			  How to get Memory address in java
+.............................................................................................
+
+In General memory address we cant get in java. because java does not support pointers.
+
+Java exposes some pattern through which you can get address of object but which is not real address(fake address) assigned by jvm.
+ 
+hashCode:
+  It is unique identification give by the jvm to every object is created inside heap.
+  hashcode is method from the java.lang.Object.
+
+ package com.sapient.oo.typing;
+
+public class StringsDemo {
+    public static void main(String[] args) {
+        String str = "Hello";
+        System.out.println(str + " its hashcode " + str.hashCode());
+        //do some state changes
+        String upperStr = str.toUpperCase();
+        System.out.println(upperStr + " its hashcode " + upperStr.hashCode());
+
+    }
+}
+output:
+Hello its hashcode 69609650
+HELLO its hashcode 68624562
+.............................................................................................. 			String Buffer and String Builder
+..............................................................................................
+
+Mutable representation of String if you want, You can use StringBuffer or StringBuilder.
+
+  StringBuffer buffer = new StringBuffer();
+        System.out.println("Inital Buffer hash code " + buffer.hashCode());
+        //modify the buffer
+        StringBuffer newBuffer= buffer.append("hello");
+        System.out.println("After Modification Buffer hash code " + newBuffer.hashCode());
+
+Inital Buffer hash code 99347477
+After Modification Buffer hash code 99347477
+.............................................................................................
+			 String to Integer Type conversion
+.............................................................................................
+
+package com.sapient.oo.typing;
+
+public class StringToNumberConversion {
+    public static void main(String[] args) {
+        String n1 = "10";
+        String n2 = "20";
+        //Type Conversion : WrapperTypeParseMethod
+        int c = Integer.parseInt(n1) * Integer.parseInt(n2);
+        System.out.println(c);
+
+    }
+}
+.............................................................................................
+				Typing and Inheritance
+............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
