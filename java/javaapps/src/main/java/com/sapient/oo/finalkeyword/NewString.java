@@ -1,4 +1,4 @@
 package com.sapient.oo.finalkeyword;
 
-public class NewString extends MyString{
-}
+//public class NewString extends MyString{
+//}

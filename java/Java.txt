@@ -3087,6 +3087,710 @@ public class NewString extends MyString{
 }
  //error.
 .............................................................................................
+					null
+..............................................................................................
+
+What is null?
+ null is value(Internally null itself is Object), which indicates the reference variable does not point valid object location.
+
+package com.sapient.oo.nullvalue;
+
+public class NullMain {
+    public static void main(String[] args) {
+        //here employee variable has valid memory address
+        Employee employee = new Employee();
+
+        //employee1 variable is not pointing any valid object location
+        Employee employee1 = null;
+        //if you try to access any property on "Employee" type and its object location not there so it will throw error
+        //runtime error.
+        employee1.setId(10);
+
+    }
+}
+.............................................................................................
+				instance of Operator
+.............................................................................................
+The java instanceof operator is used to test whether the object is an instance of the specified type (class or subclass or interface).
+
+
+package com.sapient.oo.instanceofoperator;
+
+/**
+ * if interface has no any method, that interface is called "marker" interface
+ */
+public interface MyInterface {
+}
+
+package com.sapient.oo.instanceofoperator;
+
+public class Employee implements MyInterface {
+}
+package com.sapient.oo.instanceofoperator;
+
+public class InstanceOfMain {
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        System.out.println(employee instanceof  Employee);
+        System.out.println(employee instanceof  Object);
+        System.out.println(employee instanceof  MyInterface);
+    }
+}
+............................................................................................
+			 java.lang.Object
+
+Methods:
+
+1.toString()
+   It returns string representation of Object.
+if you dont override this method in any class java.lang.Object toString is method.
+
+by default toString method returns value like below
+
+com.sapient.oo.objectclass.Greeting@1d251891
+
+
+Overriding toString method and get meaningfull output
+package com.sapient.oo.objectclass;
+
+public class Greeting {
+
+    private String message;
+    private String name;
+
+    public Greeting(){
+
+    }
+
+    public Greeting(String message, String name) {
+        this.message = message;
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    //Override to String method
+
+    @Override
+    public String toString() {
+        return "Greeting{" +
+                "message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+public class ObjectMain {
+    public static void main(String[] args) {
+        Greeting greeting = new Greeting("Hello","Subramanian");
+        //System.out.println(greeting.getMessage() + " " +greeting.getName());
+        //toString
+        System.out.println(greeting.toString());
+        System.out.println(greeting); //here toString is called automatically
+    }
+}
+..............................................................................................
+				hashcode()
+
+
+hashcode method returns an integer which represents hash value of the java object.
+System.out.println(greeting.hashCode());
+
+Can i override hashcode?
+
+Yes
+package com.sapient.oo.objectclass;
+
+import java.util.Objects;
+
+public class Greeting {
+
+    private String message;
+    private String name;
+
+    public Greeting(){
+
+    }
+
+    public Greeting(String message, String name) {
+        this.message = message;
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    //Override to String method
+
+    @Override
+    public String toString() {
+        return "Greeting{" +
+                "message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+    //override hashcode
+//    @Override
+//    public int hashCode() {
+//        return 100;
+//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(message,name);
+    }
+}
+      package com.sapient.oo.objectclass;
+
+public class ObjectMain {
+    public static void main(String[] args) {
+        Greeting greeting = new Greeting("Hello","Subramanian");
+        System.out.println(greeting.hashCode());
+    }
+}
+..............................................................................................
+				equals Method
+..............................................................................................
+
+To test equality of objects.
+
+In order to test equality we have == operator and also we have equals Method.
+
+== Operator:
+...........
+
+With Primitive Values to test two different variables having same value or not.
+   int a = 10;
+        int b = 10;
+        if (a == b) {
+            System.out.println("Equal");
+        } else {
+            System.out.println("Not equal");
+        }
+
+With Reference types and equal operator
+
+        Greeting greeting1 = new Greeting("Hello", "Subramanian");
+        Greeting greeting2 = new Greeting("Hai", "Ram");
+
+        if (greeting1 == greeting2) {
+            System.out.println("Greetings are equal");
+        } else {
+            System.out.println("Greetings are not equal");
+        }
+
+Here we are comparing not objects but object locations.
+
+ "Whether two reference variables points the same object(one location) or not"
+
+Here no, so it will give "Greetings are not equal".
+ //Equal condition with single object
+        Greeting greeting3 = new Greeting();
+        Greeting greeting4 = greeting3;
+        if (greeting3 == greeting4) {
+            System.out.println("Greetings are equal");
+        } else {
+            System.out.println("Greetings are not equal");
+        }
+.............................................................................................
+				equals method
+.............................................................................................
+
+=>This method is used to compare objects only not its memory location.
+   
+  If i create two objects having content are same
+  eg : Two Employee objects having same employeeid.
+
+
+
+package com.sapient.oo.objectclass;
+
+import java.util.Objects;
+
+public class Greeting {
+
+    private int id;
+    private String message;
+    private String name;
+
+    public Greeting(){
+
+    }
+
+    public Greeting(int id,String message, String name) {
+        this.id =id;
+        this.message = message;
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    //Override to String method
+
+    @Override
+    public String toString() {
+        return "Greeting{" +
+                "message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Greeting)) return false;
+        Greeting greeting = (Greeting) o;
+        return id == greeting.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
+
+package com.sapient.oo.objectclass;
+public class EqualsMethodMain {
+    public static void main(String[] args) {
+        Greeting greeting1 = new Greeting(1,"Hello","Subramanian");
+        Greeting greeting2 = new Greeting(6,"Hello","Subramanian");
+        System.out.println("Greeting 1 Hashcode " + greeting1.hashCode());
+        System.out.println("Greeting 2 Hashcode " + greeting2.hashCode());
+
+        //by default equals method test object reference equality using == operator
+        System.out.println(greeting1.equals(greeting2) ? "Objects are equal" : "Objects are not equal");
+
+    }
+}
+.............................................................................................
+				   Exception handling
+.............................................................................................
+In software systems errors are common, which is unavoidable.
+
+Types of errors:
+
+1.Program errors
+   ->compile time errors
+      Errors are identified during development time
+    compile time errors are not danger,because can be fixed
+
+   ->Runtime errors 
+      Errors are identified during runtime of application.
+      Errors are danager which stops the application to run.
+      This is unavoiable
+      This has to be handled properly    
+        Handling runtime errors are called "exception handling"
+
+2.System errors
+    Due to system mal function like , sudden machine restarts,disk failure,io devices failures,memory overflow.
+    We cant fix / handle this via software
+
+How to handle Exception(Application Runtime errors)?
+
+java provides a mechanism to handle errors sommothly.
+
+if you dont write error handling code, java will do automatically.
+.............................................................................................
+				Handling exceptions
+
+
+java provides keywords to handle exception
+
+1.try...catch..finally
+2.throw 
+3.throws 
+
+Exception is Object oriented, java provides a base class to abstract exception.
+
+				java.lang.Throwable
+
+The Throwable class is the superclass of all errors and exceptions in the Java language
+Only objects that are instances of this class (or one of its subclasses) are thrown by the Java Virtual Machine or can be thrown by the Java throw statement
+
+
+				java.lang.Throwable
+					 |
+		---------------------------------------------------------
+                |							|
+             java.lang.Error                                     java.lang.Exception
+
+
+
+
+Error:
+   An Error is a subclass of Throwable that indicates serious problems that a reasonable application should not try to catch.
+Most such errors are abnormal conditions. The ThreadDeath error, though a "normal" condition, is also a subclass of Error because most applications should not try to catch it.
+
+Exception:
+  The class Exception and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch.
+
+............................................................................................
+				 Types of Exception
+............................................................................................
+
+1.UnChecked Exception
+
+    Exceptions need not be handled by write special code(try...catch).
+    what if exceptions occured, JVM will handle auotmatically.
+
+Eg;
+   NullPointerException
+       Exception(error) , is thrown by the jvm incase if you access object properties , if object does not exit.
+
+  static void checkNullException() {
+        String str = null;
+        System.out.println(str.length());
+    }
+  NumberFormatException
+     Incase string to number conversion, if it fails
+    static  void checkNumberFormate(){
+        String str = "$10";
+        int a = Integer.parseInt(str);
+        System.out.println(a);
+    }
+etc...
+
+How to identify the unchecked Exception?
+			
+ if any exception inherits "java.lang.RuntimeException" or any Exception subclass of RuntimeException are called "UnChecked Exception"
+
+
+How to handle Unchecked Exception?
+  Handling means reporting errors.
+
+try....catch block
+static void handleException() {
+        try {
+            //your application
+            String str = "$10";
+            int a = Integer.parseInt(str);
+            System.out.println(a);
+        } catch (NumberFormatException es) {
+            //reporting block
+            System.out.println(es.getMessage());
+        }
+
+    }
+
+2.Checked Exception
+    Exceptions need to be handled by writing code using try...catch or throws.
+    The code which throws CheckedException, without handling using try...catch or throws , we cant compile the code.
+
+CheckedException is used in many java apis
+
+1.java.io apis
+2.java.sql apis
+3.java.net apis
+etc.....
+..............................................................................................
+				Custom Exception /Biz Exception
+.............................................................................................
+
+Custom Exceptions /Biz Exceptions can be created based on our application code.
+
+Custom Exception can be checked or unchecked Exception.
+............................................................................................
+				UnChecked Custom Exception
+.............................................................................................
+
+Steps:
+
+1.Write a class extends "java.lang.RuntimeException".
+
+2.add Constructors 
+
+public class BalanceNotFoundException extends RuntimeException {
+    public BalanceNotFoundException() {
+        super(); // calling super class constructor
+    }
+    public BalanceNotFoundException(String errorMessage) {
+        super(errorMessage); // calling super class constructor
+    }
+}
+
+3.write biz class , and methods ,simulate exception.
+
+we have to create Exception Object, we have to throw it
+
+package com.sapient.exceptions.custom.uncheck;
+
+public class AccountService {
+    private double balance = 1000.00;
+
+    public double witdraw(double amt) {
+        if (balance < amt) {
+            //error : you are throwing where this method is called.
+            throw new BalanceNotFoundException("Balance Not Found " + "balace=>" + balance + "amt to be withdrawn =>" + amt);
+        }
+        return balance - amt; //balance
+    }
+}
+
+4.call biz method , handle exception 
+
+package com.sapient.exceptions.custom.uncheck;
+
+public class Main {
+    public static void main(String[] args) {
+        AccountService accountService = new AccountService();
+        double response = 0.0;
+        response = accountService.witdraw(100);
+        System.out.println("Response is " + response);
+        //without try catch code will be compiled...
+//        response = accountService.witdraw(3000);
+//        System.out.println("Response is " + response);
+        //with try ...catch
+        try {
+            response = accountService.witdraw(3000);
+            System.out.println("Response is " + response);
+        } catch (BalanceNotFoundException es) {
+            System.out.println(es.getMessage());
+        }
+
+    }
+}
+.............................................................................................
+				Checked Custom Exception
+.............................................................................................
+
+Steps
+
+1.Write a class extends "java.lang.Exception".
+
+
+public class BalanceNotFoundException extends Exception {
+    public BalanceNotFoundException() {
+        super(); // calling super class constructor
+    }
+    public BalanceNotFoundException(String errorMessage) {
+        super(errorMessage); // calling super class constructor
+    }
+}
+
+2.write biz class , and methods ,simulate exception.
+public class AccountService {
+    private double balance = 1000.00;
+
+    public double witdraw(double amt) {
+        if (balance < amt) {
+            //error : you are throwing where this method is called.
+            throw new BalanceNotFoundException("Balance Not Found " + "balace=>" + balance + "amt to be withdrawn =>" + amt);
+        }
+        return balance - amt; //balance
+    }
+}
+
+You will get compile time error:
+ Unhandled exception: com.sapient.exceptions.custom.checked.BalanceNotFoundException
+
+We have not called exception, but why we are getting this error. we need to bind CheckedException with this method.
+
+"throws" -  keyword used to bind Checked Exception with method.
+
+public class AccountService {
+    private double balance = 1000.00;
+
+    public double witdraw(double amt) throws BalanceNotFoundException {
+        if (balance < amt) {
+            //error : you are throwing where this method is called.
+            throw new BalanceNotFoundException("Balance Not Found " + "balace=>" + balance + "amt to be withdrawn =>" + amt);
+        }
+        return balance - amt; //balance
+    }
+}
+
+3. caller side
+public class Main {
+    public static void main(String[] args) {
+        AccountService accountService = new AccountService();
+        double response = 0.0;
+        response = accountService.witdraw(100);
+        System.out.println("Response is " + response);
+    }
+}
+here compiler will throw error
+Unhandled exception: com.sapient.exceptions.custom.checked.BalanceNotFoundException
+
+Here checkedException forces to handle it
+
+using try ...catch...
+      try {
+            response = accountService.witdraw(4000);
+            System.out.println("Response is " + response);
+        } catch (BalanceNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+Sometimes , we are interested to use try...catch, how to compile the code?
+
+yes we can , escaping handling exception using try...catch.
+
+"using throws" keyword
+package com.sapient.exceptions.custom.checked;
+
+public class Main {
+    public static void main(String[] args) throws BalanceNotFoundException {
+        AccountService accountService = new AccountService();
+        double response = 0.0;
+        response = accountService.witdraw(4000);
+        System.out.println("Response is " + response);
+
+//        try {
+//            response = accountService.witdraw(4000);
+//            System.out.println("Response is " + response);
+//        } catch (BalanceNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
+    }
+}
+.............................................................................................
+			 finally keyword
+
+
+finally is used for writing some clean up activties such as file closing operations,like so
+finally is called whether exception is thrown are not.
+
+package com.sapient.exceptions.custom.checked;
+
+public class Main {
+    public static void main(String[] args) { // throws BalanceNotFoundException {
+        AccountService accountService = new AccountService();
+        double response = 0.0;
+        try {
+            response = accountService.witdraw(1000);
+            System.out.println("Response is " + response);
+        } catch (BalanceNotFoundException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("called");
+        }
+    }
+}
+............................................................................................
+				multi catch
+
+We can have mulitple catch Statement. Each catch statement is used to identifiy specific errors.
+
+
+package com.sapient.exceptions;
+
+public class MulitCatch {
+
+    public static void checkMultiCatch() {
+        try {
+            String str = "10";
+            System.out.println(Integer.parseInt(str));
+            String str2 = "";
+            System.out.println(str2.toUpperCase());
+            int a = 10;
+            int res = a / 0;
+            System.out.println(res);
+
+        } catch (NumberFormatException es) {
+            System.out.println("Number error");
+        } catch (NullPointerException es) {
+            System.out.println("Null Error");
+        } catch (RuntimeException es) {
+            System.out.println(es.getMessage());
+        } catch (Exception es) {
+            System.out.println(es.getMessage());
+        } catch (Throwable es) {
+            System.out.println(es.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        checkMultiCatch();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
