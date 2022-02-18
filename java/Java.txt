@@ -3283,7 +3283,7 @@ In order to test equality we have == operator and also we have equals Method.
 ...........
 
 With Primitive Values to test two different variables having same value or not.
-   int a = 10;
+        int a = 10;
         int b = 10;
         if (a == b) {
             System.out.println("Equal");
@@ -4347,6 +4347,825 @@ public class ArrayProcessing {
     }
 }
 ..............................................................................................
+				Collections Framework
+
+Collections framework is ready made data structure.
+
+				  java.util.Collection
+
+The root interface in the collection hierarchy. A collection represents a group of objects, known as its elements. Some collections allow duplicate elements and others do not. Some are ordered and others unordered
+
+				 java.util.Collection
+					 |
+		          java.util.List        java.util.Set
+
+Behind every Collection implementation is array which is dynamic.
+
+
+List:
+
+An ordered collection (also known as a sequence)
+  Order could be index,hashvalue,insertion order
+Lists typically allow duplicate elements
+
+
+				 java.util.Collection
+					 |
+		          	   java.util.List 
+					 |
+
+1.ArrayList
+2.LinkedList
+3.Stack					
+
+
+ArrayList:
+ArrayList()
+
+ Constructs an empty list with an initial capacity of ten.
+
+ArrayList(Collection<? extends E> c)
+ Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's iterator.
+
+ArrayList(int initialCapacity)
+  Constructs an empty list with the specified initial capacity.
+
+Generics:
+  Type container
+
+In the begining , the collection was designed to accept only objects with type of java.lang.Object
+  
+Why Generics?
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArrayListMain {
+    public static void main(String[] args) {
+        ArrayList list = new ArrayList();
+        list.add(10); // list.add(new Integer(10)) Object o = new Integer
+        list.add("Hello");
+        //iterate
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Integer ins = (Integer) iterator.next();
+            System.out.println(ins.intValue() * 10);
+        }
+    }
+
+100
+Exception in thread "main" java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Integer (java.lang.String and java.lang.Integer are in module java.base of loader 'bootstrap')
+	at com.sapient.ds.collections.ArrayListMain.main(ArrayListMain.java:14)
+
+ClassCastException is most the dangerous exception which could be arrived in runtime only.
+
+
+How to avoid classCastException?
+
+ We have to prevent List to accept multiple types.
+
+List should accept only Integers.
+
+We need to create compile time error.
+
+Generics concept were introduced. Generics prevent multiple type to be added , can be fixed during compile time.
+
+<Type>
+
+ArrayList<Integer> list = new ArrayList<Integer>()
+ArrayList list = new ArrayList<Integer>()
+
+  //Generics Version
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(10); // list.add(new Integer(10)) Object o = new Integer
+        //list.add("hello");
+        list.add(20);
+        //iterate
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Integer ins = (Integer) iterator.next();
+            System.out.println(ins.intValue() * 10);
+        }
+
+
+
+package com.sapient.ds.collections;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ListProcessingMain {
+    public static void processIntList() {
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(100);
+        list.add(1);
+        list.add(2);
+        list.add(200);
+        System.out.println("Before Sorting");
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+        Collections.sort(list);
+        System.out.println("After Sorting");
+        for (Integer val : list) {
+            System.out.println(val);
+        }
+    }
+
+    public static void processEmployeeList() {
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(new Employee(1, "A1", 100.89));
+        employeeList.add(new Employee(3, "A3", 1070.89));
+        employeeList.add(new Employee(2, "A2", 10330.89));
+        employeeList.add(new Employee(5, "A5", 10670.89));
+        System.out.println("Before Sorting");
+        for (Employee employee : employeeList) {
+            System.out.println(employee);
+        }
+        Collections.sort(employeeList);
+        System.out.println("After Sorting");
+        for (Employee employee : employeeList) {
+            System.out.println(employee);
+        }
+        Collections.sort(employeeList,new EmployeeIdDecendingOrder());
+        System.out.println("After Sorting");
+        for (Employee employee : employeeList) {
+            System.out.println(employee);
+        }
+    }
+
+    public static void main(String[] args) {
+        processEmployeeList();
+    }
+}
+package com.sapient.ds.collections;
+
+public class Employee implements Comparable<Employee> {
+    private int id;
+    private String name;
+    private double salary;
+
+    public Employee() {
+
+    }
+
+    public Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public int compareTo(Employee employee) {
+        return compare(this.id, employee.getId());
+    }
+
+    public int compare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+
+}
+............................................................................................
+
+LinkedList:
+package com.sapient.ds.collections;
+
+import java.util.LinkedList;
+
+public class LinkedListMain {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.addFirst(56);
+        list.addLast(222);
+        for (Integer value : list) {
+            System.out.println(value);
+        }
+    }
+}
+
+Stack: Last In First Out:
+..........................
+package com.sapient.ds.collections;
+
+import java.util.Stack;
+
+public class StackMain {
+    public static void main(String[] args) {
+        Stack<Integer> integers = new Stack<>();
+        integers.push(1);
+        integers.push(3);
+        integers.push(2); // l
+        int vale = integers.pop(); // last value in the stack will be read
+        System.out.println(vale);
+    }
+}
+.............................................................................................
+
+List order is index order(0th,1th...)
+Linked list is insertion order(how you insert)
+Stack is last in first Order
+.............................................................................................
+				  Set
+..............................................................................................
+
+A collection that contains no duplicate elements,like list only.
+
+Set Implementation:
+
+1.HashSet
+2.LinkedHashSet
+3.TreeSet
+
+
+1.HashSet
+ =>No duplicates
+ =>order is element hashcode value.
+
+public static void createHashSet() {
+        Set<Integer> integerSet = new HashSet<>();
+        integerSet.add(12);
+        integerSet.add(12);
+        integerSet.add(100);
+        integerSet.add(1);
+        for (Integer ins : integerSet) {
+            System.out.println(ins);
+        }
+        Set<Employee> employeeHashSet = new HashSet<>();
+        employeeHashSet.add(new Employee(1, "A1", 100.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(2, "A2", 10330.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+
+        for (Employee employee : employeeHashSet) {
+            System.out.println(employee);
+        }
+    }
+
+2.LinkedHashSet
+
+LinkedList + Set
+
+Order is insertion Order without duplicates
+
+ public static void createLinkedHashSet() {
+        Set<Integer> integerSet = new LinkedHashSet<>();
+        integerSet.add(12);
+        integerSet.add(12);
+        integerSet.add(100);
+        integerSet.add(1);
+        for (Integer ins : integerSet) {
+            System.out.println(ins);
+        }
+        Set<Employee> employeeHashSet = new LinkedHashSet<>();
+        employeeHashSet.add(new Employee(1, "A1", 100.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(2, "A2", 10330.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+
+        for (Employee employee : employeeHashSet) {
+            System.out.println(employee);
+        }
+    }
+.............................................................................................
+TreeSet:
+=>It avoids duplicates 
+=>The elements are ordered using their natural ordering of an element, or by a Comparator.
+  integer-asy 
+  integers-desc
+
+ public static void createTreeSet() {
+        Set<Integer> integerSet = new TreeSet<>();
+        integerSet.add(12);
+        integerSet.add(12);
+        integerSet.add(100);
+        integerSet.add(1);
+        for (Integer ins : integerSet) {
+            System.out.println(ins);
+        }
+        Set<Employee> employeeHashSet = new TreeSet<>(new EmployeeIdDecendingOrder());
+        employeeHashSet.add(new Employee(1, "A1", 100.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(3, "A3", 1070.89));
+        employeeHashSet.add(new Employee(2, "A2", 10330.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+        employeeHashSet.add(new Employee(5, "A5", 10670.89));
+
+        for (Employee employee : employeeHashSet) {
+            System.out.println(employee);
+        }
+    }
+.............................................................................................
+				  Map
+.............................................................................................
+
+Key-value Pair data Structure.
+
+Map Implementation:
+1.HashMap
+   Storing values based key-value ,key order is hash value
+2.LinkedHashMap
+   Storing values based key-value ,key order is insertion order
+3.TreeMap
+  Storing values based key-value ,key order is based on Comparator or Comparable
+
+
+package com.sapient.ds.collections;
+
+import java.util.*;
+
+public class MapImplementation {
+    public static void main(String[] args) {
+        //   createHashMap();
+        //createLinkedHashMap();
+        createTreeMap();
+    }
+    public static void createTreeMap() {
+        Map<Integer, Integer> hash = new TreeMap<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer x, Integer y) {
+                return  (x > y) ? -1 : ((x == y) ? 0 : 1);
+            }
+        });
+        hash.put(1, 100);
+        hash.put(4, 400);
+        hash.put(5, 500);
+        hash.put(3, 300);
+        hash.put(2, 200);
+
+        //convert map into set/Collection view for interation
+        Set<Integer> keys = hash.keySet();
+        for (Integer key : keys) {
+            System.out.println(key);
+        }
+        Collection<Integer> values = hash.values();
+        for (Integer value : values) {
+            System.out.println(value);
+        }
+        for (Map.Entry<Integer, Integer> entry : hash.entrySet()) //using map.entrySet() for iteration
+        {
+            System.out.println("id: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+    }
+
+    public static void createLinkedHashMap() {
+        Map<Integer, Integer> hash = new LinkedHashMap<>();
+        hash.put(1, 100);
+        hash.put(4, 400);
+        hash.put(5, 500);
+        hash.put(3, 300);
+        hash.put(2, 200);
+
+        //convert map into set/Collection view for interation
+        Set<Integer> keys = hash.keySet();
+        for (Integer key : keys) {
+            System.out.println(key);
+        }
+        Collection<Integer> values = hash.values();
+        for (Integer value : values) {
+            System.out.println(value);
+        }
+        for (Map.Entry<Integer, Integer> entry : hash.entrySet()) //using map.entrySet() for iteration
+        {
+            System.out.println("id: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+    }
+
+
+
+    public static void createHashMap() {
+        Map<Integer, Integer> hash = new HashMap<>();
+        hash.put(1, 100);
+        hash.put(4, 400);
+        hash.put(5, 500);
+        hash.put(3, 300);
+        hash.put(2, 200);
+
+        //convert map into set/Collection view for interation
+        Set<Integer> keys = hash.keySet();
+        for (Integer key : keys) {
+            System.out.println(key);
+        }
+        Collection<Integer> values = hash.values();
+        for (Integer value : values) {
+            System.out.println(value);
+        }
+        for (Map.Entry<Integer, Integer> entry : hash.entrySet()) //using map.entrySet() for iteration
+        {
+            System.out.println("id: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+
+
+    }
+}
+.............................................................................................
+				Multi Threading
+.............................................................................................
+Thread is nothing but sub process.
+Java has simplifed to create sub process(thread)
+Every java program runs in a thread that is called "main thread".
+we create our own thread, and we can schedule the task parrell.
+multi threading is nothing running more one thread  is called multi threading.
+
+How to create thread and how to run thread?
+
+Using Thread class
+Using Runnable interface.
+
+
+package com.sapient.multihreading;
+
+public class Task implements Runnable {
+    //Thread logic
+    @Override
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + Thread.currentThread().getName());
+
+        }
+    }
+}
+package com.sapient.multihreading;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Main " + Thread.currentThread().getName());
+        //
+        for (int i = 0; i < 10; i++) {
+            Thread taskThread = new Thread(new Task());
+            // taskThread.setName("Task Thread");
+            //start the thread
+            taskThread.start();
+        }
+    }
+
+}
+..............................................................................................
+				 How to connect Database in java
+.............................................................................................
+
+Database connectivity:
+
+Java can talk to any type of data base provided by "drivers".
+
+Drivers are bridge libs which connects java application with databases.
+
+JDBC: java database connectivity -  java.sql package for interacting with databases.
+..............................................................................................
+
+Requirement:
+
+1.You need the database to be installed. mysql
+2.you need drivers to connect database
+
+
+Steps:
+
+1.you need load driver into jvm
+ Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+          
+2.Connection creation
+        Connection connection = null;
+String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+
+
+3.Query Execution
+  Statement implemenation Object
+
+Types of Statement
+
+1.Statement
+   All SQL statements/DML statements - CREATE,INSERT,UPDATE,DELETE,SELECT
+2.PreparedStatement
+  All SQL statements/DML statements - CREATE,INSERT,UPDATE,DELETE,SELECT
+  Enables caching - incase any frequent query exection, it wont go to the database again and again
+  
+3.CallableStatement
+   For executing Stored Procedures.
+
+Statement selectStatement = null;
+selectStatement = connection.createStatement();
+
+
+4.Execute Sql statement
+
+ String sqlQuery = "SELECT * FROM myuser";
+ ResultSet resultSet = selectStatement.executeQuery(sqlQuery);
+ ResultSet is used to Capture the result.
+      ResultSet resultSet = selectStatement.executeQuery(sqlQuery);
+            //process the data
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("id") +
+                        " " + resultSet.getString("name") + " " +
+                        resultSet.getString("city"));
+            }
+..............................................................................................package com.sapient.jdbc;
+
+import java.sql.*;
+
+public class JdbcMain {
+    public static void connectDatabase() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void selectAllUsers() {
+        Connection connection = null;
+        Statement selectStatement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+            String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connection is Success");
+            //ExecuteQuery
+            selectStatement = connection.createStatement();
+            String sqlQuery = "SELECT * FROM myuser";
+            ResultSet resultSet = selectStatement.executeQuery(sqlQuery);
+            //process the data
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("id") +
+                        " " + resultSet.getString("name") + " " +
+                        resultSet.getString("city"));
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        //connectDatabase();
+        selectAllUsers();
+    }
+}
+.............................................................................................
+
+Insert row
+  Connection connection = null;
+        Statement insertStatement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+            String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connection is Success");
+            //ExecuteQuery
+            insertStatement = connection.createStatement();
+            String insertQuery = "INSERT INTO myuser (id, name, city) VALUES (2, 'ram', 'Chennai')";
+            int noofRowsAffected = insertStatement.executeUpdate(insertQuery);
+            if (noofRowsAffected > 0) {
+                System.out.println("Users inserted");
+
+            } else {
+                System.out.println("Users not inserted");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+..
+update Row:
+  private static void updateRow() {
+        Connection connection = null;
+        Statement updateStatement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+            String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connection is Success");
+            //ExecuteQuery
+            updateStatement = connection.createStatement();
+            String insertQuery = "UPDATE myuser SET city = 'Delhi' WHERE id = 2";
+            int noofRowsAffected = updateStatement.executeUpdate(insertQuery);
+            if (noofRowsAffected > 0) {
+                System.out.println("Users updated");
+                selectAllUsers();
+            } else {
+                System.out.println("Users not update");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+.........................................................................................
+
+Delete a row:
+ private static void deleteRow() {
+        Connection connection = null;
+        Statement deleteStatement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+            String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connection is Success");
+            //ExecuteQuery
+            deleteStatement = connection.createStatement();
+            String deleteQuery = "DELETE FROM myuser WHERE id = 2";
+            int noofRowsAffected = deleteStatement.executeUpdate(deleteQuery);
+            if (noofRowsAffected > 0) {
+                System.out.println("Users deleted");
+                selectAllUsers();
+            } else {
+                System.out.println("Users not deleted");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            System.out.println(sqlException.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
+..............................................................................................
+PreparedStatement Passing Parameters:
+
+   PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEES
+                                     SET SALARY = ? WHERE ID = ?");
+   pstmt.setBigDecimal(1, 153833.00)
+   pstmt.setInt(2, 110592)
+
+
+package com.sapient.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class PreparedStatementMain {
+
+    public static void main(String[] args) {
+        updateRow();
+    }
+
+    private static void updateRow() {
+        Connection connection = null;
+        PreparedStatement updateStatement = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            System.out.println("Driver is ready!");
+            String connectionString = "jdbc:mysql://localhost/users?" +
+                    "user=root&password=root";
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("Connection is Success");
+            //ExecuteQuery
+            String updateQuery = "UPDATE myuser SET city=? WHERE id=?".trim();
+            updateStatement = connection.prepareStatement(updateQuery);
+            updateStatement.setString(1, "Pune");
+           updateStatement.setInt(2, 1);
+            int noofRowsAffected = updateStatement.executeUpdate();
+            if (noofRowsAffected > 0) {
+                System.out.println("Users updated");
+            } else {
+                System.out.println("Users not update");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            //System.out.println(sqlException.getMessage());
+            sqlException.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+.............................................................................................
+
+ResultSetMetaData:
+An object that can be used to get information about the types and properties of the columns in a ResultSet object.
+https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Collection.html
+.............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
