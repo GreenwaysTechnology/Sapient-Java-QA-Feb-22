@@ -760,20 +760,360 @@ select * from products WHERE productid=1;
 				 SQL Joins
 .............................................................................................
 
+What is Join?
+
+   A relational database consists of multiple related tables linking together using common columns, which are known as foreign key columns.
+  Getting data from the multiple tables are called "joins".
+
+Types of joins:
+
+1.inner join
+2.Left join
+3.Right join
+4.cross join
 
 
+Demo:
+CREATE TABLE members (
+    member_id INT AUTO_INCREMENT,
+    name VARCHAR(100),
+    PRIMARY KEY (member_id)
+);
+
+CREATE TABLE committees (
+    committee_id INT AUTO_INCREMENT,
+    name VARCHAR(100),
+    PRIMARY KEY (committee_id)
+);
+
+INSERT INTO members(name)
+VALUES('John'),('Jane'),('Mary'),('David'),('Amelia');
+
+INSERT INTO committees(name)
+VALUES('John'),('Mary'),('Amelia'),('Joe');
 
 
+INNER Join:
+  joins two tables based on a condition which is known as join predicate(boolean condition)
+  
+  The inner join clause compares "each row from the first table" with every row from the second table
+
+  First Table        second table
+    1 one           =>    N rows
+
+SELECT column_list
+FROM table_1
+INNER JOIN table_2 ON join_condition;
+
+Note:
+ when we combine two tables there might be two column names same, that time we need to which table data we want, "Column Alialse"  -  Reference name for the table.
+
+SELECT columnName from table_name
+
+SELECT SomeName.columnName from table_name as SomeName
+
+eg:
+
+SELECT 
+    m.member_id, 
+    m.name AS member, 
+    c.committee_id, 
+    c.name AS committee
+FROM
+    members m
+INNER JOIN committees c ON c.name = m.name;
 
 
+mysql> SELECT
+    ->     m.member_id,
+    ->     m.name AS member,
+    ->     c.committee_id,
+    ->     c.name AS committee
+    -> FROM
+    ->     members m
+    -> INNER JOIN committees c ON 
++-----------+--------+--------------+-----------+
+| member_id | member | committee_id | committee |
++-----------+--------+--------------+-----------+
+|         1 | John   |            1 | John      |
+|         3 | Mary   |            2 | Mary      |
+|         5 | Amelia |            3 | Amelia    |
++-----------+--------+--------------+-----------+
+3 rows in set (0.00 sec)
+...............................................................................................
+
+MySQL LEFT JOIN clause
+
+  Similar to an inner join, a left join also requires a join predicate. When joining two tables using a left join, the concepts of left and right tables are introduced.
+
+The left join selects data starting from the left table. For each row in the left table, the left join compares with every row in the right table.
+
+Which displays all the data, if no match found, then unknown match values are treated or replaced with null values
+
+SELECT column_list 
+FROM table_1 
+LEFT JOIN table_2 ON join_condition;
 
 
+SELECT 
+    m.member_id, 
+    m.name AS member, 
+    c.committee_id, 
+    c.name AS committee
+FROM
+    members m
+LEFT JOIN committees c ON c.name = m.name;
+
+........................
+
+ SELECT
+    ->     m.member_id,
+    ->     m.name AS member,
+    ->     c.committee_id,
+    ->     c.name AS committee
+    -> FROM
+    ->     members m
+    -> LEFT JOIN committees c ON c.name = m.name;
++-----------+--------+--------------+-----------+
+| member_id | member | committee_id | committee |
++-----------+--------+--------------+-----------+
+|         1 | John   |            1 | John      |
+|         2 | Jane   |         NULL | NULL      |
+|         3 | Mary   |            2 | Mary      |
+|         4 | David  |         NULL | NULL      |
+|         5 | Amelia |            3 | Amelia    |
++-----------+--------+--------------+-----------+
+5 rows in set (0.00 sec)
+............................................................................................
+
+RIGHT JOIN clause
+
+  The right join clause is similar to the left join clause except that the treatment of left and right tables is reversed. 
+
+The right join starts selecting data from the right table instead of the left table.
+
+The right join clause selects all rows from the right table and matches rows in the left table.
+
+ If a row from the right table does not have matching rows from the left table, the column of the left table will have NULL in the final result set.
 
 
+SELECT column_list 
+FROM table_1 
+RIGHT JOIN table_2 ON join_condition;
+SELECT
+    ->     m.member_id,
+    ->     m.name AS member,
+    ->     c.committee_id,
+    ->     c.name AS committee
+    -> FROM
+    ->     members m
+    -> RIGHT JOIN committees c ON c.name = m.name;
++-----------+--------+--------------+-----------+
+| member_id | member | committee_id | committee |
++-----------+--------+--------------+-----------+
+|         1 | John   |            1 | John      |
+|         3 | Mary   |            2 | Mary      |
+|         5 | Amelia |            3 | Amelia    |
+|      NULL | NULL   |            4 | Joe       |
++-----------+--------+--------------+-----------+
+4 rows in set (0.00 sec)
+.............................................................................................
+
+Self Join
+The syntax of self-join is the same as the syntax of joining two different tables.
+Here, we use aliases name for tables because both the table name are the same. The following are the syntax of a SELF JOIN in MySQL:
+
+SELECT s1.col_name, s2.col_name...  
+FROM table1 s1, table1 s2  
+WHERE s1.common_col_name = s2.common_col_name;  
 
 
+Select m1.name , m2.name from members m1 , members m2 where  m1.member_id= m2.member_id;
++--------+--------+
+| name   | name   |
++--------+--------+
+| John   | John   |
+| Jane   | Jane   |
+| Mary   | Mary   |
+| David  | David  |
+| Amelia | Amelia |
++--------+--------+
+5 rows in set (0.00 sec)
+.............................................................................................
+				MY SQL Functions
+...............................................................................................
+Aggregate Functions 
+ Average(), Count(), Maximum() 
+ Median(), Minimum(), Mode(), Sum() 
+https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html
+
+use classicmodels
+ SELECT * FROM classicmodels.products;
+
+avg
+SELECT
+    ->     AVG(buyprice) 'Average Classic Cars Price'
+    -> FROM
+    ->     products
+    -> WHERE
+    ->     productline = 'Classic Cars';
++----------------------------+
+| Average Classic Cars Price |
++----------------------------+
+|                  64.446316 |
++----------------------------+
+1 row in set (0.01 sec)
+
+max:
+SELECT productName, MIN(buyprice), MAX(buyPrice) FROM products;
++---------------------------------------+---------------+---------------+
+| productName                           | MIN(buyprice) | MAX(buyPrice) |
++---------------------------------------+---------------+---------------+
+| 1969 Harley Davidson Ultimate Chopper |         15.91 |        103.42 |
++---------------------------------------+---------------+---------------+
+1 row in set (0.00 sec)
+
+.............................................................................................
+				Grouping data
+
+groupby, orderby having
+
+Groupby:
+ if you want to get summary of data
+  The GROUP BY clause groups a set of rows into a set of summary rows by values of columns or expressions.
+
+ The GROUP BY clause returns one row for each group. 
+  In other words, it reduces the number of rows in the result set.
+
+phone
+  ...
+ipad
+  ...
+computers
+  
+SELECT 
+    c1, c2,..., cn, aggregate_function(ci)
+FROM
+    table
+WHERE
+    where_conditions
+GROUP BY c1 , c2,...,cn;
+
+SELECT 
+    status
+FROM
+    orders
+GROUP BY status;
+..............................................................................................
+
+ORDER BY clause
+   When you use the SELECT statement to query data from a table, the order of rows in the result set is unspecified.
+  To sort the rows in the result set, you add the ORDER BY clause to the SELECT statement.
+
+The following illustrates the syntax of the ORDER BY clause:
+
+SELECT 
+   select_list
+FROM 
+   table_name
+ORDER BY 
+   column1 [ASC|DESC], 
+   column2 [ASC|DESC],
+   ...;
+
+SELECT
+	contactLastname,
+	contactFirstname
+FROM
+	customers
+ORDER BY
+	contactLastname; 
+
+The above one is asyn order.
 
 
+mysql> SELECT
+    -> contactLastname,
+    -> contactFirstname
+    -> FROM
+    -> customers
+    -> ORDER BY
+    -> contactLastname desc;
+.............................................................................................
+				Groupby with Condition
+
+  The HAVING clause is used in the SELECT statement to specify filter conditions for a group of rows or aggregates.
+
+The HAVING clause is often used with the GROUP BY clause to filter groups based on a specified condition. If you omit the GROUP BY clause, the HAVING clause behaves like the WHERE clause.
+
+The following illustrates the syntax of the HAVING clause:
+
+SELECT 
+    select_list
+FROM 
+    table_name
+WHERE 
+    search_condition
+GROUP BY 
+    group_by_expression
+HAVING 
+    group_condition;
+
+SELECT 
+    ordernumber,
+    SUM(quantityOrdered) AS itemsCount,
+    SUM(priceeach*quantityOrdered) AS total
+FROM
+    orderdetails
+GROUP BY 
+   ordernumber
+HAVING 
+   total > 100 and total < 5000;
+
+SELECT
+    ->     ordernumber,
+    ->     SUM(quantityOrdered) AS itemsCount,
+    ->     SUM(priceeach*quantityOrdered) AS total
+    -> FROM
+    ->     orderdetails
+    -> GROUP BY
+    ->    ordernumber
+    -> HAVING
+    ->    total > 100 and total < 5000;
++-------------+------------+---------+
+| ordernumber | itemsCount | total   |
++-------------+------------+---------+
+|       10116 |         27 | 1627.56 |
+|       10118 |         36 | 3101.40 |
+|       10132 |         36 | 2880.00 |
+|       10144 |         20 | 1128.20 |
+|       10154 |         67 | 4465.85 |
+|       10156 |         68 | 4599.52 |
+|       10158 |         22 | 1491.38 |
+|       10189 |         28 | 3879.96 |
+|       10242 |         46 | 1679.92 |
+|       10255 |         61 | 4632.31 |
+|       10256 |         63 | 4710.73 |
+|       10277 |         28 | 2611.84 |
+|       10286 |         38 | 1960.80 |
+|       10294 |         45 | 4424.40 |
+|       10303 |         70 | 3474.66 |
+|       10317 |         35 | 2434.25 |
+|       10345 |         43 | 1676.14 |
+|       10364 |         48 | 1834.56 |
+|       10376 |         35 | 3452.75 |
+|       10385 |         62 | 4466.71 |
+|       10387 |         44 | 3516.04 |
+|       10408 |         15 |  615.45 |
+|       10409 |         67 | 2326.18 |
++-------------+------------+---------+
+23 rows in set (0.00 sec)
+.............................................................................................
+				Database objects
 
 
-
+1.index
+2.views
+3.storedprocedures and functions
+4.tiggers
+5.transactions
