@@ -1117,3 +1117,309 @@ SELECT
 3.storedprocedures and functions
 4.tiggers
 5.transactions
+
+index:
+ index is object used on table columns used to perform fast data reterival.
+   An index is a data structure such as B-Tree that improves the speed of data retrieval on a table at the cost of additional writes and storage to maintain it.
+
+how to add index?
+
+inside table definition
+
+CREATE TABLE t(
+   c1 INT PRIMARY KEY,
+   c2 INT NOT NULL,
+   c3 INT NOT NULL,
+   c4 VARCHAR(10),
+   INDEX (c2,c3) 
+);
+
+outside table definition:
+
+ CREATE INDEX index_name ON table_name (column_list)
+
+SELECT 
+    employeeNumber, 
+    lastName, 
+    firstName
+FROM
+    employees
+WHERE
+    jobTitle = 'Sales Rep';
+
+CREATE INDEX jobTitle ON employees(jobTitle);
+
+SHOW INDEXES FROM employees;
+.............................................................................................
+
+Views:
+
+  Views are like table, but can be used only query reterival.
+
+Why Views?
+
+SELECT 
+    customerName, 
+    checkNumber, 
+    paymentDate, 
+    amount
+FROM
+    customers
+INNER JOIN
+    payments USING (customerNumber);
+
+Views are used to abstract complex query operations?
+
+CREATE VIEW viewName select statement;
+
+CREATE VIEW customerPayments
+AS 
+SELECT 
+    customerName, 
+    checkNumber, 
+    paymentDate, 
+    amount
+FROM
+    customers
+INNER JOIN
+    payments USING (customerNumber);
+
+
+SELECT *FROM customerPayments.
+..............................................................................................
+Triggers:
+
+In MySQL, a trigger is a stored program invoked automatically in response to an event such as insert, update, or delete that occurs in the associated table. 
+
+MySQL supports triggers that are invoked in response to the INSERT, UPDATE or DELETE event.
+
+The SQL standard defines two types of triggers:
+
+row-level triggers and statement-level triggers.
+
+A row-level trigger is activated for each row that is inserted, updated, or deleted.  For example, if a table has 100 rows inserted, updated, or deleted, the trigger is automatically invoked 100 times for the 100 rows affected.
+
+A statement-level trigger is executed once for each transaction regardless of how many rows are inserted, updated, or deleted.
+
+Advantages of triggers
+Triggers provide another way to check the integrity of data.
+Triggers handle errors from the database layer.
+Triggers give an alternative way to run scheduled tasks. By using triggers, you don’t have to wait for the scheduled events to run because the triggers are invoked automatically before or after a change is made to the data in a table.
+Triggers can be useful for auditing the data changes in tables.
+
+How to create Trigger?
+
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE| DELETE }
+ON table_name FOR EACH ROW
+trigger_body;
+
+
+CREATE TABLE employees_audit (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    employeeNumber INT NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    changedat DATETIME DEFAULT NULL,
+    action VARCHAR(50) DEFAULT NULL
+);
+
+CREATE TRIGGER before_employee_update 
+    BEFORE UPDATE ON employees
+    FOR EACH ROW 
+ INSERT INTO employees_audit
+ SET action = 'update',
+     employeeNumber = OLD.employeeNumber,
+     lastname = OLD.lastname,
+     changedat = NOW();
+
+
+Update the employee table;
+
+UPDATE employees 
+SET 
+    lastName = 'Phan'
+WHERE
+    employeeNumber = 1056;
+
+
+mysql> UPDATE employees
+    -> SET
+    ->     lastName = 'Phan'
+    -> WHERE
+    ->     employeeNumber = 1056;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select lastName from employees where employeeNumber=1056
+    -> ;
++----------+
+| lastName |
++----------+
+| Phan     |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *FROM employees_audit;
++----+----------------+-----------+---------------------+--------+
+| id | employeeNumber | lastname  | changedat           | action |
++----+----------------+-----------+---------------------+--------+
+|  1 |           1056 | Patterson | 2022-02-21 16:44:44 | update |
++----+----------------+-----------+---------------------+--------+
+1 row in set (0.00 sec)
+..............................................................................................
+				Stored Procedures
+.............................................................................................
+Stored Procedures are methods/functions having biz logic + comibing sql statements.
+Inside write complex biz logic in the client side, we can write the same in the database itself.
+
+How to create Stored procedures?
+
+DELIMITER $$
+CREATE PROCEDURE GetCustomers()
+BEGIN
+	SELECT 
+		customerName, 
+		city, 
+		state, 
+		postalCode, 
+		country
+	FROM
+		customers
+	ORDER BY customerName;    
+END$$
+DELIMITER ;
+
+Invoke Stored procedure:
+
+CALL GetCustomers();
+..............................................................................................
+Stored Procedures:
+
+IN parameters
+ IN is the default mode. When you define an IN parameter in a stored procedure, the calling program has to pass an argument to the stored procedure.
+
+In addition, the value of an IN parameter is protected. It means that even you change the value of the IN parameter inside the stored procedure, its original value is unchanged after the stored procedure ends. In other words, the stored procedure only works on the copy of the IN parameter.
+
+OUT parameters(Return values):
+ The value of an OUT parameter can be changed inside the stored procedure and its new value is passed back to the calling program.
+
+Notice that the stored procedure cannot access the initial value of the OUT parameter when it starts.
+
+INOUT parameters (input and return)
+An INOUT  parameter is a combination of IN and OUT parameters. It means that the calling program may pass the argument, and the stored procedure can modify the INOUT parameter, and pass the new value back to the calling program.
+
+[IN | OUT | INOUT] parameter_name datatype[(length)]
+
+DELIMITER //
+
+CREATE PROCEDURE GetOfficeByCountry(
+	IN countryName VARCHAR(255)
+)
+BEGIN
+	SELECT * 
+ 	FROM offices
+	WHERE country = countryName;
+END //
+
+DELIMITER ;
+
+CALL getOfficeByCountry('France');
+..............................................................................................
+				   Trancations and Locks
+..............................................................................................
+
+What is transaction?
+  A sequence of statement execution, during statement execution if something goes wrong in the middle, i dont want to continue the steps and cancel previous actions.
+
+for eg:
+  online purchase
+
+1.purchase is success, purchase table got updated
+2.payment is failed, i could not insert data in the payment table and also i have to revoke the purchase table.
+
+
+By default, transaction is disabled in databse.
+
+we need to enable transaction features.
+
+SET autocommit = ON; 
+
+
+-- 1. start a new transaction
+START TRANSACTION;
+
+-- 2. Get the latest order number
+SELECT 
+    @orderNumber:=MAX(orderNUmber)+1
+FROM
+    orders;
+
+-- 3. insert a new order for customer 145
+INSERT INTO orders(orderNumber,
+                   orderDate,
+                   requiredDate,
+                   shippedDate,
+                   status,
+                   customerNumber)
+VALUES(@orderNumber,
+       '2005-05-31',
+       '2005-06-10',
+       '2005-06-11',
+       'In Process',
+        145);
+        
+-- 4. Insert order line items
+INSERT INTO orderdetails(orderNumber,
+                         productCode,
+                         quantityOrdered,
+                         priceEach,
+                         orderLineNumber)
+VALUES(@orderNumber,'S18_1749', 30, '136', 1),
+      (@orderNumber,'S18_2248', 50, '55.09', 2); 
+      
+-- 5. commit changes    
+COMMIT;
+
+
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM orders;
+Query OK, 327 rows affected (0.03 sec)
+
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from user;
++----+-------------------------------+--------------+
+| id | email                         | name         |
++----+-------------------------------+--------------+
+|  1 | sasubramanian_md@hotmail.com  | subramanian  |
+|  2 | sasubramanian1_md@hotmail.com | subramanian1 |
++----+-------------------------------+--------------+
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from user;
+Empty set (0.00 sec)
+
+mysql>
+
+
+rollback : 
+   you can get the data where ever last until commited data.
+
+commit :
+  you are conforming the what ever the transactions you did.
+.....................................&&&&&&&&&&&&&&&&&&&&&&&&................................
+ 
+
+
+
+
+
+
+
