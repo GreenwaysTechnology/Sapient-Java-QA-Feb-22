@@ -1,0 +1,598 @@
+                                      Unit Testing:
+
+What is unit Testing?
+
+Unit testing is kind of testing done during development cycle, done by developer who develops code
+Every programming language has unit testing modules.
+
+  UNIT TESTING is a type of software testing where individual units or components of a software are tested. 
+
+The purpose is to validate that each unit of the software code performs as expected.
+ Unit Testing is done during the development (coding phase) of an application by the      developers.
+Unit Tests isolate a section of code and verify its correctness.
+  A unit may be an individual function, method, procedure, module, or object.
+
+Why Unit Testing?
+
+  Unit Testing is important because software developers sometimes try saving time doing minimal unit testing and this is myth because inappropriate unit testing leads to high cost Defect fixing during System Testing, Integration Testing and even Beta Testing after application is built. 
+
+If proper unit testing is done in early development, then it saves time and money in the end.
+
+
+How to do Unit Testing?
+
+   In order to do Unit Testing, developers write a section of code to test a specific function in software application. 
+
+Developers can also isolate this function to test more rigorously which reveals unnecessary dependencies between function being tested and other units so the dependencies can be eliminated. 
+
+Developers generally use "UnitTest framework" to develop automated test cases for unit testing.
+
+Unit Testing is of two types
+
+1.Manual
+    if you execute the test cases by without tool support called manual
+
+2.Automated
+   if you execute the test cases with tool support called automated
+............................................................................................
+				Unit Testing tools
+
+For Java Language.
+
+1.JUnit
+2.TestNg
+3.Mockito
+4.AssertJ
+5.Hamcrest
+
+Core Concepts in Unit Testing:
+
+1.Test Suite
+   
+2.Test Case
+
+3.Assertions
+
+
+Test Suite : 
+ It is a container which contains other suits and Test case.
+ Test suite is a container that has a set of tests which helps testers in executing and   reporting the test execution status.
+Test Suite looks like a class
+
+login is suite
+ describe('login',function(){
+   //here test cases will go 
+   
+ })
+
+Test Case :
+  It has application logic representation with possitve and negative aspects
+  Test case has assertions
+
+ describe('login',function(){
+  
+    it('user name must be there',function(){
+          //assertions
+    })
+    it('password must be there',function(){
+          //assertions
+    })
+    it('password should not contain empty space',function(){
+          //assertions
+    })
+    it('username should contain only characters',function(){
+          //assertions
+    })
+ })
+
+Assertions:
+  To test whether application output and client(requirment) expecation is meeting or not.
+
+ for eg:
+  function add(a,b){
+    return  a-b
+  }
+
+ add(10,10)=>20
+
+............................................................................................
+					Testing Types
+
+
+1.BDD:Behavior-Driven Development (BDD)
+  Developing application and writing test cases using natural language syntax,instead of complex programming syntax
+  Most declarative,readable code.
+ 
+eg:for loop : 1 to 100
+  for(int i=0;i<100;i++){
+      println(i);
+  }
+BDD pattern
+  1..100
+
+2.TDD : Test Driven Development
+
+   Writing test cases using programming language syntax.
+   It is not readable,declartive.
+
+.............................................................................................
+				Junit
+
+What is Junit?
+  Junit is java core testing framework to test java methods.
+
+Junit is made of "Annotations".
+
+What is annotations?
+  Annotation is meta program which is injected during various stages of code.
+
+How to start using annotations?
+
+@AnnotationName()
+
+How to represent Annotation?
+ Every annotation is an interface only.
+
+interface Override{
+
+}
+APT : Annotation Processing tools , which is used to generate code.
+
+There types of annotations?
+
+1.Source code level annotation
+   It is used only at source code.
+   It is used for generating documentations
+@Override
+
+2.compile time anntoations
+   It is used at byte level .
+@Enity
+@Service
+@Controller
+etc....
+
+3.Runtime annotations
+  It is used at runtime  when application is running
+@Proxy
+.............................................................................................
+
+Junit is made of lot of annotations;
+...................................
+
+Setup Project
+
+Download the project from the below link
+https://github.com/junit-team/junit5-samples/tree/r5.8.2/junit5-jupiter-starter-maven
+
+open the project in the ide
+
+Start wrting code:
+
+Any Test Suite should be a class
+
+public class HelloWorld {}
+
+Test Suite  Test Cases
+
+Test cases are annotated with @Test Annotation
+
+package com.example.project;
+
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+public class HelloWorldTest {
+
+    //Test cases
+    @Test
+    @DisplayName("hello") // for title of the test case; if ignore this , method name will be title
+    public void testHelloWorld() {
+       
+    }
+
+}
+
+Verification: using assertXXX api
+in order to write assertions we can use Junit assert api or you can integrate other assertion libs like "Hamcrest is a framework for writing matcher objects allowing ‘match’ rules to be defined declaratively"
+
+What is assert api?
+ 
+  It is method only
+
+Which takes two parameters:
+
+1st parameter is expected
+  What is biz requrement  
+2nd parameter is actual
+  What is your code api is giving.
+
+Which returns boolean , true /false
+
+if it is true, then you will get Test success
+
+if it is false, then you will get Exception (failures)
+
+when expecation and actual is matching, then you will get true.
+.........................................................................................
+
+
+package com.example.project;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+public class HelloWorldTest {
+
+    //Test cases
+    @Test
+    @DisplayName("hello") // for title of the test case; if ignore this , method name will be title
+    public void testHelloWorld() {
+        //assertions
+        String expected = "HelloWorld";
+        String actual = "hai";
+        //match
+                assertEquals(expected,actual);
+
+    }
+
+}
+
+output:
+org.opentest4j.AssertionFailedError: 
+Expected :HelloWorld
+Actual   :hai
+<Click to see difference>
+
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
+	
+.............................................................................................
+
+Writing test case against biz methods:
+
+Greeting.java
+package com.example.project;
+
+public class Greeting {
+    public String sayHello() {
+        return "Hai";
+    }
+}
+
+HelloWorldTest.java
+package com.example.project;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class HelloWorldTest {
+
+    //Test cases
+    @Test
+    @DisplayName("hello") // for title of the test case; if ignore this , method name will be title
+    public void testHelloWorld() {
+        //assertions
+        String expected = "HelloWorld";
+        Greeting greeting = new Greeting();
+        String actual = greeting.sayHello();
+        //match
+        //Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+}
+.............................................................................................HHamcrest Lib:
+  It is more declarative assetion lib for java applications.
+
+pom.xml
+<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+
+
+package com.example.project;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class HelloWorldTest {
+
+    //Test cases
+    @Test
+    @DisplayName("hello") // for title of the test case; if ignore this , method name will be title
+    public void testHelloWorld() {
+        //assertions
+        String expected = "HelloWorld";
+        Greeting greeting = new Greeting("HelloWorld");
+        String actual = greeting.sayHello();
+        //match
+        //Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Whether two Greetings Objects are equal or not")
+    public void testGreetingEquals() {
+        Greeting greeting1 = new Greeting("Hello");
+        Greeting greeting2 = new Greeting("Hai");
+        assertThat(greeting1, equalTo(greeting2));
+
+    }
+}
+..............................................................................................
+				Junit Life Cycle methods
+.............................................................................................
+
+Life cycles methods are called before and after each test case /suite runs.
+Life cycles methods are used to initalize the resources, deallocate resources required for test.
+
+package com.example.project;
+
+import org.junit.jupiter.api.*;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class GreetingLifeTests {
+    Greeting greeting1;
+    Greeting greeting2;
+
+    @BeforeAll
+    static void initAll() {
+        System.out.println("init one time");
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("Clean is called one time");
+    }
+
+    @BeforeEach
+    @DisplayName("init is called every time")
+    public void init() {
+        System.out.println("Which is called for every test case");
+        greeting1 = new Greeting("hello");
+        greeting2 = new Greeting("hello");
+    }
+
+    //Test
+    @Test
+    @DisplayName("It should return hello")
+    public void testHello() {
+        assertEquals("hello", greeting1.sayHello());
+    }
+
+    @Test
+    @DisplayName("Whether two Greetings Objects are equal or not")
+    public void testGreetingEquals() {
+        assertThat(greeting1, equalTo(greeting2));
+    }
+
+    //tearDown : for clean up actitivy
+    @AfterEach
+    void tearDown() {
+        System.out.println("Cleaning for every test case");
+        greeting1 = null;
+        greeting2 = null;
+    }
+}
+..............................................................................................
+			How to skip running Test cases or Test suite
+.............................................................................................
+
+@Disabled Annotation
+
+@Disabled("Disabled until bug #99 has been fixed")
+class DisabledClassDemo {
+
+    @Test
+    void testWillBeSkipped() {
+    }
+
+}
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+class DisabledTestsDemo {
+
+    @Disabled("Disabled until bug #42 has been resolved")
+    @Test
+    void testWillBeSkipped() {
+    }
+
+    @Test
+    void testWillBeExecuted() {
+    }
+
+}
+
+package com.example.project;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+@DisplayName("Skip Tests")
+//@Disabled
+public class SkippingTest {
+
+    @Disabled("Disabled until bug #42 has been resolved")
+    @Test
+    @DisplayName("doStuff method")
+    public void doStuff(){
+        Assertions.assertEquals("hello","hai");
+    }
+    @Test
+    @DisplayName("doStuff2 method")
+    public void doStuff2(){
+        Assertions.assertEquals("welcome","welcome");
+
+    }
+}
+..............................................................................................
+				Repeated Test
+.............................................................................................
+
+if you want to run a test case mulptil times, Repeated Test
+
+package com.example.project;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
+
+@DisplayName("Repeate Test")
+public class RepeatedTestSuite {
+
+    @RepeatedTest(10)
+    public void runMore() {
+        Assertions.assertEquals(1, 1);
+    }
+}
+............................................................................................
+				ParameterizedTest
+............................................................................................
+if you want to pass parameters to test method, test whether test is passing or not.
+package com.example.project;
+
+public class StringUtils {
+    public static boolean isPalindrome(String candidate) {
+        String rev = "";
+        int length = candidate.length();
+        for (int i = length - 1; i >= 0; i--)
+            rev = rev + candidate.charAt(i);
+        if (candidate.equals(rev))
+            return true;
+        return false;
+    }
+}
+
+package com.example.project;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@DisplayName("Parametermize")
+public class ParamerimizedTestSuite {
+    @ParameterizedTest
+    @ValueSource(strings = {"racecar", "radar", "able was I ere I saw elba","subramanian"})
+    void palindromes(String candidate) {
+        System.out.println(candidate);
+        assertTrue(StringUtils.isPalindrome(candidate));
+    }
+}
+.............................................................................................
+			   Test Reports
+.............................................................................................
+
+Test Reports are nothing how to generate test reports in automated env.
+
+Test Reports Types:
+1.console - default reports
+2.html 
+3.pdf
+3.excel
+etc.....
+
+   The Maven unit test reports are generated by the Maven Surefire plugin. 
+
+Therefore a unit test report is also some times referred to as surefire report.
+
+Run mvn command to generate report:
+
+>mvn surefire-report:report
+
+Two reports locations
+
+target/surefire-report/xml files
+target/site/html file
+..............................................................................................
+			Automations - Continuous Integration - CI
+...........................................................................................
+
+Continuous integration (CI) is the practice of automating the integration of code changes from multiple contributors into a single software project.
+
+it is the practice of integrating changes from different developers in the team into a mainline as early as possible, in best cases several times a day. This makes sure the code individual developers work on doesn’t divert too much. When you combine the process with automated testing, continuous integration can enable your code to be dependable.
+
+
+1.CI environment basics – Jenkins, Hudson
+
+What is Jenkins?
+  Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software.
+
+Jenkins can be installed through native system packages, Docker, or even run standalone by any machine with a Java Runtime Environment (JRE) installed.
+
+Sonar Cube :
+
+ SonarQube® is an automatic code review tool to detect bugs, vulnerabilities, and code smells in your code. It can integrate with your existing workflow to enable continuous code inspection across your project branches and pull requests.
+
+  
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
