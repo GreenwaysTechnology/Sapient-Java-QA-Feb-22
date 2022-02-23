@@ -6,6 +6,13 @@ public class Greeting {
     public Greeting() {
     }
 
+    @Override
+    public String toString() {
+        return "Greeting{" +
+                "message='" + message + '\'' +
+                '}';
+    }
+
     public Greeting(String message) {
         this.message = message;
     }

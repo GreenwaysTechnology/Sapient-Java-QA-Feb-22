@@ -257,23 +257,217 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreeterController {
 }
 3.add methods in order to implement CURD
+package com.example.demo.rest;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GreeterController {
+
+    //This method to be called by the client using GET method
+    @GetMapping("/api/hello")
+    public String sayHello() {
+        return "Hello Rest";
+    }
+
+}
+
+4.Run the code
+
+package com.example.demo.rest;
+
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+public class GreeterController {
+
+    //This method to be called by the client using GET method
+    @GetMapping("/api/hello")
+    public String sayHello() {
+        return "Hello Rest";
+    }
+
+    @GetMapping("/api/greet")
+    public Greeting sayGreet() {
+        return new Greeting("Greet");
+    }
+
+    @GetMapping("/api/greet/list")
+    public List<Greeting> listGreetings() {
+        List<Greeting> greetings = new ArrayList<>();
+        greetings.add(new Greeting("Hello"));
+        greetings.add(new Greeting("Hai"));
+        greetings.add(new Greeting("welcome"));
+        greetings.add(new Greeting("welcome"));
+        greetings.add(new Greeting("bye"));
+        return greetings;
+    }
+
+    //post request
+    @PostMapping("/api/greet")
+    public String save(@RequestBody Greeting greeting) {
+        System.out.println(greeting);
+        return "saved";
+    }
+
+    //dynamic url  /api/greet/john => Hello John
+    @GetMapping("/api/greet/{name}/{salary}") // {} place holder, here name is replaced with value
+    public Greeting findByName(@PathVariable String name, @PathVariable double salary) {
+        return new Greeting("Hello " + name);
+    }
+
+    //update
+    @PutMapping("/api/greet")
+    public String updateGreet() {
+        return "Updated";
+    }
+
+    //delete
+    @DeleteMapping("/api/greet")
+    public String removeGreet() {
+        return "Deleted";
+    }
+}
+..............................................................................................
+				REST Integration with database(mysql)
+..............................................................................................
+
+Web Layer
+JPA With Hibernate  - Java Persistency api -  wrapper for JDBC
+Database - you can select any database - mysql,h2,derby......
+
+
+Dependencies:
+dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+application.properties  - connection configuration:
+# Connection string properties
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/classicmodels
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.show-sql:true
+............................................................................................
+ORM - Object relational Mapping
+
+Create Entity class:
+
+Entity class which maps directly to the table.
+
+package com.example.demo.rest;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String name;
+    private String email;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+Create Repository Class - This class contains ready made JDBC Operations.
+
+package com.example.demo.rest;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+}
 
 
 
+package com.example.demo.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
+@RestController
+@RequestMapping("/api")
+public class UserRestController {
 
+    @Autowired
+    private UserRepository userRepository;
 
+    @GetMapping("/users")
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
+    @PostMapping("/user")
+    public ResponseEntity<User> save(@RequestBody User user) {
+        return ResponseEntity.ok(userRepository.save(user));
+    }
 
+    @PutMapping("/user/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User user) {
+        return userRepository.findById(id)
+                .map(newUser -> {
+                    newUser.setEmail(user.getEmail());
+                    return userRepository.save(newUser);
+                }).orElseGet(() -> user);
+    }
 
-
-
-
-
-
-
+    //delete operation
+    @DeleteMapping("/user/{id}")
+    public void deleteById(@PathVariable int id) {
+        userRepository.deleteById(id);
+    }
+}
 
 
 
