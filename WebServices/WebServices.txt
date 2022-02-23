@@ -1,0 +1,286 @@
+                           
+				 Web Services
+.............................................................................................
+History of Web:
+
+1989 - Web was created in order to distribute documents over internet(Type of network)
+
+Web Application:
+  It is type of distributed application , introduced in 1989.
+
+Web Application Types
+
+1.Static web application
+1989 -1995
+    Only hand coded html pages
+2.Dynamic content web application
+1996 - till date
+   html pages are created by programs automatically
+   CGI- Perl,c
+   J2EE - Servlets/JSP
+   ASP  - MicroSoft
+   PHP   -Open Source
+
+3.Web Services
+1998 - Inter application communcation - B2B(Biz to Biz).
+ One biz need to send data to other biz via internet with web ,not html pages 
+Lets assume A company whose system is running on java, B is Company whose system is running on Php, now A needs to send data in the form of document to B, so that B can process that document.
+   
+WebService is a program can be written in any language(java,c++,C#,php,python), which distributes data in the format of xml,pdf,word,excel,json.. to other system
+
+
+Web Services Types:
+
+1.XML based Web Service/SOAP Based Web Service
+
+ This is type of web service introduced first.
+
+ In this model, the server side program , which generates xml files and send over internet via http protocal, but http protocal can be used to send only html docs,  then how to send xml files , new protocal was introduced called "SOAP"(Simple Object Access Protocal).
+
+SOAP is application level protocal , uses http protocal to send and receive XML Files.
+
+SOAP based web service model almost deprecated from the industry. No body is now a days creating soap based web services
+
+
+How to implement soap based Web Service?
+ 
+You can implement in any language.
+
+How to implement soap based web services in java language?
+
+JAX-WS -  Java api for XML - WebService
+
+=>Apache CXF  is most popular framework for building soap based webservice
+=>Spring-WS  is the framework from the spring team to build soap based webServices
+
+Service Oriented Architecture(SOA):
+................................
+Service-Oriented Architecture (SOA) is a style of software design where services are provided to the other components by application components, through a communication protocol over a network. 
+SOA is built on the top of SOAP based webservices
+
+SOAP based web Service Technologies:
+
+1.WSDL -  WebService Description language
+
+WSDL is description of program, used by the frameworks to generate code.
+
+Applications uses wsdl to generate code , language independant manner.
+
+Wsdl file
+
+<?xml version="1.0"?>
+<definitions name="StockQuote"
+
+targetNamespace="http://example.com/stockquote.wsdl"
+          xmlns:tns="http://example.com/stockquote.wsdl"
+          xmlns:xsd1="http://example.com/stockquote.xsd"
+          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+          xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <types>
+       <schema targetNamespace="http://example.com/stockquote.xsd"
+              xmlns="http://www.w3.org/2000/10/XMLSchema">
+           <element name="TradePriceRequest">
+              <complexType>
+                  <all>
+                      <element name="tickerSymbol" type="string"/>
+                  </all>
+              </complexType>
+           </element>
+           <element name="TradePrice">
+              <complexType>
+                  <all>
+                      <element name="price" type="float"/>
+                  </all>
+              </complexType>
+           </element>
+       </schema>
+    </types>
+
+    <message name="GetLastTradePriceInput">
+        <part name="body" element="xsd1:TradePriceRequest"/>
+    </message>
+
+    <message name="GetLastTradePriceOutput">
+        <part name="body" element="xsd1:TradePrice"/>
+    </message>
+
+    <portType name="StockQuotePortType">
+        <operation name="GetLastTradePrice">
+           <input message="tns:GetLastTradePriceInput"/>
+           <output message="tns:GetLastTradePriceOutput"/>
+        </operation>
+    </portType>
+
+    <binding name="StockQuoteSoapBinding" type="tns:StockQuotePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="GetLastTradePrice">
+           <soap:operation soapAction="http://example.com/GetLastTradePrice"/>
+           <input>
+               <soap:body use="literal"/>
+           </input>
+           <output>
+               <soap:body use="literal"/>
+           </output>
+        </operation>
+    </binding>
+
+    <service name="StockQuoteService">
+        <documentation>My first service</documentation>
+        <port name="StockQuotePort" binding="tns:StockQuoteBinding">
+           <soap:address location="http://example.com/stockquote"/>
+        </port>
+    </service>
+</definitions>
+..............................................................................................Tools for accessing SOAP based webservices:
+
+1.SOAP UI
+  SOAP UI is most powerfull tool for testers to test APIs written in any API technology-(SOAP,REST,GraphQL).
+
+2.POST MAN tool
+   POST MAN tool from the google but it  is open source
+
+2.RESTFull Web Services
+   It is type of webservices inspired from the specification published by http core team
+
+Roy Thomas Fielding (born 1965) is an American computer scientist, one of the principal authors of the HTTP specification and the originator of the Representational State Transfer (REST) architectural style.
+
+Based on REST Principles the implemenation was created called "RESTFull" 
+
+REST VS RESTFull
+
+REST is a spec
+RESTFull is implementation 
+
+Based on REST theroy, webservices were designed called "RESTFull Webservices".
+
+
+in order to build Restfull webservices, any language can be used.
+
+Java and RestFull web services:
+
+=>JAX-RS -  JAVA API For Rest Full Architecture
+
+Implemention:
+RESTEasy  - framework created by Jboss team
+SpringRest - framework from the spring team -  This is widely used in the market.
+Vertx
+Quarkus
+etc....
+
+Based on Restfull architecture , Microservices were created.
+
+
+4.Single Page Web Application(SPA)
+
+  Introduced in 2007 by w3c, in order to build client side web application.
+
+SPA applications frameworks -  Angular,React,vue.......
+..............................................................................................
+				REST Implemenation
+.............................................................................................
+
+Select Framework:
+
+ SpringBoot
+Setup project
+https://start.spring.io/
+..............................................................................................
+
+Core Rest Concepts:
+
+RESTFull Web Service is  a program which receives request and returns response in the form of json by default.
+
+Resource:
+   It represents a domain object which returns data.
+   Resource is  a java class 
+
+HTTP verbs:
+
+ Clients those who want to access REST APIs who gives request via http protocal.
+ with http methods are called HTTP verbs.
+
+Verbs/method:
+ 
+ GET
+    To read data from the server(WebService)
+ POST 
+    to send data from the client to server for insert operation
+
+ PUT
+    to send data from the client to server for update operation
+ 
+ DELETE
+    to send data from the client to server for delete operations
+
+ READ INSERT UPDATE DELETE
+
+ CREATE(INSERT/POST) UPDATE(PUT) READ(GET) DELETE(Delete) => CURD Operations
+
+
+DATA format:
+  Client and servers agree the common data format for sending receiving : Representation
+
+REST arch supports many formats like json,xml,html,pdf,word......but soap web services only support "XML"
+
+
+URI : Uniform Resource Indifier:
+  To identifiy /locate the resource in the server by client , who uses a naming scheme called URI
+ api/resourceName/subresource
+
+URL : 
+  Full path of uri
+ 
+http://serverName/api/resourceName/subresource
+
+http://localhost:8080/api/resourceName/subresource
+
+
+
+Create Simple RESTFull Web Service using Spring Boot.
+
+
+Steps:
+
+1.create resource class.
+public class GreeterController {
+}
+
+2.Indicate the class as "RestFull WebService"
+ Using an annotation @RestController
+
+package com.example.demo.rest;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GreeterController {
+}
+3.add methods in order to implement CURD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
