@@ -468,6 +468,178 @@ public class UserRestController {
         userRepository.deleteById(id);
     }
 }
+..............................................................................................
+				SOAP UI Tool
+.............................................................................................
+
+Functional Testing:
+  To Test functionlity of the soap webservices and also rest webservices.
+
+
+SOAP Web Service Testing:
+........................
+
+Test Structure
+  
+SoapUI structures functional tests into three levels; 
+1.TestSuites, 
+2.TestCases
+3.TestSteps.
+
+A "TestSuite" is a collection of TestCases that can be used for grouping functional tests into logical units.
+ Any number of TestSuites can be created inside a ReadyAPIject to support massive testing scenarios.
+
+A TestCase is a collection of TestSteps that are assembled to test some specific aspect of your service(s).
+
+You can add any number of TestCases to a containing TestSuite and even modularize them to call each other for complex testing scenarios.
+
+
+TestSteps are the "building blocks" of functional tests in soapUI.
+hey are added to a TestCase and used control the flow of execution and validate the functionality of the service(s) to be tested.
+
+SOAP Request -- Response Model:
+
+Request is XML file and Response also XML.
+Request and Response sent over "SOAP Protcal"
+
+
+Request Structure:
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.dataaccess.com/webservicesserver/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:NumberToDollars>
+         <web:dNum>?</web:dNum>
+      </web:NumberToDollars>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+Response Structure:
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <m:NumberToDollarsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">
+         <m:NumberToDollarsResult>ten dollars</m:NumberToDollarsResult>
+      </m:NumberToDollarsResponse>
+   </soap:Body>
+</soap:Envelope>
+
+How to do functional Testing in soap ui?
+
+Steps:
+
+1.Create Test Suite
+
+2.Create Test Case
+
+3.Create Test Step
+
+https://www.soapui.org/docs/functional-testing/getting-started/
+
+In SOAP UI Test suite ,Test case ,Test Step all are automated scripts written in language called "groovy"
+
+Assertions:
+  conditions, based on conditions we can verify the validity of response.
+
+Types of assertions:
+
+1.Property content
+2.status 
+3.Script
+4.SLA
+5.JMS
+6.Security
+
+Contains Assertions
+  To test whether data present in the response or not.
+Which eq to assertEqual(10,10) => Out put of this would be "Valid" | "Invalid"
+
+XPath Assertions: (YOu need to know XML Xpath Technology)
+
+XQuery Assertions
+
+Scripting Assertions : using groovy Script
+
+Demo On 
+Contains Assertions
+Not Contains Assertions
+
+..............................................................................................
+					Mocking
+
+What is Mocking?
+
+  Mocking means faking the real service / api /database.
+
+Why Mock?
+  
+  In Testing ,we should not test the application against real database, external services, like so.
+
+
+Advantages of Mocking?
+
+1.It isloates the Testing env from the real env.
+2.Application can be tested without real data,api.
+3.without application features ready , also we can test - Acceptance Testing.
+
+SOAP UI can help use to create mock env for SOAP service testing.
+
+SOAP UI creates local mock server like remote server, where soapui hosts the application what we are testing.
+
+Demo on mocking services for calcuator.
+.............................................................................................
+				REST API Testing using SOAPUI
+..............................................................................................
+
+in order to rest api in soapui 
+
+we need files
+
+1.WSDL - For SOAP based web service
+2.WADL  - For Rest based web service
+
+
+What is WADL ?
+  The Web Application Description Language(WADL) is machine-readable XML language that works on HTTP based web service.
+
+<application xmlns="http://wadl.dev.java.net/2009/02">
+   <doc xml:lang="en" title="https://restcountries.com"/>
+   <resources base="https://restcountries.com">
+      <resource path="v3.1/all" id="All">
+         <doc xml:lang="en" title="All"/>
+         <method name="GET" id="All 1">
+            <doc xml:lang="en" title="All 1"/>
+            <request/>
+            <response status="200">
+               <representation mediaType="application/json" element="Response"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>
+
+Functional REST API Testing using SOAP UI
+
+1.Test Suite
+2.Test case
+3.Test step
+
+Create a mock servers and test against it.
+.............................................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
